@@ -19,20 +19,20 @@ const LoginForm = (props) => {
       <Form onFinish={submit} onFinishFailed={onFailure}>
         <div className="my-4">
           <Form.Item
-            name="username"
-            rules={[required("اسم المستخدم مطلوب")]}
-          >
-            <Input placeholder="اسم المستخدم" size="large" />
-          </Form.Item>
-        </div>
-        <div className="my-4">
-          <Form.Item
-            name="password"
-            rules={[required("كلمة السر مطلوبه")]}
-          >
-            <Input.Password placeholder="كلمة السر" size="large" />
-          </Form.Item>
-        </div>
+name="username"
+rules={[required("اسم المستخدم مطلوب")]}
+>
+<Input placeholder="اسم المستخدم" size="large" />
+</Form.Item>
+</div>
+<div className="my-4">
+<Form.Item
+name="password"
+rules={[required("كلمة السر مطلوبه")]}
+>
+<Input.Password placeholder="كلمة السر" size="large" />
+</Form.Item>
+</div>
 
         <Form.Item
           name="remember"
