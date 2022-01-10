@@ -7,5 +7,12 @@ module.exports = {
   theme: {
     extend: tw,
   },
-  plugins: [],
+  plugins: [
+    require('tailwindcss-dir')(),
+  ],
+  variants: {
+    extend: {
+      space: ['responsive', 'direction'],
+    }
+  },
 }
