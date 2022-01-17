@@ -33,7 +33,7 @@ export default function Home() {
         <div className="home">
           <header>
             <div className="absolute top-0 z-10 w-full px-12 md:px-24 py-12 pointer-events-none">
-              <Navbar />
+              <Navbar dark />
             </div>
 
             <Slider {...settings}>
@@ -150,7 +150,7 @@ export default function Home() {
               الشركات الاعلي تقييماً
             </h1>
             <Slider
-              {...settings}
+              className="multi"
               slidesToShow={5}
               rtl
               autoplay
@@ -175,38 +175,44 @@ export default function Home() {
                 },
               ]}
             >
-              <div className="px-4">
-                <img
+              <div className="relative h-36 object-cover">
+                <Image
+                  layout="fill"
                   src="https://images.pexels.com/photos/2662116/pexels-photo-2662116.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
                   alt=""
                 />
               </div>
-              <div className="px-4">
-                <img
+              <div className="relative h-36 object-cover">
+                <Image
+                  layout="fill"
                   src="https://images.pexels.com/photos/235621/pexels-photo-235621.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
                   alt=""
                 />
               </div>
-              <div className="px-4">
-                <img
+              <div className="relative h-36 object-cover">
+                <Image
+                  layout="fill"
                   src="https://images.pexels.com/photos/2662116/pexels-photo-2662116.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
                   alt=""
                 />
               </div>
-              <div className="px-4">
-                <img
+              <div className="relative h-36 object-cover">
+                <Image
+                  layout="fill"
                   src="https://images.pexels.com/photos/235621/pexels-photo-235621.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
                   alt=""
                 />
               </div>
-              <div className="px-4">
-                <img
+              <div className="relative h-36 object-cover">
+                <Image
+                  layout="fill"
                   src="https://images.pexels.com/photos/2662116/pexels-photo-2662116.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
                   alt=""
                 />
               </div>
-              <div className="px-4">
-                <img
+              <div className="relative h-36 object-cover">
+                <Image
+                  layout="fill"
                   src="https://images.pexels.com/photos/235621/pexels-photo-235621.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
                   alt=""
                 />
@@ -225,7 +231,9 @@ export default function Home() {
                 </Link>
               </div>
               <div className="logo">
-                <img className="w-48" src={logo} alt="" />
+                <div className="w-24">
+                  <Image src={logo} alt="" />
+                </div>
               </div>
               <div className="socials">socials</div>
             </div>

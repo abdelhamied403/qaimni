@@ -11,7 +11,11 @@ const Navbar = (props) => {
 
   return (
     <nav>
-      <div className="flex items-center justify-between text-white">
+      <div
+        className={`flex items-center justify-between ${
+          props.dark ? "text-white" : ""
+        }`}
+      >
         <div className="flex items-center space-x-4 rtl:space-x-reverse pointer-events-auto">
           <Image width={192} src={logo} alt="" />
           <span className="text-xl hover:text-primary">
@@ -24,17 +28,19 @@ const Navbar = (props) => {
           </span>
         </div>
         <div className="actions pointer-events-auto">
-          <Button variant="outlined" onClick={() => router.push("/search")}>
-            <div className="flex gap-12 -ml-2">
-              <div className="search flex gap-2">
-                <SearchIcon />
-                <span className="text-gray-400">ابحث ...</span>
+          {!props.noSearch && (
+            <Button variant="outlined" onClick={() => router.push("/search")}>
+              <div className="flex gap-12 -ml-2">
+                <div className="search flex gap-2">
+                  <SearchIcon />
+                  <span className="text-gray-400">ابحث ...</span>
+                </div>
+                <div className="border border-primary border-solid px-2 rounded-lg">
+                  Ctrl+K
+                </div>
               </div>
-              <div className="border border-primary border-solid px-2 rounded-lg">
-                Ctrl+K
-              </div>
-            </div>
-          </Button>
+            </Button>
+          )}
         </div>
       </div>
     </nav>
