@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import CompanyCard from "../src/components/CompanyCard";
 import Input from "../src/components/Input";
 
@@ -10,6 +10,7 @@ const Search = (props) => {
           <Input
             variant="standard"
             size="large"
+            autofocus
             className="border-0 w-full font-bold"
             label="ابحث عن شخص شركه او مستشار..."
             InputProps={{

@@ -4,7 +4,7 @@ import React from "react";
 
 const Comment = (props) => {
   return (
-    <div className="comment border rounded-lg">
+    <div className="comment border border-solid border-gray-400 my-8 px-8 py-4 rounded-lg">
       <div className="flex gap-4">
         <div className="head ">
           <Image

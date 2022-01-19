@@ -9,6 +9,7 @@ import CommentIcon from "@mui/icons-material/Comment";
 import PaidIcon from "@mui/icons-material/Paid";
 import WorkIcon from "@mui/icons-material/Work";
 import SaleryCard from "../../src/components/SaleryCard";
+import Link from "next/link";
 
 const Company = (props) => {
   const router = useRouter();
@@ -32,7 +33,14 @@ const Company = (props) => {
             ></Image>
           </div>
           <div className="info">
-            <h1 className="m-0">جوجل</h1>
+            <div className="flex justify-between">
+              <h1 className="m-0">جوجل</h1>
+              <Link href={`${id}/review`} passHref>
+                <Button variant="contained" color="primary" size="large">
+                  تقديم رأيك
+                </Button>
+              </Link>
+            </div>
             <div className="rate">
               <Rating name="size-large" defaultValue={2} size="large" />
             </div>
@@ -75,10 +83,6 @@ const Company = (props) => {
               <SaleryCard />
               <SaleryCard />
               <SaleryCard />
-              <div className="flex justify-between">
-                <h1>هل تعمل لدي شركه جوجل</h1>
-                <Button>شارك برأيك</Button>
-              </div>
             </TabPanel>
             <TabPanel value={currentTab} index={2}>
               <div className="jobCard">
@@ -119,6 +123,14 @@ const Company = (props) => {
                 </div>
               </div>
             </TabPanel>
+            <div className="flex gap-8">
+              <h1>هل تعمل لدي شركه جوجل</h1>
+              <Link href={`${id}/review`} passHref>
+                <Button variant="outlined" color="primary" size="large">
+                  تقديم رأيك
+                </Button>
+              </Link>
+            </div>
           </div>
         </div>
       </div>

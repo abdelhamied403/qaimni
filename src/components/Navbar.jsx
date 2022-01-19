@@ -22,12 +22,18 @@ const Navbar = (props) => {
             <Link href="/">الرئيسية</Link>
           </span>
           <span className="text-xl hover:text-primary">
-            <Link className="" href="/tes">
+            <Link className="" href="/sections">
               الأقسام
             </Link>
           </span>
         </div>
-        <div className="actions pointer-events-auto">
+        <div className="actions pointer-events-auto flex gap-4">
+          <Button
+            variant="contained"
+            onClick={() => router.push("/auth/login")}
+          >
+            <span className="text-white">تسجيل دخول</span>
+          </Button>
           {!props.noSearch && (
             <Button variant="outlined" onClick={() => router.push("/search")}>
               <div className="flex gap-12 -ml-2">
@@ -35,7 +41,7 @@ const Navbar = (props) => {
                   <SearchIcon />
                   <span className="text-gray-400">ابحث ...</span>
                 </div>
-                <div className="border border-primary border-solid px-2 rounded-lg">
+                <div className="border border-solid border-primary bg-primary bg-opacity-20 px-2 rounded-lg">
                   Ctrl+K
                 </div>
               </div>

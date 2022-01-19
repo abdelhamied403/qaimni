@@ -8,6 +8,7 @@ import Slide from "../src/components/Slide";
 import Image from "next/image";
 import Link from "next/link";
 import logo from "../src/assets/logo.svg";
+import { useRouter } from "next/router";
 
 var settings = {
   infinite: true,
@@ -21,6 +22,8 @@ var settings = {
 };
 
 export default function Home() {
+  const router = useRouter();
+
   return (
     <>
       <Head>
@@ -49,9 +52,14 @@ export default function Home() {
                 </p>
                 <div className="flex space-x-4 rtl:space-x-reverse">
                   <Button variant="contained" color="primary" size="large">
-                    اقرأ المزيد
+                    <span className="text-white">اقرأ المزيد</span>
                   </Button>
-                  <Button variant="outlined" color="accent" size="large">
+                  <Button
+                    variant="outlined"
+                    color="accent"
+                    size="large"
+                    onClick={() => router.push("/search")}
+                  >
                     ابحث
                   </Button>
                 </div>
