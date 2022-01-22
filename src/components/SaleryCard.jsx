@@ -4,7 +4,7 @@ import { Button } from "@mui/material";
 const SaleryCard = (props) => {
   return (
     <div className="saleryCard border border-solid border-gray-400 px-8 py-4 rounded-lg my-8">
-      <div className="head flex justify-between">
+      <div className="head flex flex-wrap justify-between">
         <h1>Production Engineer</h1>
         <div className="actions">
           <Button variant="outlined" color="primary" size="large">
@@ -13,7 +13,7 @@ const SaleryCard = (props) => {
         </div>
       </div>
       <div className="content">
-        <div className="grid grid-cols-3">
+        <div className="flex flex-wrap justify-between">
           <div className="avgSalery text-gray-400">
             <h2>
               123,200$ <span>/yr</span>
