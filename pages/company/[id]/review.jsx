@@ -20,13 +20,10 @@ const Review = (props) => {
     <div className="mx-8 md:mx-12 lg:mx-24 my-12">
       <div className="head flex flex-wrap md:flex-nowrap gap-4 items-center">
         <div className="logo">
-          <Image
-            width="369"
-            height="256"
-            className="object-cover"
+          <img
             src="https://images.pexels.com/photos/9404648/pexels-photo-9404648.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
             alt=""
-          ></Image>
+          />
         </div>
         <div className="info">
           <h1 className="m-0">جوجل</h1>

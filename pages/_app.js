@@ -5,15 +5,8 @@ import RTL from "../src/layout/RTL";
 import "../styles/globals.scss";
 import { theme } from "../styles/theme";
 
-import Auth from "../src/layout/Auth";
-import Page from "../src/layout/Page";
-const layouts = {
-  Auth,
-};
-
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
-  const Layout = layouts[Component.layout] || Page;
 
   useEffect(() => {
     document.addEventListener("keydown", (evt) => {
@@ -27,9 +20,13 @@ function MyApp({ Component, pageProps }) {
     <RTL>
       <ThemeProvider theme={theme}>
         <div className="app" dir="rtl">
-          <Layout title={Component.name}>
+          {Component.Layout ? (
+            <Component.Layout title={Component.name}>
+              <Component {...pageProps} />
+            </Component.Layout>
+          ) : (
             <Component {...pageProps} />
-          </Layout>
+          )}
         </div>
       </ThemeProvider>
     </RTL>

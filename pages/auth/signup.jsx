@@ -1,15 +1,13 @@
-import Image from "next/image";
 import React from "react";
 import Link from "../../src/components/Link";
-import logo from "../../src/assets/logo.png";
-import banner from "../../src/assets/authBanner.png";
 import SignupForm from "../../src/components/auth/SignupForm";
+import Auth from "../../src/layout/Auth";
 
 const Signup = (props) => {
   return (
     <div className="content col-span-2 lg:col-span-1">
       <div className="p-6 py-12 lg:p-24">
-        <Image width="192" src={logo} alt="" />
+        <img className="w-64" src="../assets/logo.png" alt="" />
         <h1 className="text-4xl font-black mb-4">الاشتراك</h1>
         <h4 className="text-lg text-gray-400 font-bold m-0">
           ويُستخدم في صناعات المطابع ودور النشر. كان لوريم إيبسوم ولايزال
@@ -23,6 +21,5 @@ const Signup = (props) => {
   );
 };
 
-Signup.layout = "Auth";
-
+Signup.Layout = Auth;
 export default Signup;

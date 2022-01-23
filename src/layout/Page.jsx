@@ -13,7 +13,7 @@ const Page = ({ title, children }) => {
       </Head>
       <div className="page">
         <Navbar />
-        <main className="mt-24 min-h-screen">{children}</main>
+        <main className="min-h-screen">{children}</main>
         <Footer />
       </div>
     </>

@@ -1,15 +1,11 @@
 /* eslint-disable @next/next/no-img-element */
-import Head from "next/head";
+import { useRouter } from "next/router";
+import Page from "../src/layout/Page";
 import Button from "@mui/material/Button";
-import Navbar from "../src/components/Navbar";
 import Slider from "react-slick";
+import Slide from "../src/components/Slide";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import Slide from "../src/components/Slide";
-import Image from "next/image";
-import Link from "next/link";
-import logo from "../src/assets/logo.png";
-import { useRouter } from "next/router";
 
 var settings = {
   infinite: true,
@@ -22,7 +18,7 @@ var settings = {
   swipe: false,
 };
 
-export default function Home() {
+const Home = () => {
   const router = useRouter();
 
   return (
@@ -30,7 +26,7 @@ export default function Home() {
       <header>
         <Slider {...settings}>
           <Slide img="https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940">
-            <h1 className="text-7xl font-bold text-white">قيمني</h1>
+            <h1 className="text-7xl font-bold text-white mb-2">قيمني</h1>
             <p className="max-w-4xl my-4">
               لوريم إيبسوم(Lorem Ipsum) هو ببساطة نص شكلي (بمعنى أن الغاية هي
               الشكل وليس المحتوى) ويُستخدم في صناعات المطابع ودور النشر. كان
@@ -59,10 +55,8 @@ export default function Home() {
         <div className="relative">
           <span className="bg-accent h-4/5 w-2/3 lg:w-1/3 absolute top-12" />
           <div className="content max-w-2xl mx-24 relative z-10">
-            <Image
-              width="256"
-              height="288"
-              className="object-cover"
+            <img
+              className="w-60 h-64"
               src="https://images.pexels.com/photos/9404648/pexels-photo-9404648.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
               alt=""
             />
@@ -81,17 +75,16 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <section className="mission py-4 xl:-mt-64" style={{ direction: "ltr" }}>
+      <section className="mission py-4 xl:-mt-48" style={{ direction: "ltr" }}>
         <div className="relative">
           <span className="bg-primary h-4/5 w-2/3 lg:w-1/3 absolute top-12" />
           <div className="content max-w-2xl mx-24 relative z-10">
-            <Image
-              width="256"
-              height="288"
-              className="object-cover"
+            <img
+              className="w-60 h-64"
               src="https://images.pexels.com/photos/9404648/pexels-photo-9404648.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
               alt=""
             />
+
             <div className="data mt-4 md:-mt-12">
               <h1 className="text-right font-bold text-4xl md:text-7xl mb-6">
                 الرساله
@@ -110,7 +103,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="about py-12">
+      <section className="about py-12 mt-12">
         <div className="relative">
           <span className="bg-accent h-4/5 md:h-full w-3/5 md:w-2/5 absolute top-0" />
           <div className="content mx-24 relative z-10 grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-12">
@@ -167,50 +160,38 @@ export default function Home() {
             },
           ]}
         >
-          <div className="relative h-36 object-cover">
-            <Image
-              layout="fill"
-              src="https://images.pexels.com/photos/2662116/pexels-photo-2662116.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
-              alt=""
-            />
-          </div>
-          <div className="relative h-36 object-cover">
-            <Image
-              layout="fill"
-              src="https://images.pexels.com/photos/235621/pexels-photo-235621.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
-              alt=""
-            />
-          </div>
-          <div className="relative h-36 object-cover">
-            <Image
-              layout="fill"
-              src="https://images.pexels.com/photos/2662116/pexels-photo-2662116.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
-              alt=""
-            />
-          </div>
-          <div className="relative h-36 object-cover">
-            <Image
-              layout="fill"
-              src="https://images.pexels.com/photos/235621/pexels-photo-235621.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
-              alt=""
-            />
-          </div>
-          <div className="relative h-36 object-cover">
-            <Image
-              layout="fill"
-              src="https://images.pexels.com/photos/2662116/pexels-photo-2662116.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
-              alt=""
-            />
-          </div>
-          <div className="relative h-36 object-cover">
-            <Image
-              layout="fill"
-              src="https://images.pexels.com/photos/235621/pexels-photo-235621.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
-              alt=""
-            />
-          </div>
+          <img
+            src="https://images.pexels.com/photos/9404648/pexels-photo-9404648.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+            alt=""
+          />
+          <img
+            src="https://images.pexels.com/photos/9404648/pexels-photo-9404648.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+            alt=""
+          />
+          <img
+            src="https://images.pexels.com/photos/9404648/pexels-photo-9404648.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+            alt=""
+          />
+          <img
+            src="https://images.pexels.com/photos/9404648/pexels-photo-9404648.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+            alt=""
+          />
+          <img
+            src="https://images.pexels.com/photos/9404648/pexels-photo-9404648.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+            alt=""
+          />
+          <img
+            src="https://images.pexels.com/photos/9404648/pexels-photo-9404648.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+            alt=""
+          />
+          <img
+            src="https://images.pexels.com/photos/9404648/pexels-photo-9404648.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+            alt=""
+          />
         </Slider>
       </section>
     </>
   );
-}
+};
+Home.Layout = Page;
+export default Home;

@@ -1,7 +1,5 @@
-import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import logo from "../assets/logo.png";
 
 const Footer = (props) => {
   return (
@@ -17,7 +15,7 @@ const Footer = (props) => {
         </div>
         <div className="logo">
           <div className="w-24">
-            <Image src={logo} alt="" />
+            <img src="../assets/logo.png" alt="" />
           </div>
         </div>
         <div className="socials">socials</div>

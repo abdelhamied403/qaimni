@@ -1,13 +1,12 @@
-import Image from "next/image";
 import React from "react";
 import Link from "../../src/components/Link";
-import logo from "../../src/assets/logo.png";
 import LoginForm from "../../src/components/auth/LoginForm";
+import Auth from "../../src/layout/Auth";
 
 const Login = (props) => {
   return (
     <div className="p-6 py-12 lg:p-24">
-      <Image width="192" src={logo} alt="" />
+      <img className="w-64" src="../assets/logo.png" alt="" />
       <h1 className="text-4xl font-black mb-4">تسجيل الدخول</h1>
       <h4 className="text-lg text-gray-400 font-bold m-0">
         ويُستخدم في صناعات المطابع ودور النشر. كان لوريم إيبسوم ولايزال
@@ -20,6 +19,5 @@ const Login = (props) => {
   );
 };
 
-Login.layout = "Auth";
-
+Login.Layout = Auth;
 export default Login;

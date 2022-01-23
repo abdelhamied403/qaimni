@@ -1,22 +1,19 @@
 import React from "react";
 import { Rating } from "@mui/material";
-import Image from "next/image";
 import Link from "./Link";
 
 const CompanyCard = (props) => {
   return (
     <div className="company-card">
-      <div className="flex flex-wrap xl:flex-nowrap items-center gap-8">
+      <div className="flex flex-col gap-8">
         <div className="logo">
-          <Image
-            width="369"
-            height="256"
-            className="object-cover"
+          <img
+            className="w-full h-full"
             src="https://images.pexels.com/photos/9404648/pexels-photo-9404648.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
             alt=""
-          ></Image>
+          />
         </div>
-        <div className="info">
+        <div className="info ">
           <Link href="/company/1">
             <h1 className="title m-0">اسم الشركه</h1>
           </Link>
@@ -29,6 +26,7 @@ const CompanyCard = (props) => {
           </p>
         </div>
       </div>
+      <hr className="block md:hidden" />
     </div>
   );
 };

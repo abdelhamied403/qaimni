@@ -10,6 +10,8 @@ import PaidIcon from "@mui/icons-material/Paid";
 import WorkIcon from "@mui/icons-material/Work";
 import SaleryCard from "../../src/components/SaleryCard";
 import Link from "next/link";
+import Page from "../../src/layout/Page";
+import PlanCard from "../../src/components/PlanCard";
 
 const Company = (props) => {
   const router = useRouter();
@@ -18,24 +20,29 @@ const Company = (props) => {
 
   return (
     <div className="mx-8 md:mx-12 lg:mx-24 my-12">
-      <div className="head flex flex-wrap md:flex-nowrap gap-4 items-center">
+      <div className="head flex flex-wrap md:flex-nowrap gap-4 items-center my-12">
         <div className="logo">
-          <Image
-            width="369"
-            height="256"
-            className="object-cover"
+          <img
+            className="w-48 h-48 object-cover"
             src="https://images.pexels.com/photos/9404648/pexels-photo-9404648.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
             alt=""
-          ></Image>
+          />
         </div>
         <div className="info">
           <div className="flex justify-between">
             <h1 className="m-0">جوجل</h1>
-            <Link href={`${id}/review`} passHref>
-              <Button variant="contained" color="primary" size="large">
-                تقديم رأيك
-              </Button>
-            </Link>
+            <div className="actions flex gap-4">
+              <Link href={`${id}/review`} passHref>
+                <Button variant="contained" color="primary" size="large">
+                  تقديم رأيك
+                </Button>
+              </Link>
+              <Link href={`${id}/review`} passHref>
+                <Button variant="contained" color="accent" size="large">
+                  اشتراك premium
+                </Button>
+              </Link>
+            </div>
           </div>
           <div className="rate">
             <Rating name="size-large" defaultValue={2} size="large" />
@@ -48,6 +55,12 @@ const Company = (props) => {
           </p>
         </div>
       </div>
+
+      <div className="flex gap-4 justify-center">
+        <PlanCard></PlanCard>
+        <PlanCard></PlanCard>
+      </div>
+
       <div className="tabs">
         <div className="tabs flex justify-center">
           <Tabs value={currentTab} onChange={(_, val) => setCurrentTab(val)}>
@@ -93,13 +106,11 @@ const Company = (props) => {
               <div className="content">
                 <div className="company flex gap-4">
                   <div className="logo">
-                    <Image
-                      width="100"
-                      height="100"
-                      className="object-cover"
+                    <img
+                      className="w-24 h-24 object-cover"
                       src="https://images.pexels.com/photos/9404648/pexels-photo-9404648.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
                       alt=""
-                    ></Image>
+                    />
                   </div>
                   <div className="info">
                     <div className="name flex items-center gap-3">
@@ -133,4 +144,5 @@ const Company = (props) => {
   );
 };
 
+Company.Layout = Page;
 export default Company;

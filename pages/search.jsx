@@ -1,6 +1,9 @@
+import { SearchOutlined } from "@mui/icons-material";
+import { InputAdornment } from "@mui/material";
 import React, { useEffect, useRef } from "react";
 import CompanyCard from "../src/components/CompanyCard";
 import Input from "../src/components/Input";
+import Page from "../src/layout/Page";
 
 const Search = (props) => {
   const searchInput = useRef();
@@ -11,23 +14,23 @@ const Search = (props) => {
 
   return (
     <div className="mx-8 md:mx-12 lg:mx-24 my-12">
-      <div className="search-box my-8" ref={searchInput}>
+      <div className="search-box my-8 font-bold" ref={searchInput}>
         <Input
-          variant="standard"
+          variant="outlined"
           size="large"
-          autoFocus
-          className="border-0 w-full font-bold"
-          label="ابحث عن شخص شركه او مستشار..."
+          label="ابحث عن شخص شركه او مستشار"
+          placeholder="ابحث عن شخص شركه او مستشار"
+          className="w-full font-bold"
           InputProps={{
-            disableUnderline: true,
-            style: {
-              fontSize: 48,
-              fontWeight: 700,
-            },
+            startAdornment: (
+              <InputAdornment position="start">
+                <SearchOutlined />
+              </InputAdornment>
+            ),
           }}
         />
       </div>
-      <div className="results grid xl:flex xl:flex-col grid-cols-1 md:grid-cols-2 xl:grid-cols-none gap-8">
+      <div className="results grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 max-w-7xl mx-auto">
         <CompanyCard />
         <CompanyCard />
         <CompanyCard />
@@ -36,4 +39,5 @@ const Search = (props) => {
   );
 };
 
+Search.Layout = Page;
 export default Search;

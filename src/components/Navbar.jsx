@@ -1,6 +1,4 @@
 import React, { useRef } from "react";
-import logo from "../assets/logo.png";
-import Image from "next/image";
 import { Button } from "@mui/material";
 import Link from "./Link";
 import SearchIcon from "@mui/icons-material/Search";
@@ -24,7 +22,7 @@ const Navbar = (props) => {
         }`}
       >
         <div className="menu flex items-center pointer-events-auto">
-          <Image width={100} height={40} src={logo} alt="" />
+          <img className="max-w-full" src="../assets/logo.png" alt="" />
           <ul
             className="
               lg:flex lg:static top-12 left-0 text-black lg:text-inherit bg-white lg:bg-transparent

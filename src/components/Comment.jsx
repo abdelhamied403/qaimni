@@ -7,13 +7,11 @@ const Comment = (props) => {
     <div className="comment border border-solid border-gray-400 my-8 px-8 py-4 rounded-lg">
       <div className="flex gap-4">
         <div className="head ">
-          <Image
-            width="100"
-            height="100"
-            className="object-cover"
+          <img
+            className="w-16 h-16 object-cover rounded-md"
             src="https://images.pexels.com/photos/9404648/pexels-photo-9404648.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
             alt=""
-          ></Image>
+          />
         </div>
         <div className="content">
           <div className="head flex justify-between">

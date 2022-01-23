@@ -1,13 +1,12 @@
 import { Pagination } from "@mui/material";
-import Image from "next/image";
 import React from "react";
 import CategoryCard from "../src/components/CategoryCard";
-import Navbar from "../src/components/Navbar";
+import Page from "../src/layout/Page";
 
 const Sections = (props) => {
   return (
     <>
-      <div className="px-12 md:px-24">
+      <div className="px-12 mt-12 md:px-24">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
           <CategoryCard />
           <CategoryCard />
@@ -30,4 +29,5 @@ const Sections = (props) => {
   );
 };
 
+Sections.Layout = Page;
 export default Sections;
