@@ -2,31 +2,58 @@ import React, { useState } from "react";
 import Input from "../../components/Input";
 import { Button } from "@mui/material";
 import { useRouter } from "next/router";
+import user from "../../services/user";
+import { useDispatch, useSelector } from "react-redux";
+import { setUser } from "../../redux/slices/user.slice";
 
 const LoginForm = (props) => {
   const router = useRouter();
-  const [errors, setErrors] = useState(false);
+  const dispatch = useDispatch();
 
-  const onSubmit = () => {
-    console.log(errors);
-    router.push("/");
+  // state
+  const [phone, setPhone] = useState("");
+  const [phoneError, setPhoneError] = useState("");
+  const [password, setPassword] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+
+  const validate = () => {
+    let hasError = false;
+    if (!phone || phone.trim() === "") {
+      setPhoneError("من فضلك ادخل رقم الهاتف");
+      hasError = true;
+    }
+    if (!password || password.trim() === "") {
+      setPasswordError("من فضلك ادخل كلمه السر");
+      hasError = true;
+    }
+
+    return hasError;
   };
 
-  const componentClicked = (props) => {
-    console.log(props);
-  };
-  const responseFacebook = (props) => {
-    console.log(props);
-  };
-  const responseGoogle = (props) => {
-    console.log(props);
+  const onSubmit = async () => {
+    if (!validate()) {
+      const res = await user.login(phone, password);
+      dispatch(setUser(res.data.user));
+      router.push("/");
+    }
   };
 
   return (
     <div className={`form ${props.className}`}>
       <div className="social-login">social logins</div>
-      <Input required email label="البريد الالكتروني" setErrors={setErrors} />
-      <Input required type="password" label="كلمة السر" setErrors={setErrors} />
+      <Input
+        label="الهاتف"
+        error={phoneError}
+        value={phone}
+        onChange={(e) => setPhone(e.target.value)}
+      />
+      <Input
+        type="password"
+        label="كلمة السر"
+        error={passwordError}
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+      />
       <div className="actions flex justify-between gap-2">
         <Button
           variant="contained"

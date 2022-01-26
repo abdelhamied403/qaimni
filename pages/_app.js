@@ -1,9 +1,11 @@
+import { useEffect } from "react";
+import "../styles/globals.scss";
+import { Provider } from "react-redux";
+import { store } from "../src/redux/store";
+import App from "../src/layout/App";
+import { theme } from "../styles/theme";
 import { ThemeProvider } from "@mui/material";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
-import RTL from "../src/layout/RTL";
-import "../styles/globals.scss";
-import { theme } from "../styles/theme";
 
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
@@ -16,10 +18,11 @@ function MyApp({ Component, pageProps }) {
       }
     });
   }, [router]);
+
   return (
-    <RTL>
-      <ThemeProvider theme={theme}>
-        <div className="app" dir="rtl">
+    <Provider store={store}>
+      <App>
+        <ThemeProvider theme={theme}>
           {Component.Layout ? (
             <Component.Layout title={Component.name}>
               <Component {...pageProps} />
@@ -27,9 +30,9 @@ function MyApp({ Component, pageProps }) {
           ) : (
             <Component {...pageProps} />
           )}
-        </div>
-      </ThemeProvider>
-    </RTL>
+        </ThemeProvider>
+      </App>
+    </Provider>
   );
 }
 

@@ -5,10 +5,13 @@ import SearchIcon from "@mui/icons-material/Search";
 import MenuIcon from "@mui/icons-material/Menu";
 import PersonIcon from "@mui/icons-material/Person";
 import { useRouter } from "next/router";
+import { useSelector } from "react-redux";
 
 const Navbar = (props) => {
   const router = useRouter();
   const menu = useRef();
+
+  const user = useSelector((state) => state.user.user);
 
   const toggleMenu = () => {
     menu.current.classList.toggle("hidden");
@@ -22,7 +25,12 @@ const Navbar = (props) => {
         }`}
       >
         <div className="menu flex items-center pointer-events-auto">
-          <img className="max-w-full" src="../assets/logo.png" alt="" />
+          <img
+            className="max-w-full cursor-pointer"
+            src="../assets/logo.png"
+            alt=""
+            onClick={() => router.push("/")}
+          />
           <ul
             className="
               lg:flex lg:static top-12 left-0 text-black lg:text-inherit bg-white lg:bg-transparent
@@ -42,6 +50,15 @@ const Navbar = (props) => {
                 </Link>
               </span>
             </li>
+            {user && (
+              <li>
+                <span className="text-xl hover:text-primary">
+                  <Link className="" href="/messages">
+                    الرسائل
+                  </Link>
+                </span>
+              </li>
+            )}
           </ul>
         </div>
 
@@ -73,12 +90,31 @@ const Navbar = (props) => {
             </>
           )}
           <div className="hidden lg:flex">
-            <Button
-              variant="contained"
-              onClick={() => router.push("/auth/login")}
-            >
-              <span className="text-white">تسجيل دخول</span>
-            </Button>
+            {user && (
+              <Button
+                className="flex items-center gap-2"
+                variant="default"
+                onClick={() => router.push("/profile")}
+              >
+                {!user.image_url && <PersonIcon color="primary" />}
+                {user.image_url && (
+                  <img
+                    className="w-12 h-12 object-cover"
+                    src="assets/logo.png"
+                    alt=""
+                  />
+                )}
+                <p>{user.name}</p>
+              </Button>
+            )}
+            {!user && (
+              <Button
+                variant="contained"
+                onClick={() => router.push("/auth/login")}
+              >
+                <span className="text-white">تسجيل دخول</span>
+              </Button>
+            )}
           </div>
           <div
             className="flex lg:hidden"

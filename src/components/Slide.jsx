@@ -1,13 +1,38 @@
-import Image from "next/image";
 import React from "react";
+import Button from "@mui/material/Button";
+import { useRouter } from "next/router";
 
 const Slide = (props) => {
+  const router = useRouter();
+
   return (
     <div className="h-screen bg-gray-200 relative" dir="rtl">
       <div className="overlay bg-black bg-opacity-50 h-full w-full absolute top-0 z-10"></div>
-      <img src={props.img} alt="" />
+      <img
+        className="w-full h-full object-cover"
+        src={props.image_url}
+        alt=""
+      />
       <div className="content absolute top-0 w-full h-full flex text-white px-12 z-10 md:px-24">
-        <div className="my-auto">{props.children}</div>
+        <div className="my-auto">
+          <h1 className="text-7xl font-bold text-white mb-2">
+            {props.slider_title}
+          </h1>
+          <p className="max-w-4xl my-4">{props.slider_desc}</p>
+          <div className="flex space-x-4 rtl:space-x-reverse">
+            <Button variant="contained" color="primary" size="large">
+              <span className="text-white">اقرأ المزيد</span>
+            </Button>
+            <Button
+              variant="outlined"
+              color="accent"
+              size="large"
+              onClick={() => router.push("/search")}
+            >
+              ابحث
+            </Button>
+          </div>
+        </div>
       </div>
     </div>
   );
