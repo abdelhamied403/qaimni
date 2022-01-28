@@ -28,20 +28,15 @@ const LoginForm = (props) => {
   };
 
   useEffect(() => {
-    getProviders()
-      .then((providers) => {
-        console.log(providers);
-        setProviders(providers);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    getProviders().then((providers) => {
+      setProviders(providers);
+    });
   }, []);
 
   return (
     <div className={`form ${props.className}`}>
       <div className="social-login flex gap-2">
-        {/* {Object.values(providers).map((provider) => (
+        {Object.values(providers).map((provider) => (
           <div key={provider.name}>
             <Button
               variant="contained"
@@ -52,7 +47,7 @@ const LoginForm = (props) => {
               تسجيل بـ {provider.name}
             </Button>
           </div>
-        ))} */}
+        ))}
       </div>
       <Input
         required
