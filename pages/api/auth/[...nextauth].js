@@ -17,4 +17,5 @@ export default NextAuth({
   pages: {
     signIn: "/auth/login",
   },
+  secret: "alK8bAWP+npfCrkF5ZeIEguTLnB06PAk+p/mtRfzuzs=",
 });
