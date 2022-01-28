@@ -11,9 +11,9 @@ const Page = ({ title, children }) => {
         <meta name="description" content="qaimni" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="page">
+      <div className="page min-h-screen flex flex-col">
         <Navbar />
-        <main className="min-h-screen">{children}</main>
+        <main className="flex-1">{children}</main>
         <Footer />
       </div>
     </>

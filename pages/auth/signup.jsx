@@ -5,9 +5,9 @@ import Auth from "../../src/layout/Auth";
 
 const Signup = (props) => {
   return (
-    <div className="content col-span-2 lg:col-span-1">
-      <div className="p-6 py-12 lg:p-24">
-        <img className="w-64" src="../assets/logo.png" alt="" />
+    <div className="content col-span-2 lg:col-span-1 my-auto">
+      <div className="mx-12">
+        <img className="w-48" src="../assets/logo.png" alt="" />
         <h1 className="text-4xl font-black mb-4">الاشتراك</h1>
         <h4 className="text-lg text-gray-400 font-bold m-0">
           ويُستخدم في صناعات المطابع ودور النشر. كان لوريم إيبسوم ولايزال

@@ -15,7 +15,7 @@ const Footer = (props) => {
         </div>
         <div className="logo">
           <div className="w-24">
-            <img src="../assets/logo.png" alt="" />
+            <img src="/assets/logo.png" alt="" />
           </div>
         </div>
         <div className="socials">socials</div>

@@ -1,8 +1,7 @@
 import { Rating } from "@mui/material";
-import Image from "next/image";
 import React from "react";
 
-const Comment = (props) => {
+const Comment = ({ comment, created_at, rate, types }) => {
   return (
     <div className="comment border border-solid border-gray-400 my-8 px-8 py-4 rounded-lg">
       <div className="flex gap-4">
@@ -13,21 +12,38 @@ const Comment = (props) => {
             alt=""
           />
         </div>
-        <div className="content">
+        <div className="content flex-1">
           <div className="head flex justify-between">
             <div className="username">
               <h3>Ahmed</h3>
+              <Rating
+                name="size-large"
+                defaultValue={rate}
+                size="large"
+                readOnly
+                precision={0.1}
+              />
+              <p className="text-sm">{created_at}</p>
             </div>
-            <div className="rate">
-              <Rating name="size-large" defaultValue={2} size="large" />
+            <div className="rate flex flex-col">
+              {types?.map((type) => (
+                <div
+                  className="rating flex items-center gap-2 justify-end"
+                  key={type.id}
+                >
+                  <p className="text-sm">{type.title}</p>
+                  <Rating
+                    name="size-large"
+                    defaultValue={type.rate}
+                    size="large"
+                    readOnly
+                    precision={0.1}
+                  />
+                </div>
+              ))}
             </div>
           </div>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi
-            repellat maiores vitae molestiae laudantium. Perspiciatis,
-            obcaecati? Totam, ipsum aliquid accusantium, sapiente unde et nihil
-            blanditiis, qui culpa quisquam at inventore.
-          </p>
+          <p>{comment}</p>
         </div>
       </div>
     </div>

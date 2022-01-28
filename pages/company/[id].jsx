@@ -1,7 +1,7 @@
 import { Box, Button, Rating, Tab, Tabs, Typography } from "@mui/material";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Comment from "../../src/components/Comment";
 import Navbar from "../../src/components/Navbar";
 import TabPanel from "../../src/components/TabPanel";
@@ -12,61 +12,83 @@ import SaleryCard from "../../src/components/SaleryCard";
 import Link from "next/link";
 import Page from "../../src/layout/Page";
 import PlanCard from "../../src/components/PlanCard";
+import company from "../../src/services/company";
 
 const Company = (props) => {
   const router = useRouter();
   const { id } = router.query;
   const [currentTab, setCurrentTab] = useState(0);
+  const [companyData, setCompanyData] = useState();
+  const [companyReviews, setCompanyReviews] = useState();
+
+  const getCompanyData = async (id) => {
+    if (id) {
+      const res = await company.getCompany(id);
+      setCompanyData(res.data);
+    }
+  };
+  const getCompanyReviews = async (id) => {
+    if (id) {
+      const res = await company.getCompanyReviews(id);
+      setCompanyReviews(res.data);
+    }
+  };
+
+  useEffect(() => {
+    getCompanyData(id);
+    getCompanyReviews(id);
+  }, [id]);
 
   return (
     <div className="mx-8 md:mx-12 lg:mx-24 my-12">
-      <div className="head flex flex-wrap md:flex-nowrap gap-4 items-center my-12">
+      <div className="head flex flex-wrap gap-4 items-center my-12">
         <div className="logo">
           <img
-            className="w-48 h-48 object-cover"
-            src="https://images.pexels.com/photos/9404648/pexels-photo-9404648.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+            className="w-48 h-48 object-contain"
+            src={companyData?.logo_url}
             alt=""
           />
         </div>
-        <div className="info">
-          <div className="flex justify-between">
-            <h1 className="m-0">جوجل</h1>
+        <div className="info flex-1">
+          <div className="flex flex-wrap justify-between items-start">
+            <div className="info">
+              <h1 className="m-0">{companyData?.name}</h1>
+              <p>
+                {companyData?.address} - {companyData?.phone}
+              </p>
+            </div>
             <div className="actions flex gap-4">
               <Link href={`${id}/review`} passHref>
                 <Button variant="contained" color="primary" size="large">
                   تقديم رأيك
                 </Button>
               </Link>
-              <Link href={`${id}/review`} passHref>
-                <Button variant="contained" color="accent" size="large">
-                  اشتراك premium
-                </Button>
-              </Link>
             </div>
           </div>
           <div className="rate">
-            <Rating name="size-large" defaultValue={2} size="large" />
+            <Rating
+              name="size-large"
+              value={companyData?.rate || 0}
+              size="large"
+              readOnly
+              precision={0.1}
+            />
           </div>
-          <p className="m-0">
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nam
-            aliquam vel inventore delectus nobis, nostrum, assumenda, beatae
-            recusandae quas quos atque dolor minima doloribus voluptatem nisi
-            quaerat omnis perferendis! Eveniet?
-          </p>
+          <p className="m-0">{companyData?.description}</p>
         </div>
       </div>
 
-      <div className="flex gap-4 justify-center">
+      {/* <div className="flex gap-4 justify-center">
         <PlanCard></PlanCard>
         <PlanCard></PlanCard>
-      </div>
+      </div> */}
 
       <div className="tabs">
         <div className="tabs flex justify-center">
           <Tabs value={currentTab} onChange={(_, val) => setCurrentTab(val)}>
             <Tab icon={<CommentIcon />} label="التقييمات" index={1} />
-            <Tab icon={<PaidIcon />} label="المرتبات" index={2} />
-            <Tab icon={<WorkIcon />} label="الوظائف" index={3} />
+            {/* <Tab icon={<PaidIcon />} label="المرتبات" index={2} />
+            <Tab icon={<WorkIcon />} label="الوظائف" index={3} /> */}
           </Tabs>
         </div>
         <div className="tabContent">
@@ -74,16 +96,11 @@ const Company = (props) => {
             {/* comments */}
             <div className="comments">
               <div className="title mb-8">
-                <h1>
-                  تقييمات <span className="text-sm font-normal">8.6 الف</span>
-                </h1>
+                <h1>تقييمات</h1>
               </div>
-              <Comment />
-              <Comment />
-              <Comment />
-              <Comment />
-              <Comment />
-              <Comment />
+              {companyReviews?.map((review) => (
+                <Comment {...review} key={review.id} />
+              ))}
             </div>
           </TabPanel>
           <TabPanel value={currentTab} index={1}>

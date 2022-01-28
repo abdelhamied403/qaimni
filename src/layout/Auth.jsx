@@ -12,7 +12,9 @@ const Auth = ({ title, children }) => {
       <div className="page signup">
         <main>
           <div className="grid grid-cols-2 min-h-screen">
-            <div className="content col-span-2 lg:col-span-1">{children}</div>
+            <div className="content col-span-2 lg:col-span-1 flex">
+              {children}
+            </div>
             <div className="banner hidden lg:block col-span-0 lg:col-span-1">
               <img
                 className="w-full h-screen object-cover"

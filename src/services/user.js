@@ -6,11 +6,8 @@ const user = (() => {
     return res.data;
   };
 
-  const login = async (phone, password) => {
-    const res = await api.post("auth/login", {
-      phone,
-      password,
-    });
+  const login = async (data) => {
+    const res = await api.post("auth/login", data);
     const token = res.data.data.access_token.access_token;
     localStorage.setItem("token", token);
     return res.data;
@@ -23,11 +20,22 @@ const user = (() => {
 
   const socialLogin = async () => {};
 
+  const uploadCV = async (cv) => {
+    const res = await api.patch("profile/upload-cv", { cv });
+    return res.data;
+  };
+  const update = async (data) => {
+    const res = await api.put("profile/update", data);
+    return res.data;
+  };
+
   return {
     me,
     login,
     register,
     socialLogin,
+    uploadCV,
+    update,
   };
 })();
 

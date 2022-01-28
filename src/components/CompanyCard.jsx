@@ -2,28 +2,25 @@ import React from "react";
 import { Rating } from "@mui/material";
 import Link from "./Link";
 
-const CompanyCard = (props) => {
+const CompanyCard = ({ id, logo_url, name, rate, description }) => {
   return (
     <div className="company-card">
       <div className="flex flex-col gap-8">
         <div className="logo">
-          <img
-            className="w-full h-full"
-            src="https://images.pexels.com/photos/9404648/pexels-photo-9404648.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
-            alt=""
-          />
+          <img className="w-48 h-48 object-contain" src={logo_url} alt="" />
         </div>
         <div className="info ">
-          <Link href="/company/1">
-            <h1 className="title m-0">اسم الشركه</h1>
+          <Link href={`/company/${id}`}>
+            <h1 className="title m-0">{name}</h1>
           </Link>
-          <Rating name="size-large" defaultValue={2} size="large" />
-          <p className="m-0">
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-            Laudantium, error? Expedita non amet aut porro optio blanditiis
-            tenetur. Officia dolorem ducimus quis, consequuntur laboriosam
-            deleniti ipsa eligendi odit accusantium sunt.
-          </p>
+          <Rating
+            name="size-large"
+            defaultValue={rate || 0}
+            size="large"
+            readOnly
+            precision={0.1}
+          />
+          <p className="m-0">{description}</p>
         </div>
       </div>
       <hr className="block md:hidden" />

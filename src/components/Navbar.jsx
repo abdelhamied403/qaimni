@@ -1,11 +1,12 @@
 import React, { useRef } from "react";
-import { Button } from "@mui/material";
+import { Button, IconButton } from "@mui/material";
 import Link from "./Link";
 import SearchIcon from "@mui/icons-material/Search";
 import MenuIcon from "@mui/icons-material/Menu";
 import PersonIcon from "@mui/icons-material/Person";
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
+import LogoutIcon from "@mui/icons-material/Logout";
 
 const Navbar = (props) => {
   const router = useRouter();
@@ -15,6 +16,11 @@ const Navbar = (props) => {
 
   const toggleMenu = () => {
     menu.current.classList.toggle("hidden");
+  };
+
+  const logout = () => {
+    localStorage.removeItem("token");
+    router.push("/auth/login");
   };
 
   return (
@@ -27,7 +33,7 @@ const Navbar = (props) => {
         <div className="menu flex items-center pointer-events-auto">
           <img
             className="max-w-full cursor-pointer"
-            src="../assets/logo.png"
+            src="/assets/logo.png"
             alt=""
             onClick={() => router.push("/")}
           />
@@ -45,20 +51,18 @@ const Navbar = (props) => {
             </li>
             <li>
               <span className="text-xl hover:text-primary">
-                <Link className="" href="/sections">
+                <Link className="" href="/categories">
                   الأقسام
                 </Link>
               </span>
             </li>
-            {user && (
-              <li>
-                <span className="text-xl hover:text-primary">
-                  <Link className="" href="/messages">
-                    الرسائل
-                  </Link>
-                </span>
-              </li>
-            )}
+            <li>
+              <span className="text-xl hover:text-primary">
+                <Link className="" href="/blog">
+                  المدونه
+                </Link>
+              </span>
+            </li>
           </ul>
         </div>
 
@@ -91,21 +95,26 @@ const Navbar = (props) => {
           )}
           <div className="hidden lg:flex">
             {user && (
-              <Button
-                className="flex items-center gap-2"
-                variant="default"
-                onClick={() => router.push("/profile")}
-              >
-                {!user.image_url && <PersonIcon color="primary" />}
-                {user.image_url && (
-                  <img
-                    className="w-12 h-12 object-cover"
-                    src="assets/logo.png"
-                    alt=""
-                  />
-                )}
-                <p>{user.name}</p>
-              </Button>
+              <>
+                <Button
+                  className="flex items-center gap-2"
+                  variant="default"
+                  onClick={() => router.push("/profile")}
+                >
+                  {!user.image_url && <PersonIcon color="primary" />}
+                  {user.image_url && (
+                    <img
+                      className="w-12 h-12 object-cover"
+                      src="assets/logo.png"
+                      alt=""
+                    />
+                  )}
+                  <p>{user.name}</p>
+                </Button>
+                <IconButton onClick={logout}>
+                  <LogoutIcon />
+                </IconButton>
+              </>
             )}
             {!user && (
               <Button
@@ -118,7 +127,7 @@ const Navbar = (props) => {
           </div>
           <div
             className="flex lg:hidden"
-            onClick={() => router.push("/auth/login")}
+            onClick={() => router.push(user ? "/profile" : "/auth/login")}
           >
             <PersonIcon />
           </div>
