@@ -50,7 +50,7 @@ export const addResInterceptors = (dispatch) => {
         dispatch(
           setAlert({
             type: "error",
-            message: error.response.data.message,
+            message: error?.response?.data.message,
           })
         );
       }

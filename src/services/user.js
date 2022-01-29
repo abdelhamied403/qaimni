@@ -15,11 +15,15 @@ const user = (() => {
 
   const register = async (data) => {
     const res = await api.post("auth/register", data);
+    const token = res.data.data.access_token.access_token;
+    localStorage.setItem("token", token);
     return res.data;
   };
 
   const socialLogin = async (data) => {
-    const res = await api.post("auth/soical", data);
+    const res = await api.post("auth/social", data);
+    const token = res.data.data.access_token.access_token;
+    localStorage.setItem("token", token);
     return res.data;
   };
 

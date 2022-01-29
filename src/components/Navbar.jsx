@@ -20,7 +20,8 @@ const Navbar = (props) => {
 
   const logout = () => {
     localStorage.removeItem("token");
-    router.push("/auth/login");
+    localStorage.removeItem("provider");
+    router.replace("/auth/login");
   };
 
   return (

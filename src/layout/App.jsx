@@ -25,7 +25,7 @@ const App = (props) => {
 
   useEffect(() => {
     auth();
-  });
+  }, []);
 
   return (
     <CacheProvider value={cacheRtl}>

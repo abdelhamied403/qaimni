@@ -10,8 +10,13 @@ import {
 } from "@mui/material";
 import vocab from "../../services/vocab";
 import user from "../../services/user";
+import { useDispatch } from "react-redux";
+import { setUser } from "../../redux/slices/user.slice";
+import { useRouter } from "next/router";
 
 const SignupForm = (props) => {
+  const dispatch = useDispatch();
+  const router = useRouter();
   const [form, setForm] = useState({
     name: "",
     phone: "",
@@ -54,6 +59,7 @@ const SignupForm = (props) => {
   const onSubmit = async () => {
     const res = await user.register(form);
     dispatch(setUser(res.data.user));
+    router.push("/");
   };
 
   return (
