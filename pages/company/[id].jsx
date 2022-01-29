@@ -63,6 +63,13 @@ const Company = (props) => {
                   تقديم رأيك
                 </Button>
               </Link>
+              {!companyData?.verified && (
+                <Link href={`${id}/claim`} passHref>
+                  <Button variant="contained" color="accent" size="large">
+                    المطالبه بالشركه
+                  </Button>
+                </Link>
+              )}
             </div>
           </div>
           <div className="rate">

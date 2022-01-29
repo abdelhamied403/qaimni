@@ -18,7 +18,10 @@ const user = (() => {
     return res.data;
   };
 
-  const socialLogin = async () => {};
+  const socialLogin = async (data) => {
+    const res = await api.post("auth/soical", data);
+    return res.data;
+  };
 
   const uploadCV = async (cv) => {
     const res = await api.patch("profile/upload-cv", { cv });

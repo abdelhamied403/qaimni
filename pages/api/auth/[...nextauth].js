@@ -17,5 +17,11 @@ export default NextAuth({
   pages: {
     signIn: "/auth/login",
   },
+  callbacks: {
+    async session({ session, token }) {
+      session.accessToken = token.accessToken;
+      return token;
+    },
+  },
   secret: "alK8bAWP+npfCrkF5ZeIEguTLnB06PAk+p/mtRfzuzs=",
 });

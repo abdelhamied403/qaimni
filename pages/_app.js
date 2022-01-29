@@ -6,8 +6,10 @@ import App from "../src/layout/App";
 import { theme } from "../styles/theme";
 import { ThemeProvider } from "@mui/material";
 import { useRouter } from "next/router";
+import { SessionProvider } from "next-auth/react";
+import { addResInterceptors } from "../src/services/axios";
 
-function MyApp({ Component, pageProps }) {
+function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   const router = useRouter();
 
   useEffect(() => {
@@ -19,19 +21,23 @@ function MyApp({ Component, pageProps }) {
     });
   }, [router]);
 
+  addResInterceptors(store.dispatch);
+
   return (
     <Provider store={store}>
-      <App>
-        <ThemeProvider theme={theme}>
-          {Component.Layout ? (
-            <Component.Layout title={Component.name}>
+      <SessionProvider session={session}>
+        <App>
+          <ThemeProvider theme={theme}>
+            {Component.Layout ? (
+              <Component.Layout title={Component.name}>
+                <Component {...pageProps} />
+              </Component.Layout>
+            ) : (
               <Component {...pageProps} />
-            </Component.Layout>
-          ) : (
-            <Component {...pageProps} />
-          )}
-        </ThemeProvider>
-      </App>
+            )}
+          </ThemeProvider>
+        </App>
+      </SessionProvider>
     </Provider>
   );
 }

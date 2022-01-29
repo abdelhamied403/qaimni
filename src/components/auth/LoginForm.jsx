@@ -3,14 +3,15 @@ import Input from "../../components/Input";
 import { Button } from "@mui/material";
 import { useRouter } from "next/router";
 import user from "../../services/user";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { setUser } from "../../redux/slices/user.slice";
-import { signIn, getProviders } from "next-auth/react";
+import { useSession, signIn, getProviders } from "next-auth/react";
 
 const LoginForm = (props) => {
   const router = useRouter();
   const dispatch = useDispatch();
   const [providers, setProviders] = useState([]);
+  const session = useSession();
 
   const [form, setForm] = useState({
     phone: "",
@@ -27,6 +28,23 @@ const LoginForm = (props) => {
     router.push("/");
   };
 
+  const socialLogin = async () => {
+    const data = {
+      name: session.data?.name,
+      email: session.data?.email,
+      picture: session.data?.picture,
+      provider_name: localStorage.getItem("provider"),
+      provider_id: session.data?.sub,
+    };
+    const res = await user.socialLogin(data);
+    dispatch(setUser(res.data.user));
+    router.push("/");
+  };
+
+  useEffect(() => {
+    if (session) socialLogin();
+  }, [session]);
+
   useEffect(() => {
     getProviders().then((providers) => {
       setProviders(providers);
@@ -42,7 +60,10 @@ const LoginForm = (props) => {
               variant="contained"
               color="inherit"
               size="large"
-              onClick={() => signIn(provider.id)}
+              onClick={() => {
+                signIn(provider.id);
+                localStorage.setItem("provider", provider.id);
+              }}
             >
               تسجيل بـ {provider.name}
             </Button>

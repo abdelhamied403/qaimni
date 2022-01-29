@@ -25,12 +25,18 @@ const company = (() => {
     return res.data;
   };
 
+  const claim = async (data) => {
+    const res = await api.post(`company/claim`, data);
+    return res.data;
+  };
+
   return {
     getCompany,
     getCompanyReviews,
     searchCompanies,
     getRatingTypes,
     submitReview,
+    claim,
   };
 })();
 

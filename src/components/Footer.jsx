@@ -12,6 +12,9 @@ const Footer = (props) => {
           <Link className="text-lg" href="/">
             الاقسام
           </Link>
+          <Link className="" href="/blog">
+            المدونه
+          </Link>
         </div>
         <div className="logo">
           <div className="w-24">
