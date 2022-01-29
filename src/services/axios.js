@@ -3,7 +3,7 @@ import Router from "next/router";
 import { setAlert } from "../redux/slices/app.slice";
 
 const api = axios.create({
-  baseURL: "https://qaimni.pixagrama.tk/api/user",
+  baseURL: process.env.BASE_URL,
   headers: {
     Accept: "application/json",
     "Content-Type": "application/json",

@@ -5,13 +5,12 @@ import GoogleProvider from "next-auth/providers/google";
 export default NextAuth({
   providers: [
     FacebookProvider({
-      clientId: "468982278086646",
-      clientSecret: "dccbc0d871a6893144403bb5b2e62978",
+      clientId: process.env.FB_CLIENT_ID,
+      clientSecret: process.env.FB_CLIENT_SECRET,
     }),
     GoogleProvider({
-      clientId:
-        "466670452015-d65kpu28ct02ck8nfju57bji0858720k.apps.googleusercontent.com",
-      clientSecret: "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",
+      clientId: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     }),
   ],
   pages: {
@@ -23,5 +22,5 @@ export default NextAuth({
       return token;
     },
   },
-  secret: "alK8bAWP+npfCrkF5ZeIEguTLnB06PAk+p/mtRfzuzs=",
+  secret: process.env.NEXT_SECRET,
 });
