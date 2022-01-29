@@ -5,12 +5,12 @@ import GoogleProvider from "next-auth/providers/google";
 export default NextAuth({
   providers: [
     FacebookProvider({
-      clientId: process.env.FB_CLIENT_ID,
-      clientSecret: process.env.FB_CLIENT_SECRET,
+      clientId: process.env.NEXT_PUBLIC_FB_CLIENT_ID,
+      clientSecret: process.env.NEXT_PUBLIC_FB_CLIENT_SECRET,
     }),
     GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      clientId: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID,
+      clientSecret: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_SECRET,
     }),
   ],
   pages: {
@@ -22,5 +22,5 @@ export default NextAuth({
       return token;
     },
   },
-  secret: process.env.NEXT_SECRET,
+  secret: process.env.NEXT_PUBLIC_NEXT_SECRET,
 });
