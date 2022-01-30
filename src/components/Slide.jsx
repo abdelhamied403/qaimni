@@ -19,18 +19,18 @@ const Slide = (props) => {
             {props.slider_title}
           </h1>
           <p className="max-w-4xl my-4">{props.slider_desc}</p>
+
           <div className="flex space-x-4 rtl:space-x-reverse">
-            <Button variant="contained" color="primary" size="large">
-              <span className="text-white">اقرأ المزيد</span>
-            </Button>
-            <Button
-              variant="outlined"
-              color="accent"
-              size="large"
-              onClick={() => router.push("/search")}
-            >
-              ابحث
-            </Button>
+            {props.link && (
+              <Button
+                variant="outlined"
+                color="accent"
+                size="large"
+                onClick={() => router.push(props.link)}
+              >
+                اضغط هنا
+              </Button>
+            )}
           </div>
         </div>
       </div>
