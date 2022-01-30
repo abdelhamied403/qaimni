@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   alert: null,
+  loading: false,
 };
 
 export const app = createSlice({
@@ -11,10 +12,13 @@ export const app = createSlice({
     setAlert: (state, action) => {
       state.alert = action.payload;
     },
+    setLoading: (state, action) => {
+      state.loading = action.payload;
+    },
   },
 });
 
 // setters
-export const { setAlert } = app.actions;
+export const { setAlert, setLoading } = app.actions;
 
 export default app.reducer;

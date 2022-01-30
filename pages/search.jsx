@@ -4,6 +4,7 @@ import React, { useEffect, useRef, useState } from "react";
 import CompanyCard from "../src/components/CompanyCard";
 import Page from "../src/layout/Page";
 import company from "../src/services/company";
+import InboxIcon from "@mui/icons-material/Inbox";
 
 const Search = (props) => {
   const searchInput = useRef();
@@ -47,6 +48,14 @@ const Search = (props) => {
         {searchResults.map((result) => (
           <CompanyCard {...result} key={result.id} />
         ))}
+        {searchResults.length === 0 && (
+          <div className="text-center col-span-3 bg-gray-100 py-24">
+            <div className="text-7xl text-primary">
+              <InboxIcon fontSize="inherit" />
+            </div>
+            <h4>لا يوجد اي شركات بهذا الاسم</h4>
+          </div>
+        )}
       </div>
     </div>
   );
