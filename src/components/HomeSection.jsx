@@ -11,8 +11,8 @@ const HomeSection = (props) => {
         />
         <div className="content max-w-2xl mx-24 relative z-10">
           <img
-            className="w-60 h-64"
-            src="https://images.pexels.com/photos/9404648/pexels-photo-9404648.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+            className="w-60 h-72"
+            src={`/assets/${props.infos_key}.png`}
             alt=""
           />
           <div className="data mt-4 md:-mt-12">
