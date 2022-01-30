@@ -65,18 +65,12 @@ const Navbar = (props) => {
               </span>
             </li>
             <li>
-              <span className="text-xl hover:text-primary">
-                <Link className="" href="/about">
-                  عنا
-                </Link>
-              </span>
-            </li>
-            <li>
-              <span className="text-xl hover:text-primary">
-                <Link className="" href="/contact">
-                  تواصل معنا
-                </Link>
-              </span>
+              <Button
+                variant="contained"
+                onClick={() => window.open('https://company.qaimni.com', '_blank').focus()}
+              >
+                <span className="text-white">تسجيل الشركات</span>
+              </Button>
             </li>
           </ul>
         </div>

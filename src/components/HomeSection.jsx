@@ -2,7 +2,7 @@ import React from "react";
 
 const HomeSection = (props) => {
   return (
-    <section className="vision py-4" dir={props.id % 2 === 0 ? "ltr" : "rtl"}>
+    <section className="vision mt-5 py-4" dir={props.id % 2 === 0 ? "ltr" : "rtl"}>
       <div className="relative">
         <span
           className={`${
@@ -25,7 +25,7 @@ const HomeSection = (props) => {
             </h1>
             <p
               className={`${
-                props.id % 2 === 0 ? "text-right" : "md:text-left"
+                props.id % 2 === 0 ? "text-right" : "md:text-right"
               }`}
             >
               {props.infos_desc}

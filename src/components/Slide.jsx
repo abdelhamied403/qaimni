@@ -6,7 +6,7 @@ const Slide = (props) => {
   const router = useRouter();
 
   return (
-    <div className="h-screen bg-gray-200 relative" dir="rtl">
+    <div className="h-screen bg-gray-200 relative mb-5" dir="rtl">
       <div className="overlay bg-black bg-opacity-50 h-full w-full absolute top-0 z-10"></div>
       <img
         className="w-full h-full object-cover"

@@ -30,8 +30,8 @@ const Search = (props) => {
         <TextField
           variant="outlined"
           size="large"
-          label="ابحث عن شخص شركه او مستشار"
-          placeholder="ابحث عن شخص شركه او مستشار"
+          label="ابحث عن شركه"
+          placeholder="ابحث عن شركه"
           className="w-full font-bold"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
