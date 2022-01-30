@@ -14,7 +14,7 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
 
   useEffect(() => {
     document.addEventListener("keydown", (evt) => {
-      if (evt.ctrlKey && evt.keyCode == 75) {
+      if (evt.ctrlKey && evt.keyCode == 81) {
         evt.preventDefault();
         router.push("/search");
       }
