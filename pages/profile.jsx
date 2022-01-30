@@ -20,7 +20,7 @@ const Profile = (props) => {
             <h1 className="text-4xl">{user?.name}</h1>
             <p className="text-gray-500">{user?.job_title}</p>
             <p className="text-gray-500">
-              {user?.country} {user?.state}
+              {user?.country} - {user?.state}
             </p>
           </div>
         </div>
@@ -28,9 +28,9 @@ const Profile = (props) => {
           <Button variant="contained" size="large">
             <Link href="profile/edit">تعديل</Link>
           </Button>
-          <Button variant="contained" color="accent" size="large">
+          {/* <Button variant="contained" color="accent" size="large">
             اشتراك premium
-          </Button>
+          </Button> */}
         </div>
       </div>
     </div>

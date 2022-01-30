@@ -6,6 +6,8 @@ import user from "../../services/user";
 import { useDispatch } from "react-redux";
 import { setUser } from "../../redux/slices/user.slice";
 import { useSession, signIn, getProviders } from "next-auth/react";
+import FacebookIcon from "@mui/icons-material/Facebook";
+import GoogleIcon from "@mui/icons-material/Google";
 
 const LoginForm = (props) => {
   const router = useRouter();
@@ -53,22 +55,36 @@ const LoginForm = (props) => {
 
   return (
     <div className={`form ${props.className}`}>
+      <h3>سجل دخول بواسطه</h3>
       <div className="social-login flex gap-2">
-        {Object.values(providers).map((provider) => (
-          <div key={provider.name}>
-            <Button
-              variant="contained"
-              color="inherit"
-              size="large"
-              onClick={() => {
-                signIn(provider.id);
-                localStorage.setItem("provider", provider.id);
-              }}
-            >
-              تسجيل بـ {provider.name}
-            </Button>
-          </div>
-        ))}
+        <Button
+          variant="contained"
+          color="inherit"
+          style={{ backgroundColor: "#4267B2", color: "white" }}
+          className="flex gap-2"
+          size="large"
+          onClick={() => {
+            signIn(providers.facebook.id);
+            localStorage.setItem("provider", providers.facebook.id);
+          }}
+        >
+          <FacebookIcon />
+          <span>فيسبوك</span>
+        </Button>
+        <Button
+          variant="outlined"
+          color="inherit"
+          style={{ backgroundColor: "#fff", color: "black" }}
+          className="flex gap-2"
+          size="large"
+          onClick={() => {
+            signIn(providers.google.id);
+            localStorage.setItem("provider", providers.google.id);
+          }}
+        >
+          <img className="w-6" src="/assets/google_logo.png" alt="" />
+          <span>جوجل</span>
+        </Button>
       </div>
       <Input
         required

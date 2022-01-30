@@ -9,10 +9,15 @@ const vocab = (() => {
     const res = await api.get(`states?country_id=${countryId}`);
     return res.data;
   };
+  const getSocials = async () => {
+    const res = await api.get("social-media");
+    return res.data;
+  }
 
   return {
     getCountries,
     getStates,
+    getSocials
   };
 })();
 

@@ -1,21 +1,18 @@
 import { Rating } from "@mui/material";
 import React from "react";
+import ForumIcon from "@mui/icons-material/Forum";
 
 const Comment = ({ comment, created_at, rate, types }) => {
   return (
     <div className="comment border border-solid border-gray-400 my-8 px-8 py-4 rounded-lg">
       <div className="flex gap-4">
-        <div className="head ">
-          <img
-            className="w-16 h-16 object-cover rounded-md"
-            src="https://images.pexels.com/photos/9404648/pexels-photo-9404648.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
-            alt=""
-          />
+        <div className="head text-5xl">
+          <ForumIcon />
         </div>
         <div className="content flex-1">
           <div className="head flex justify-between">
             <div className="username">
-              <h3>Ahmed</h3>
+              <h3>التقييم العام</h3>
               <Rating
                 name="size-large"
                 defaultValue={rate}
