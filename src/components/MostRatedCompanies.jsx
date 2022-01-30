@@ -5,8 +5,8 @@ import Slider from "react-slick";
 
 const MostRatedCompanies = (props) => {
   return (
-    <section className="top-rated py-12 px-12 md:px-24">
-      <h1 className="font-bold text-4xl md:text-7xl mb-6">
+    <section className="top-rated py-24 px-12 md:px-24">
+      <h1 className="font-bold text-3xl md:text-5xl mb-6">
         الشركات الاعلي تقييماً
       </h1>
       <Slider
