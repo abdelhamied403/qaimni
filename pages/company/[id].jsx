@@ -42,9 +42,9 @@ const Company = (props) => {
   return (
     <div className="mx-8 md:mx-12 lg:mx-24 my-12">
       <div className="head flex flex-wrap gap-4 items-center my-12">
-        <div className="logo">
+        <div className="logo border border-solid border-gray-400 rounded-xl p-4">
           <img
-            className="w-48 h-48 object-contain"
+            className="w-44 h-44 object-contain"
             src={companyData?.logo_url}
             alt=""
           />
@@ -52,7 +52,7 @@ const Company = (props) => {
         <div className="info flex-1">
           <div className="flex flex-wrap justify-between items-start">
             <div className="info">
-              <h1 className="m-0">{companyData?.name}</h1>
+              <h1 className="m-0 text-primary">{companyData?.name}</h1>
               <p>
                 {companyData?.address} - {companyData?.phone}
               </p>
@@ -154,14 +154,6 @@ const Company = (props) => {
               </div>
             </div>
           </TabPanel>
-          <div className="flex flex-wrap justify-between">
-            <h1>هل تعمل لدي شركه جوجل</h1>
-            <Link href={`${id}/review`} passHref>
-              <Button variant="outlined" color="primary" size="large">
-                تقديم رأيك
-              </Button>
-            </Link>
-          </div>
         </div>
       </div>
     </div>
