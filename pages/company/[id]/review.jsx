@@ -19,7 +19,7 @@ const Review = (props) => {
   const { id } = router.query;
   const [ratingTypes, setRatingTypes] = useState([]);
   const [companyData, setCompanyData] = useState();
-  const [rateAs, setRateAs] = useState();
+  const [rateAs, setRateAs] = useState("employee");
 
   const [form, setForm] = useState({
     type: "",
@@ -127,6 +127,8 @@ const Review = (props) => {
             <ToggleButtonGroup
               value={rateAs}
               exclusive
+              color="primary"
+              variant="contained"
               onChange={(e) => {
                 setRateAs(e.target.value);
                 setForm((prev) => ({
@@ -140,10 +142,18 @@ const Review = (props) => {
                 }));
               }}
             >
-              <ToggleButton value="employee" disabled={rateAs === "employee"}>
+              <ToggleButton
+                value="employee"
+                disabled={rateAs === "employee"}
+                style={{ padding: "0 30px" }}
+              >
                 موظف
               </ToggleButton>
-              <ToggleButton value="client" disabled={rateAs === "client"}>
+              <ToggleButton
+                value="client"
+                disabled={rateAs === "client"}
+                style={{ padding: "0 30px" }}
+              >
                 عميل
               </ToggleButton>
             </ToggleButtonGroup>
