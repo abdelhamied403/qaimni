@@ -81,7 +81,7 @@ const Navbar = (props) => {
                       <span className="text-gray-400">ابحث ...</span>
                     </div>
                     <div className="border border-solid border-primary bg-primary bg-opacity-20 px-2 rounded-lg">
-                      Ctrl+K
+                      Ctrl+Q
                     </div>
                   </div>
                 </Button>
