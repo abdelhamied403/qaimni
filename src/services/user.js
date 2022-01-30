@@ -35,6 +35,10 @@ const user = (() => {
     const res = await api.put("profile/update", data);
     return res.data;
   };
+  const contactUs = async (data) => {
+    const res = await api.post("contact-us", data);
+    return res.data;
+  };
 
   return {
     me,
@@ -43,6 +47,7 @@ const user = (() => {
     socialLogin,
     uploadCV,
     update,
+    contactUs
   };
 })();
 

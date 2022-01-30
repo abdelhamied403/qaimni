@@ -29,14 +29,11 @@ const Footer = (props) => {
     <footer className="bg-gray-900 py-4 px-12 md:px-24 text-white">
       <div className="flex flex-wrap justify-between items-center">
         <div className="menu flex gap-4">
-          <Link className="text-lg" href="/">
-            الرئيسية
+          <Link className="text-lg" href="/privacy-policy">
+            سياسة الخصوصيه
           </Link>
-          <Link className="text-lg" href="/">
-            الاقسام
-          </Link>
-          <Link className="" href="/blog">
-            المدونه
+          <Link className="text-lg" href="/terms-of-condition">
+            شروط الاستخدام
           </Link>
         </div>
         <div className="logo">

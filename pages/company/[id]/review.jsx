@@ -287,5 +287,5 @@ const Review = (props) => {
 };
 
 Review.Layout = Page;
-Review.DisplayName = "Review";
+Review.DisplayName = "تقييم";
 export default Review;

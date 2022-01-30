@@ -211,5 +211,5 @@ const ProfileEdit = (props) => {
 };
 
 ProfileEdit.Layout = Page;
-ProfileEdit.DisplayName = "ProfileEdit";
+ProfileEdit.DisplayName = "تعديل الملف الشخصي";
 export default ProfileEdit;

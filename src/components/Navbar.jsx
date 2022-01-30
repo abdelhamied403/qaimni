@@ -64,6 +64,20 @@ const Navbar = (props) => {
                 </Link>
               </span>
             </li>
+            <li>
+              <span className="text-xl hover:text-primary">
+                <Link className="" href="/about">
+                  عنا
+                </Link>
+              </span>
+            </li>
+            <li>
+              <span className="text-xl hover:text-primary">
+                <Link className="" href="/contact">
+                  تواصل معنا
+                </Link>
+              </span>
+            </li>
           </ul>
         </div>
 

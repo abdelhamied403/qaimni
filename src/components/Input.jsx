@@ -15,6 +15,8 @@ const Input = ({
   options,
   name,
   label,
+  maxRows,
+  multiline,
   value,
   setValue,
   error,
@@ -82,6 +84,8 @@ const Input = ({
 
   return (
     <TextField
+      maxRows={maxRows}
+      multiline={multiline}
       type={type || "text"}
       value={value}
       error={error?.length > 0}

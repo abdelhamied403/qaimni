@@ -161,5 +161,5 @@ const Company = (props) => {
 };
 
 Company.Layout = Page;
-Company.DisplayName = "Company";
+Company.DisplayName = "شركه";
 export default Company;

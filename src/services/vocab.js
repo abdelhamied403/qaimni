@@ -13,11 +13,36 @@ const vocab = (() => {
     const res = await api.get("social-media");
     return res.data;
   }
+  const getContactVocab = async () => {
+    const res = await api.get("vocab?page=contact_us_page");
+    return res.data;
+  }
+  const getAboutVocab = async () => {
+    const res = await api.get("vocab?page=about_us_page");
+    return res.data;
+  }
+  const getAuthVocab = async () => {
+    const res = await api.get("vocab?page=auth_page");
+    return res.data;
+  }
+  const getPrivacyVocab = async () => {
+    const res = await api.get("vocab?page=privacy_policy");
+    return res.data;
+  }
+  const getTermsVocab = async () => {
+    const res = await api.get("vocab?page=terms_of_use");
+    return res.data;
+  }
 
   return {
     getCountries,
     getStates,
-    getSocials
+    getSocials,
+    getContactVocab,
+    getAboutVocab,
+    getAuthVocab,
+    getPrivacyVocab,
+    getTermsVocab,
   };
 })();
 

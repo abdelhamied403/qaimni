@@ -63,5 +63,5 @@ const Home = () => {
   );
 };
 Home.Layout = Page;
-Home.DisplayName = "Home";
+Home.DisplayName = "الرئيسيه";
 export default Home;

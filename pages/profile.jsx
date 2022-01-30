@@ -38,5 +38,5 @@ const Profile = (props) => {
 };
 
 Profile.Layout = Page;
-Profile.DisplayName = "Profile";
+Profile.DisplayName = "الملف الشخصي";
 export default Profile;

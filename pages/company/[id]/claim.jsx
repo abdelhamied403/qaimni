@@ -158,5 +158,5 @@ const ClaimCompany = (props) => {
 };
 
 ClaimCompany.Layout = Page;
-ClaimCompany.DisplayName = "ClaimCompany";
+ClaimCompany.DisplayName = "المطالبه بالشركه";
 export default ClaimCompany;

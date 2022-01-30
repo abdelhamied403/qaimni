@@ -36,5 +36,5 @@ const Category = (props) => {
 };
 
 Category.Layout = Page;
-Category.DisplayName = "Category";
+Category.DisplayName = "قسم";
 export default Category;

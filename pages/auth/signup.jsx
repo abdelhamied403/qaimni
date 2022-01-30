@@ -1,17 +1,28 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Link from "../../src/components/Link";
 import SignupForm from "../../src/components/auth/SignupForm";
 import Auth from "../../src/layout/Auth";
+import vocabService from "../../src/services/vocab";
 
 const Signup = (props) => {
+  const [vocab, setVocab] = useState();
+
+  const getVocab = async () => {
+    const res = await vocabService.getAuthVocab();
+    setVocab(res.data);
+  };
+
+  useEffect(() => {
+    getVocab();
+  }, []);
+
   return (
     <div className="content col-span-2 lg:col-span-1 my-auto">
       <div className="mx-12">
         <img className="w-48" src="../assets/logo.png" alt="" />
         <h1 className="text-4xl font-black mb-4">الاشتراك</h1>
         <h4 className="text-lg text-gray-400 font-bold m-0">
-          ويُستخدم في صناعات المطابع ودور النشر. كان لوريم إيبسوم ولايزال
-          المعياردور النشر. كان لور
+          {vocab?.infos_desc}
         </h4>
         <Link href="/auth/login">مستخدم حالي؟</Link>
         {/* form */}
@@ -22,5 +33,5 @@ const Signup = (props) => {
 };
 
 Signup.Layout = Auth;
-Signup.DisplayName = "Signup";
+Signup.DisplayName = "الاشتراك";
 export default Signup;

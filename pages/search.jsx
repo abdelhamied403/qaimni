@@ -62,5 +62,5 @@ const Search = (props) => {
 };
 
 Search.Layout = Page;
-Search.DisplayName = "Search";
+Search.DisplayName = "البحث";
 export default Search;
