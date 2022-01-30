@@ -60,7 +60,7 @@ const Footer = (props) => {
           {socials.map((social) => (
             <a
               target="_blank"
-              rel="noopener"
+              rel="noreferrer"
               href={social.value}
               key={social.key}
               className="hover:text-primary"
