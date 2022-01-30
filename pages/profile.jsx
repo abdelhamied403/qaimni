@@ -38,4 +38,5 @@ const Profile = (props) => {
 };
 
 Profile.Layout = Page;
+Profile.DisplayName = "Profile";
 export default Profile;

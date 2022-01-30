@@ -29,7 +29,7 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
         <App>
           <ThemeProvider theme={theme}>
             {Component.Layout ? (
-              <Component.Layout title={Component.name}>
+              <Component.Layout title={Component.DisplayName || Component.name}>
                 <Component {...pageProps} />
               </Component.Layout>
             ) : (

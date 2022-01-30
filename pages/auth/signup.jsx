@@ -22,4 +22,5 @@ const Signup = (props) => {
 };
 
 Signup.Layout = Auth;
+Signup.DisplayName = "Signup";
 export default Signup;

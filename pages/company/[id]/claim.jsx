@@ -68,9 +68,9 @@ const ClaimCompany = (props) => {
   return (
     <div className="mx-8 md:mx-12 lg:mx-24 my-12">
       <div className="head flex flex-wrap gap-4 items-center my-12">
-        <div className="logo">
+        <div className="logo border border-solid border-gray-400 rounded-xl p-4">
           <img
-            className="w-48 h-48 object-contain"
+            className="w-44 h-44 object-contain"
             src={companyData?.logo_url}
             alt=""
           />
@@ -84,7 +84,7 @@ const ClaimCompany = (props) => {
               </p>
             </div>
             <div className="actions flex gap-4">
-              <Link href={`${id}/review`} passHref>
+              <Link href={`/company/${id}/review`} passHref>
                 <Button variant="contained" color="primary" size="large">
                   تقديم رأيك
                 </Button>
@@ -158,4 +158,5 @@ const ClaimCompany = (props) => {
 };
 
 ClaimCompany.Layout = Page;
+ClaimCompany.DisplayName = "ClaimCompany";
 export default ClaimCompany;

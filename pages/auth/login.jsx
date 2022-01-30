@@ -22,4 +22,5 @@ const Login = (props) => {
 };
 
 Login.Layout = Auth;
+Login.DisplayName = "Login";
 export default Login;

@@ -22,7 +22,7 @@ const Review = (props) => {
   const [rateAs, setRateAs] = useState("employee");
 
   const [form, setForm] = useState({
-    type: "",
+    type: "employee",
     rate: 0,
     comment: "",
     recommended: 0,
@@ -87,14 +87,15 @@ const Review = (props) => {
       rate,
     }));
     await company.submitReview(id, { ...form, types });
+    router.push(`/company/${id}`);
   };
 
   return (
     <div className="mx-8 md:mx-12 lg:mx-24 my-12">
       <div className="head flex flex-wrap gap-4 items-center my-12">
-        <div className="logo">
+        <div className="logo border border-solid border-gray-400 rounded-xl p-4">
           <img
-            className="w-48 h-48 object-contain"
+            className="w-44 h-44 object-contain"
             src={companyData?.logo_url}
             alt=""
           />
@@ -275,7 +276,7 @@ const Review = (props) => {
             variant="outlined"
             color="primary"
             size="large"
-            onClick={() => router.back()}
+            onClick={() => router.push(`/company/${id}`)}
           >
             الغاء
           </Button>
@@ -286,4 +287,5 @@ const Review = (props) => {
 };
 
 Review.Layout = Page;
+Review.DisplayName = "Review";
 export default Review;

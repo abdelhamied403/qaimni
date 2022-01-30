@@ -36,4 +36,5 @@ const Category = (props) => {
 };
 
 Category.Layout = Page;
+Category.DisplayName = "Category";
 export default Category;

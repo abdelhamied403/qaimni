@@ -29,4 +29,5 @@ const Article = (props) => {
 };
 
 Article.Layout = Page;
+Article.DisplayName = "Article";
 export default Article;

@@ -211,4 +211,5 @@ const ProfileEdit = (props) => {
 };
 
 ProfileEdit.Layout = Page;
+ProfileEdit.DisplayName = "ProfileEdit";
 export default ProfileEdit;

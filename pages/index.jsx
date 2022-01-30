@@ -63,4 +63,5 @@ const Home = () => {
   );
 };
 Home.Layout = Page;
+Home.DisplayName = "Home";
 export default Home;

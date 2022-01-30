@@ -30,4 +30,5 @@ const Blog = (props) => {
 };
 
 Blog.Layout = Page;
+Blog.DisplayName = "Blog";
 export default Blog;

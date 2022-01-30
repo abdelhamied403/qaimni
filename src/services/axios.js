@@ -43,7 +43,8 @@ export const addResInterceptors = (dispatch) => {
     },
     (error) => {
       dispatch(setLoading(false))
-      dispatch(setAlert(error?.toString() || error.message || "something went wrong"))
+      console.log(error.message)
+      dispatch(setAlert(error?.message || error?.toString() || "something went wrong"))
       setTimeout(() => {
         dispatch(setAlert(null))
       }, 3000);
