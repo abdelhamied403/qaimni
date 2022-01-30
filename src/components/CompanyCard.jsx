@@ -20,7 +20,9 @@ const CompanyCard = ({ id, logo_url, name, rate, description }) => {
             readOnly
             precision={0.1}
           />
-          <p className="m-0">{description}</p>
+          <p className="m-0 clamp-3" style={{ minHeight: "90px" }}>
+            {description}
+          </p>
         </div>
       </div>
       <hr className="block md:hidden" />
