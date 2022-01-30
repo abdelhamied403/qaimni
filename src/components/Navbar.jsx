@@ -34,7 +34,7 @@ const Navbar = (props) => {
         <div className="menu flex items-center pointer-events-auto">
           <img
             className="max-w-full cursor-pointer"
-            src="/assets/logo.png"
+            src="/assets/logo-demo.png"
             alt=""
             onClick={() => router.push("/")}
           />
@@ -114,7 +114,7 @@ const Navbar = (props) => {
                   {user.image_url && (
                     <img
                       className="w-12 h-12 object-cover"
-                      src="assets/logo.png"
+                      src="assets/logo-demo.png"
                       alt=""
                     />
                   )}

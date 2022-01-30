@@ -19,7 +19,7 @@ const Login = (props) => {
   return (
     <div className="my-auto">
       <div className="mx-12">
-        <img className="w-64" src="../assets/logo.png" alt="" />
+        <img className="w-64" src="../assets/logo-demo.png" alt="" />
         <h1 className="text-4xl font-black mb-4">تسجيل الدخول</h1>
         <h4 className="text-lg text-gray-400 font-bold m-0">
           {vocab?.infos_desc}

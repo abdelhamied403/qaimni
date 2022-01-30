@@ -31,21 +31,29 @@ const Footer = (props) => {
       <div className="flex flex-wrap justify-between items-center">
         <div className="menu flex gap-4">
           <Link className="text-lg" href="/about">
-            عن قيمني
+            <a className="hover:text-primary">
+              عن قيمني
+            </a>
           </Link>
           <Link className="text-lg" href="/contact">
-            تواصل معنا
+            <a className="hover:text-primary">
+              تواصل معنا
+            </a>
           </Link>
           <Link className="text-lg" href="/privacy-policy">
-            سياسة الخصوصيه
+            <a className="hover:text-primary">
+              سياسة الخصوصيه
+            </a>
           </Link>
           <Link className="text-lg" href="/terms-of-condition">
-            شروط الاستخدام
+            <a className="hover:text-primary">
+              شروط الاستخدام
+            </a>
           </Link>
         </div>
         <div className="logo">
           <div className="w-24">
-            <img src="/assets/logo.png" alt="" />
+            <img src="/assets/logo-demo.png" alt="" />
           </div>
         </div>
         <div className="socials flex gap-4">

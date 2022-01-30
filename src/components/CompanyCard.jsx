@@ -1,19 +1,20 @@
 import React from "react";
 import { Rating } from "@mui/material";
-import Link from "./Link";
+// import Link from "./Link";
+import Link from "next/link";
 
 const CompanyCard = ({ id, logo_url, name, rate, description }) => {
   return (
-    <div className="company-card text-center">
-      <Link href={`/company/${id}`} className="hj">
-        <div className="flex flex-col gap-8">
+    <div className="company-card">
+      <Link href={`/company/${id}`}>
+        <div className="flex flex-col gap-8 cursor-pointer group">
           <div className="logo border border-solid border-gray-400 rounded-xl">
-            <img className="w-48 h-48 object-contain" src={logo_url} alt="" />
+            <img className="w-48 h-48 object-contain mx-auto" src={logo_url} alt="" />
           </div>
           <div className="info ">
-            <Link href={`/company/${id}`}>
-              <h1 className="title m-0">{name}</h1>
-            </Link>
+              <h1 className="title m-0 group-hover:text-primary">{name}</h1>
+            {/* <Link href={`/company/${id}`} className="hover:text-primary">
+            </Link> */}
             <Rating
               name="size-large"
               defaultValue={rate || 0}
