@@ -39,26 +39,7 @@ export const addResInterceptors = (dispatch) => {
           Router.push("/auth/login");
         }
       }
-      if (error?.response?.status === 500) {
-        dispatch(
-          setAlert({
-            type: "error",
-            message: "please contact support",
-          })
-        );
-      } else {
-        dispatch(
-          setAlert({
-            type: "error",
-            message: error?.response?.data.message,
-          })
-        );
-      }
-
-      setTimeout(() => {
-        dispatch(setAlert(null));
-      }, 2000);
-
+      
       if (error?.response?.data) {
         return Promise.reject(error.response.data);
       }
