@@ -83,7 +83,7 @@ const LoginForm = (props) => {
             localStorage.setItem("provider", providers.google.id);
           }}
         >
-          <img className="w-6" src="/assets/google_logo-demo.png" alt="" />
+          <img className="w-6" src="/assets/google_logo.png" alt="" />
           <span>جوجل</span>
         </Button>
       </div>
