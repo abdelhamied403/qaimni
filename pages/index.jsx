@@ -37,28 +37,23 @@ const Home = () => {
 
   return (
     <>
-      {loading && (
-        <>
-          <Spinner fullPage />
-        </>
-      )}
-      {!loading && (
-        <>
-          <header>
-            <Slider {...settings}>
-              {homeData?.sliders?.map((slide) => (
-                <Slide {...slide} key={slide.id} />
-              ))}
-            </Slider>
-          </header>
+      <header>
+        <Slider {...settings}>
+          {homeData?.sliders?.map((slide) => (
+            <Slide {...slide} key={slide.id} />
+          ))}
+        </Slider>
+      </header>
 
+      <div className="mx-8">
+        <div className="mx-auto flex flex-wrap items-stretch gap-12 max-w-7xl">
           {homeData?.home_data.map((section) => (
             <HomeSection {...section} key={section.id} />
           ))}
+        </div>
+      </div>
 
-          <MostRatedCompanies companies={homeData?.companies} />
-        </>
-      )}
+      <MostRatedCompanies companies={homeData?.companies} />
     </>
   );
 };

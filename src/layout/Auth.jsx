@@ -25,7 +25,7 @@ const Auth = ({ title, children }) => {
         )}
         <main>
           <div className="grid grid-cols-2 min-h-screen">
-            <div className="content col-span-2 lg:col-span-1 flex">
+            <div className="content col-span-2 lg:col-span-1 flex py-24 max-h-screen overflow-auto">
               {children}
             </div>
             <div className="banner hidden lg:block col-span-0 lg:col-span-1">

@@ -20,23 +20,29 @@ const Company = (props) => {
   const [currentTab, setCurrentTab] = useState(0);
   const [companyData, setCompanyData] = useState();
   const [companyReviews, setCompanyReviews] = useState();
+  const [clientsReviews, setClientsReviews] = useState();
 
-  const getCompanyData = async (id) => {
-    if (id) {
-      const res = await company.getCompany(id);
-      setCompanyData(res.data);
-    }
+  const getCompanyData = async () => {
+    const res = await company.getCompany(id);
+    setCompanyData(res.data);
   };
-  const getCompanyReviews = async (id) => {
-    if (id) {
-      const res = await company.getCompanyReviews(id);
-      setCompanyReviews(res.data);
-    }
+
+  const getClientsReviews = async () => {
+    const res = await company.getCompanyReviews(id, "client");
+    setClientsReviews(res.data);
+  };
+
+  const getCompanyReviews = async () => {
+    const res = await company.getCompanyReviews(id, "employee");
+    setCompanyReviews(res.data);
   };
 
   useEffect(() => {
-    getCompanyData(id);
-    getCompanyReviews(id);
+    if (id) {
+      getCompanyData();
+      getCompanyReviews();
+      getClientsReviews();
+    }
   }, [id]);
 
   return (
@@ -93,9 +99,10 @@ const Company = (props) => {
       <div className="tabs">
         <div className="tabs flex justify-center">
           <Tabs value={currentTab} onChange={(_, val) => setCurrentTab(val)}>
-            <Tab icon={<CommentIcon />} label="التقييمات" index={1} />
-            {/* <Tab icon={<PaidIcon />} label="المرتبات" index={2} />
-            <Tab icon={<WorkIcon />} label="الوظائف" index={3} /> */}
+            <Tab icon={<CommentIcon />} label="تقييمات الموظفين" index={0} />
+            <Tab icon={<CommentIcon />} label="تقييمات العملاء" index={1} />
+            {/* <Tab icon={<PaidIcon />} label="المرتبات" index={3} />
+            <Tab icon={<WorkIcon />} label="الوظائف" index={4} /> */}
           </Tabs>
         </div>
         <div className="tabContent">
@@ -111,13 +118,24 @@ const Company = (props) => {
             </div>
           </TabPanel>
           <TabPanel value={currentTab} index={1}>
+            {/* comments */}
+            <div className="comments">
+              <div className="title mb-8">
+                <h1>تقييمات</h1>
+              </div>
+              {clientsReviews?.map((review) => (
+                <Comment {...review} key={review.id} />
+              ))}
+            </div>
+          </TabPanel>
+          <TabPanel value={currentTab} index={2}>
             <h1>المرتبات</h1>
             <SaleryCard />
             <SaleryCard />
             <SaleryCard />
             <SaleryCard />
           </TabPanel>
-          <TabPanel value={currentTab} index={2}>
+          <TabPanel value={currentTab} index={3}>
             <div className="jobCard">
               <div className="head flex justify-between">
                 <h1>Production Engineer</h1>

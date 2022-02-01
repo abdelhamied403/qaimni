@@ -1,9 +1,9 @@
-import Link from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
 import Slider from "react-slick";
 
 const MostRatedCompanies = (props) => {
+  const router = useRouter();
   return (
     <section className="top-rated py-24 px-12 md:px-24">
       <h1 className="font-bold text-3xl md:text-3xl mb-6">
@@ -38,14 +38,17 @@ const MostRatedCompanies = (props) => {
       >
         {props.companies?.map((company) => (
           <div className="slide text-center" key={company.id}>
-            <img
-              className="w-full h-48 object-contain object-center p-8 mx-auto"
-              src={company.logo_url}
-              alt=""
-            />
-            <Link href={`/company/${company.id}`} className="text-center">
+            <div
+              className="cursor-pointer"
+              onMouseUpCapture={() => router.push(`/company/${company.id}`)}
+            >
+              <img
+                className="w-full h-48 object-contain object-center p-8 mx-auto"
+                src={company.logo_url}
+                alt=""
+              />
               {company.name}
-            </Link>
+            </div>
           </div>
         ))}
       </Slider>

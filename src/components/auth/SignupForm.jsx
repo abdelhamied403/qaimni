@@ -13,6 +13,7 @@ import user from "../../services/user";
 import { useDispatch } from "react-redux";
 import { setUser } from "../../redux/slices/user.slice";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
 const SignupForm = (props) => {
   const dispatch = useDispatch();
@@ -155,7 +156,7 @@ const SignupForm = (props) => {
         setError={setErrors}
       />
 
-      <div className="actions flex justify-between gap-2">
+      <div className="actions flex items-center justify-between gap-2">
         <Button
           variant="contained"
           color="primary"
@@ -164,6 +165,7 @@ const SignupForm = (props) => {
         >
           الاشتراك
         </Button>
+        <Link href="/auth/login">مستخدم حالي؟</Link>
       </div>
     </div>
   );

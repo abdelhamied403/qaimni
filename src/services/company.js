@@ -5,13 +5,13 @@ const company = (() => {
     const res = await api.get(`companies/${id}`);
     return res.data;
   };
-  const getCompanyReviews = async (id) => {
-    const res = await api.get(`company/${id}/reviews`);
+  const getCompanyReviews = async (id, as) => {
+    const res = await api.get(`company/${id}/reviews?type=${as}`);
     return res.data;
   };
 
-  const searchCompanies = async (query) => {
-    const res = await api.get(`search?type=companies&search=${query}`);
+  const searchCompanies = async (query, category) => {
+    const res = await api.get(`search?type=companies&category_id=${category}&search=${query}`);
     return res.data;
   };
 

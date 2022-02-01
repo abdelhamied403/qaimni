@@ -40,38 +40,42 @@ const Navbar = (props) => {
           />
           <ul
             className="
-              lg:flex lg:static top-12 left-0 text-black lg:text-inherit bg-white lg:bg-transparent
-              hidden gap-4 items-center list-none absolute px-4 py-2 z-20
+              lg:block lg:static top-12 -left-12 text-black lg:text-inherit
+              hidden list-none absolute z-20
             "
             ref={menu}
           >
-            <li>
-              <span className="text-xl hover:text-primary">
-                <Link href="/">الرئيسية</Link>
-              </span>
-            </li>
-            <li>
-              <span className="text-xl hover:text-primary">
-                <Link className="" href="/categories">
-                  الأقسام
-                </Link>
-              </span>
-            </li>
-            <li>
-              <span className="text-xl hover:text-primary">
-                <Link className="" href="/blog">
-                  المدونه
-                </Link>
-              </span>
-            </li>
-            <li>
-              <Button
-                variant="contained"
-                onClick={() => window.open('https://company.qaimni.com', '_blank').focus()}
-              >
-                <span className="text-white">تسجيل الشركات</span>
-              </Button>
-            </li>
+            <div className="bg-white lg:bg-transparent px-4 py-8 lg:py-2 h-screen lg:h-auto flex flex-col lg:flex-row lg:gap-4 gap-8 items-center w-72 lg:w-auto">
+              <li>
+                <span className="text-xl hover:text-primary">
+                  <Link href="/">الرئيسية</Link>
+                </span>
+              </li>
+              <li>
+                <span className="text-xl hover:text-primary">
+                  <Link className="" href="/categories">
+                    الأقسام
+                  </Link>
+                </span>
+              </li>
+              <li>
+                <span className="text-xl hover:text-primary">
+                  <Link className="" href="/blog">
+                    المدونه
+                  </Link>
+                </span>
+              </li>
+              <li>
+                <Button
+                  variant="contained"
+                  onClick={() =>
+                    window.open("https://company.qaimni.com", "_blank").focus()
+                  }
+                >
+                  <span className="text-white">تسجيل الشركات</span>
+                </Button>
+              </li>
+            </div>
           </ul>
         </div>
 

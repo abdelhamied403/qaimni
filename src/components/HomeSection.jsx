@@ -1,39 +1,14 @@
 import React from "react";
 
-const HomeSection = (props) => {
+const HomeSection = ({ infos_key, infos_title, infos_desc }) => {
   return (
-    <section className="vision mt-5 py-4" dir={props.id % 2 === 0 ? "ltr" : "rtl"}>
-      <div className="relative">
-        <span
-          className={`${
-            props.id % 2 === 0 ? "bg-primary" : "bg-accent"
-          } h-4/5 w-2/3 lg:w-1/3 absolute top-12`}
-        />
-        <div className="content max-w-2xl mx-24 relative z-10">
-          <img
-            className="w-60 h-72"
-            src={`/assets/${props.infos_key}.png`}
-            alt=""
-          />
-          <div className="data mt-4 md:-mt-12">
-            <h1
-              className={`${
-                props.id % 2 === 0 ? "text-right" : "md:text-left"
-              } font-bold text-4xl md:text-7xl mb-6`}
-            >
-              {props.infos_title}
-            </h1>
-            <p
-              className={`${
-                props.id % 2 === 0 ? "text-right" : "md:text-right"
-              }`}
-            >
-              {props.infos_desc}
-            </p>
-          </div>
-        </div>
+    <div className="py-4 flex-1">
+      <div className="bg-gray-200 rounded-xl p-12 text-center shadow  h-full">
+        <img className="w-60 mx-auto" src={`/assets/${infos_key}.png`} alt="" />
+        <h1>{infos_title}</h1>
+        <p>{infos_desc}</p>
       </div>
-    </section>
+    </div>
   );
 };
 

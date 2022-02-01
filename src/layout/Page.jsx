@@ -4,8 +4,6 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { useSelector } from "react-redux";
 import Spinner from "../components/Spinner";
-import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
-import { Alert } from "@mui/material";
 
 const Page = ({ title, children }) => {
   const app = useSelector((state) => state.app);
@@ -26,20 +24,7 @@ const Page = ({ title, children }) => {
             </div>
           </div>
         )}
-        <div
-          className={`fixed z-50 right-24 top-36 transition-opacity duration-500 ${
-            app.alert ? "opacity-100" : "opacity-0"
-          }`}
-        >
-          {app.alert && (
-            <Alert
-              icon={<CancelOutlinedIcon fontSize="inherit" />}
-              severity="error"
-            >
-              {app.alert}
-            </Alert>
-          )}
-        </div>
+
         <main className="flex-1">{children}</main>
         <Footer />
       </div>

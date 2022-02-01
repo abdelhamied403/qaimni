@@ -43,10 +43,13 @@ export const addResInterceptors = (dispatch) => {
     },
     (error) => {
       dispatch(setLoading(false))
-      dispatch(setAlert(error?.message || error?.toString() || "something went wrong"))
-      setTimeout(() => {
-        dispatch(setAlert(null))
-      }, 3000);
+      console.log(error)
+      if(!(error?.status=== 401 || error.status===500 || error.exception)&& error?.message){
+        dispatch(setAlert(error?.message))
+        setTimeout(() => {
+          dispatch(setAlert(null))
+        }, 3000);
+      }
       if (error?.response?.status === 401) {
         if (!publicRoutes.includes(Router.pathname)) {
           Router.push("/auth/login");

@@ -1,32 +1,49 @@
 import { SearchOutlined } from "@mui/icons-material";
-import { InputAdornment, TextField } from "@mui/material";
+import {
+  Button,
+  FormControl,
+  InputAdornment,
+  InputLabel,
+  MenuItem,
+  Select,
+  TextField,
+} from "@mui/material";
 import React, { useEffect, useRef, useState } from "react";
 import CompanyCard from "../src/components/CompanyCard";
 import Page from "../src/layout/Page";
 import company from "../src/services/company";
 import InboxIcon from "@mui/icons-material/Inbox";
+import categoryService from "../src/services/category";
 
 const Search = (props) => {
   const searchInput = useRef();
   const [query, setQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
+  const [categories, setCategories] = useState();
+  const [category, setCategory] = useState();
+
+  const getAllCategories = async () => {
+    const res = await categoryService.getAllCategories();
+    setCategories(res.data);
+  };
 
   useEffect(() => {
     searchInput.current.querySelector("input").focus();
   }, []);
 
   const searchCompanies = async () => {
-    const res = await company.searchCompanies(query);
+    const res = await company.searchCompanies(query, category);
     setSearchResults(res.data.data);
   };
 
   useEffect(() => {
     searchCompanies();
-  }, [query]);
+    getAllCategories();
+  }, []);
 
   return (
     <div className="mx-8 md:mx-12 lg:mx-24 my-12">
-      <div className="search-box my-8 font-bold" ref={searchInput}>
+      <div className="search-box my-8 font-bold flex gap-4" ref={searchInput}>
         <TextField
           variant="outlined"
           size="large"
@@ -43,6 +60,28 @@ const Search = (props) => {
             ),
           }}
         />
+        <FormControl className="w-56">
+          <InputLabel>الاقسام</InputLabel>
+          <Select
+            value={category}
+            label="Category"
+            onChange={(e) => setCategory(e.target.value)}
+          >
+            {categories?.map((category) => (
+              <MenuItem value={category.id} key={category.id}>
+                {category.title}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+        <Button
+          variant="contained"
+          color="primary"
+          size="large"
+          onClick={searchCompanies}
+        >
+          ابحث
+        </Button>
       </div>
       <div className="results grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 max-w-7xl mx-auto">
         {searchResults.map((result) => (

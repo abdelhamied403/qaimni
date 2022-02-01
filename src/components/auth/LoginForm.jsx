@@ -8,6 +8,7 @@ import { setUser } from "../../redux/slices/user.slice";
 import { useSession, signIn, getProviders } from "next-auth/react";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import GoogleIcon from "@mui/icons-material/Google";
+import Link from "next/link";
 
 const LoginForm = (props) => {
   const router = useRouter();
@@ -44,7 +45,7 @@ const LoginForm = (props) => {
   };
 
   useEffect(() => {
-    if (session) socialLogin();
+    if (session && localStorage.getItem("provider")) socialLogin();
   }, [session]);
 
   useEffect(() => {
@@ -105,7 +106,7 @@ const LoginForm = (props) => {
         error={errors.password}
         setError={setErrors}
       />
-      <div className="actions flex justify-between gap-2">
+      <div className="actions flex justify-between items-center gap-2">
         <Button
           variant="contained"
           color="primary"
@@ -114,6 +115,7 @@ const LoginForm = (props) => {
         >
           تسجيل الدخول
         </Button>
+        <Link href="/auth/signup">مستخدم جديد؟</Link>
       </div>
     </div>
   );
