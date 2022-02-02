@@ -12,6 +12,7 @@ import Page from "../../src/layout/Page";
 import vocab from "../../src/services/vocab";
 import userService from "../../src/services/user";
 import { useRouter } from "next/router";
+import withAuth from "../../src/components/HOC/withAuth";
 
 const ProfileEdit = (props) => {
   const user = useSelector((state) => state.user.user);
@@ -212,4 +213,4 @@ const ProfileEdit = (props) => {
 
 ProfileEdit.Layout = Page;
 ProfileEdit.DisplayName = "تعديل الملف الشخصي";
-export default ProfileEdit;
+export default withAuth(ProfileEdit);

@@ -11,6 +11,7 @@ import {
 } from "@mui/material";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
+import withAuth from "../../../src/components/HOC/withAuth";
 import Page from "../../../src/layout/Page";
 import company from "../../../src/services/company";
 
@@ -288,4 +289,4 @@ const Review = (props) => {
 
 Review.Layout = Page;
 Review.DisplayName = "تقييم";
-export default Review;
+export default withAuth(Review);

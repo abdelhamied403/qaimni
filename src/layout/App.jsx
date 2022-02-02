@@ -1,10 +1,7 @@
 import rtlPlugin from "stylis-plugin-rtl";
 import { CacheProvider } from "@emotion/react";
 import createCache from "@emotion/cache";
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import user from "../services/user";
-import { setUser } from "../redux/slices/user.slice";
+import { useSelector } from "react-redux";
 import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
 import { Alert } from "@mui/material";
 
@@ -15,17 +12,7 @@ const cacheRtl = createCache({
 });
 
 const App = (props) => {
-  const dispatch = useDispatch();
   const app = useSelector((state) => state.app);
-
-  const auth = async () => {
-    const res = await user.me("auth/me");
-    dispatch(setUser(res.data));
-  };
-
-  useEffect(() => {
-    auth();
-  }, []);
 
   return (
     <CacheProvider value={cacheRtl}>

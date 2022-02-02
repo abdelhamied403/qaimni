@@ -11,7 +11,7 @@ const Auth = ({ title, children }) => {
   return (
     <>
       <Head>
-        <title>Qaimni | {title}</title>
+        <title>قيمني | {title}</title>
         <meta name="description" content="qaimni" />
         <link rel="icon" href="/favicon.ico" />
       </Head>

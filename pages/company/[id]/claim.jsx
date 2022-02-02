@@ -6,6 +6,7 @@ import Page from "../../../src/layout/Page";
 import company from "../../../src/services/company";
 import Input from "../../../src/components/Input";
 import { useSelector } from "react-redux";
+import withAuth from "../../../src/components/HOC/withAuth";
 
 const ClaimCompany = (props) => {
   const router = useRouter();
@@ -159,4 +160,4 @@ const ClaimCompany = (props) => {
 
 ClaimCompany.Layout = Page;
 ClaimCompany.DisplayName = "المطالبه بالشركه";
-export default ClaimCompany;
+export default withAuth(ClaimCompany);

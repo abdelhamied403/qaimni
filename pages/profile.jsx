@@ -2,6 +2,7 @@ import { Button } from "@mui/material";
 import Link from "next/link";
 import React from "react";
 import { useSelector } from "react-redux";
+import withAuth from "../src/components/HOC/withAuth";
 import Page from "../src/layout/Page";
 
 const Profile = (props) => {
@@ -41,4 +42,4 @@ const Profile = (props) => {
 
 Profile.Layout = Page;
 Profile.DisplayName = "الملف الشخصي";
-export default Profile;
+export default withAuth(Profile);

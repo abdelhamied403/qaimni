@@ -11,7 +11,7 @@ const company = (() => {
   };
 
   const searchCompanies = async (query, category) => {
-    const res = await api.get(`search?type=companies&category_id=${category}&search=${query}`);
+    const res = await api.get(`search?type=companies&category_id=${category||''}&search=${query}`);
     return res.data;
   };
 

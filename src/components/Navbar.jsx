@@ -21,6 +21,7 @@ const Navbar = (props) => {
   const logout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("provider");
+    localStorage.removeItem("user");
     router.replace("/auth/login");
   };
 

@@ -7,7 +7,9 @@ import { theme } from "../styles/theme";
 import { ThemeProvider } from "@mui/material";
 import { useRouter } from "next/router";
 import { SessionProvider } from "next-auth/react";
-import { addResInterceptors } from "../src/services/axios";
+import { addInterceptors } from "../src/services/axios";
+import { initUser } from "../src/redux/slices/user.slice";
+
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   const router = useRouter();
@@ -20,8 +22,11 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
       }
     });
   }, [router]);
+  useEffect(() => {
+    store.dispatch(initUser())
+  }, []);
 
-  addResInterceptors(store.dispatch);
+  addInterceptors(store.dispatch);
 
   return (
     <Provider store={store}>

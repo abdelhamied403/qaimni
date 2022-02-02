@@ -10,8 +10,6 @@ const api = axios.create({
   },
 });
 
-
-
 const publicRoutes = [
   "/",
   "/auth/login",
@@ -21,7 +19,7 @@ const publicRoutes = [
   "/categories",
 ];
 
-export const addResInterceptors = (dispatch) => {
+export const addInterceptors = (dispatch) => {
   api.interceptors.request.use((config) => {
     const lang = localStorage.getItem("LANG") || "ar";
     const token = localStorage.getItem("token");
@@ -43,19 +41,23 @@ export const addResInterceptors = (dispatch) => {
     },
     (error) => {
       dispatch(setLoading(false))
-      console.log(error)
-      if(!(error?.status=== 401 || error.status===500 || error.exception)&& error?.message){
+      if(error?.status === 404){
+        Router.push("/404");
+      }
+      
+      if(error?.message){
         dispatch(setAlert(error?.message))
         setTimeout(() => {
           dispatch(setAlert(null))
-        }, 3000);
+        }, 2000);
       }
-      if (error?.response?.status === 401) {
+
+      if (error?.status === 401) {
         if (!publicRoutes.includes(Router.pathname)) {
           Router.push("/auth/login");
         }
       }
-      
+
       if (error?.response?.data) {
         return Promise.reject(error.response.data);
       }
@@ -63,21 +65,5 @@ export const addResInterceptors = (dispatch) => {
     }
   );
 };
-
-api.interceptors.response.use(
-  (res) => res,
-  (error) => {
-    if (error?.response?.status === 401) {
-      if (!publicRoutes.includes(Router.pathname)) {
-        Router.push("/auth/login");
-      }
-    }
-    
-    if (error?.response?.data) {
-      return Promise.reject(error.response.data);
-    }
-    return Promise.reject(error?.message);
-  }
-);
 
 export default api;

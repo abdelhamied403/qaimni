@@ -13,6 +13,8 @@ import Link from "next/link";
 import Page from "../../src/layout/Page";
 import PlanCard from "../../src/components/PlanCard";
 import company from "../../src/services/company";
+import WithAuth from "../../src/components/HOC/withAuth";
+import withAuth from "../../src/components/HOC/withAuth";
 
 const Company = (props) => {
   const router = useRouter();
@@ -180,4 +182,4 @@ const Company = (props) => {
 
 Company.Layout = Page;
 Company.DisplayName = "شركه";
-export default Company;
+export default withAuth(Company);

@@ -27,7 +27,7 @@ const LoginForm = (props) => {
 
   const onSubmit = async () => {
     const res = await user.login(form);
-    dispatch(setUser(res.data.user));
+    dispatch(setUser(res?.data?.user));
     router.push("/");
   };
 
@@ -40,7 +40,7 @@ const LoginForm = (props) => {
       provider_id: session.data?.sub,
     };
     const res = await user.socialLogin(data);
-    dispatch(setUser(res.data.user));
+    dispatch(setUser(res?.data?.user));
     router.push("/");
   };
 

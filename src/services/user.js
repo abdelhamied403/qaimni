@@ -10,6 +10,7 @@ const user = (() => {
     const res = await api.post("auth/login", data);
     const token = res.data.data.access_token.access_token;
     localStorage.setItem("token", token);
+    localStorage.setItem("user", JSON.stringify(res.data.data))
     return res.data;
   };
 
@@ -17,14 +18,19 @@ const user = (() => {
     const res = await api.post("auth/register", data);
     const token = res.data.data.access_token.access_token;
     localStorage.setItem("token", token);
+    localStorage.setItem("user", JSON.stringify(res.data.data))
     return res.data;
   };
 
   const socialLogin = async (data) => {
-    const res = await api.post("auth/social", data);
-    const token = res.data.data.access_token.access_token;
-    localStorage.setItem("token", token);
-    return res.data;
+    if(data.provider_name && data.provider_id){
+      const res = await api.post("auth/social", data);
+      const token = res.data.data.access_token.access_token;
+      localStorage.setItem("token", token);
+      localStorage.setItem("user", JSON.stringify(res.data.data))
+      return res.data;
+    }
+    return null;
   };
 
   const uploadCV = async (cv) => {
