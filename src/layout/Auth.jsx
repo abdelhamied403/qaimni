@@ -15,7 +15,7 @@ const Auth = ({ title, children }) => {
         <meta name="description" content="qaimni" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="page signup">
+      <div className="page auth">
         {app.loading && (
           <div className="fixed h-screen w-screen bg-white bg-opacity-80 z-10 flex">
             <div className="m-auto">
