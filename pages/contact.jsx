@@ -42,7 +42,7 @@ const Contact = (props) => {
       <h1 className="text-center my-4  w-full lg:w-1/2">
         {vocab?.infos_title}
       </h1>
-      <div className="form w-full lg:w-1/2">
+      <div className="form w-full lg:w-1/2 my-12">
         <div className="flex flex-col gap-4">
           <Input
             required
@@ -91,24 +91,6 @@ const Contact = (props) => {
           >
             ارسال
           </Button>
-        </div>
-      </div>
-      <div className="contact-data my-12">
-        <div className="flex gap-8">
-          <div className="item flex items-center gap-2">
-            <EmailIcon color="primary" />
-            <div className="info">
-              <p className="font-bold">البريد الالكتروني</p>
-              <p>abousad@ajfew.com</p>
-            </div>
-          </div>
-          <div className="item flex items-center gap-2">
-            <LocalPhoneIcon color="primary" />
-            <div className="info">
-              <p className="font-bold">رقم الهاتف</p>
-              <p>012635584844</p>
-            </div>
-          </div>
         </div>
       </div>
     </div>
