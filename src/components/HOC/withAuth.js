@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 
-const withAuth = (WrappedComponent) => {
+const withAuth = (WrappedComponent, Layout, name) => {
   const Component = (props) => {
     const router = useRouter();
     const [verified, setVerified] = useState(false);
@@ -17,6 +17,8 @@ const withAuth = (WrappedComponent) => {
     return verified ? <WrappedComponent {...props} /> : <></>
     
   }
+  Component.Layout = Layout;
+  Component.DisplayName = name;
   return Component;
 };
  

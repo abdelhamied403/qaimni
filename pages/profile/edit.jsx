@@ -211,6 +211,4 @@ const ProfileEdit = (props) => {
   );
 };
 
-ProfileEdit.Layout = Page;
-ProfileEdit.DisplayName = "تعديل الملف الشخصي";
-export default withAuth(ProfileEdit);
+export default withAuth(ProfileEdit, Page, "تعديل الملف الشخصي");

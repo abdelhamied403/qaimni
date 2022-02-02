@@ -287,6 +287,4 @@ const Review = (props) => {
   );
 };
 
-Review.Layout = Page;
-Review.DisplayName = "تقييم";
-export default withAuth(Review);
+export default withAuth(Review, Page, "تقييم");

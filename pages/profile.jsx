@@ -40,6 +40,4 @@ const Profile = (props) => {
   );
 };
 
-Profile.Layout = Page;
-Profile.DisplayName = "الملف الشخصي";
-export default withAuth(Profile);
+export default withAuth(Profile, Page, "الملف الشخصي");

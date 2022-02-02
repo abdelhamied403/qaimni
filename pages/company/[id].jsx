@@ -180,6 +180,4 @@ const Company = (props) => {
   );
 };
 
-Company.Layout = Page;
-Company.DisplayName = "شركه";
-export default withAuth(Company);
+export default withAuth(Company, Page, "شركه");

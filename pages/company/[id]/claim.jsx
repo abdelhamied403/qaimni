@@ -158,6 +158,4 @@ const ClaimCompany = (props) => {
   );
 };
 
-ClaimCompany.Layout = Page;
-ClaimCompany.DisplayName = "المطالبه بالشركه";
-export default withAuth(ClaimCompany);
+export default withAuth(ClaimCompany, Page, "المطالبه بالشركه");
