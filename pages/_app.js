@@ -9,6 +9,7 @@ import { useRouter } from "next/router";
 import { SessionProvider } from "next-auth/react";
 import { addInterceptors } from "../src/services/axios";
 import { initUser } from "../src/redux/slices/user.slice";
+import * as ga from '../src/lib/ga';
 
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }) {
@@ -21,7 +22,22 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
         router.push("/search");
       }
     });
-  }, [router]);
+
+    const handleRouteChange = (url) => {
+      ga.pageview(url)
+    }
+
+    //When the component is mounted, subscribe to router changes
+    //and log those page views
+    router.events.on('routeChangeComplete', handleRouteChange)
+
+    // If the component is unmounted, unsubscribe
+    // from the event with the `off` method
+    return () => {
+      router.events.off('routeChangeComplete', handleRouteChange)
+    }
+
+  }, [router, router.events]);
   useEffect(() => {
     store.dispatch(initUser())
   }, []);
