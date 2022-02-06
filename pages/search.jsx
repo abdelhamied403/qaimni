@@ -31,8 +31,8 @@ const Search = (props) => {
     searchInput.current.querySelector("input").focus();
   }, []);
 
-  const searchCompanies = async () => {
-    const res = await company.searchCompanies(query, category);
+  const searchCompanies = async (p_query = query, p_category = category) => {
+    const res = await company.searchCompanies(p_query, p_category);
     setSearchResults(res.data.data);
   };
 
@@ -51,7 +51,10 @@ const Search = (props) => {
           placeholder="ابحث عن شركه"
           className="w-full font-bold"
           value={query}
-          onChange={(e) => setQuery(e.target.value)}
+          onChange={(e) => {
+            setQuery(e.target.value);
+            searchCompanies(e.target.value, category);
+          }}
           InputProps={{
             startAdornment: (
               <InputAdornment position="start">
@@ -65,7 +68,10 @@ const Search = (props) => {
           <Select
             value={category}
             label="Category"
-            onChange={(e) => setCategory(e.target.value)}
+            onChange={(e) => {
+              setCategory(e.target.value);
+              searchCompanies(query, e.target.value);
+            }}
           >
             {categories?.map((category) => (
               <MenuItem value={category.id} key={category.id}>
@@ -78,7 +84,7 @@ const Search = (props) => {
           variant="contained"
           color="primary"
           size="large"
-          onClick={searchCompanies}
+          onClick={() => searchCompanies()}
         >
           ابحث
         </Button>

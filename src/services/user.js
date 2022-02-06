@@ -3,6 +3,7 @@ import api from "./axios";
 const user = (() => {
   const me = async () => {
     const res = await api.get("auth/me");
+    localStorage.setItem("user", JSON.stringify(res.data.data))
     return res.data;
   };
 

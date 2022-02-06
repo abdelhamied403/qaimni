@@ -3,22 +3,26 @@ import {
   FormControl,
   InputLabel,
   MenuItem,
+  Input as MUIInput,
   Select,
 } from "@mui/material";
 import React, { useEffect, useRef, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Input from "../../src/components/Input";
 import Page from "../../src/layout/Page";
 import vocab from "../../src/services/vocab";
 import userService from "../../src/services/user";
 import { useRouter } from "next/router";
 import withAuth from "../../src/components/HOC/withAuth";
+import { setUser } from "../../src/redux/slices/user.slice";
+import { setAlert } from "../../src/redux/slices/app.slice";
 
 const ProfileEdit = (props) => {
   const user = useSelector((state) => state.user.user);
   const cvFile = useRef(null);
   const [reader, setReader] = useState();
   const router = useRouter();
+  const dispatch = useDispatch();
 
   const [form, setForm] = useState({
     name: "",
@@ -27,6 +31,7 @@ const ProfileEdit = (props) => {
     job_title: "",
     country_id: "",
     state_id: "",
+    image: "",
   });
   const [errors, setErrors] = useState({
     name: "",
@@ -35,7 +40,7 @@ const ProfileEdit = (props) => {
     job_title: "",
     country_id: "",
     state_id: "",
-    password: "",
+    image: "",
   });
   const [countries, setCountries] = useState([]);
   const [states, setStates] = useState([]);
@@ -63,7 +68,9 @@ const ProfileEdit = (props) => {
   }, [user]);
 
   const onSubmit = async () => {
-    await userService.update(form);
+    const res = await userService.update(form);
+    dispatch(setUser(res.data));
+    localStorage.setItem("user", JSON.stringify(res.data));
     router.push("/profile");
   };
 
@@ -73,6 +80,27 @@ const ProfileEdit = (props) => {
 
     reader.onloadend = async function (e) {
       await userService.uploadCV(e.target.result);
+      dispatch(
+        setAlert({
+          message: "لقد تم تحميل السيره الذاتيه بنجاح",
+          status: "success",
+        })
+      );
+      setTimeout(() => {
+        dispatch(setAlert(null));
+      }, 2000);
+    };
+  };
+
+  const onFileUpload = (e) => {
+    const file = e.target.files[0];
+    const url = reader.readAsDataURL(file);
+
+    reader.onloadend = function (e) {
+      setForm((prev) => ({
+        ...prev,
+        image: e.target.result,
+      }));
     };
   };
 
@@ -82,14 +110,14 @@ const ProfileEdit = (props) => {
         <div className="flex items-start gap-8">
           <img
             className="bg-gray-300 w-36 h-36 rounded-2xl"
-            src={user?.image_url}
+            src={user?.image_url || "/assets/default_user.png"}
             alt=""
           />
           <div className="info">
             <h1 className="text-4xl">{user?.name}</h1>
             <p className="text-gray-500">{user?.job_title}</p>
             <p className="text-gray-500">
-              {user?.country} {user?.state}
+              {user?.country} - {user?.state}
             </p>
           </div>
         </div>
@@ -192,6 +220,12 @@ const ProfileEdit = (props) => {
                   ))}
                 </Select>
               </FormControl>
+            </div>
+            <div className="add-logo">
+              <h2>اضف الصوره الشخصيه</h2>
+              <div className="flex flex-wrap gap-4 my-2">
+                <MUIInput accept="image/*" type="file" onInput={onFileUpload} />
+              </div>
             </div>
           </div>
           <div className="col"></div>

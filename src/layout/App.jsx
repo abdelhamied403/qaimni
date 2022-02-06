@@ -3,8 +3,8 @@ import { CacheProvider } from "@emotion/react";
 import createCache from "@emotion/cache";
 import { useSelector } from "react-redux";
 import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
+import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import { Alert } from "@mui/material";
-
 // Create rtl cache
 const cacheRtl = createCache({
   key: "muirtl",
@@ -23,8 +23,14 @@ const App = (props) => {
       >
         {app.alert && (
           <Alert
-            icon={<CancelOutlinedIcon fontSize="inherit" />}
-            severity="error"
+            icon={
+              app.status === "error" ? (
+                <CancelOutlinedIcon fontSize="inherit" />
+              ) : (
+                <CheckCircleOutlineIcon fontSize="inherit" />
+              )
+            }
+            severity={app.status}
           >
             {app.alert}
           </Alert>

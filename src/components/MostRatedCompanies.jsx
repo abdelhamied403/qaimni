@@ -43,7 +43,7 @@ const MostRatedCompanies = (props) => {
               onMouseUpCapture={() => router.push(`/company/${company.id}`)}
             >
               <img
-                className="w-full h-48 object-contain object-center p-8 mx-auto"
+                className="w-72 h-72 object-contain object-center p-8 mx-auto"
                 src={company.logo_url}
                 alt=""
               />

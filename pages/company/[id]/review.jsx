@@ -27,6 +27,7 @@ const Review = (props) => {
     rate: 0,
     comment: "",
     recommended: 0,
+    show_name: 0,
     types: {},
   });
 
@@ -195,7 +196,23 @@ const Review = (props) => {
           </div>
         </div>
         <div className="review">
-          <h2>اكتب تعليقك</h2>
+          <div className="flex justify-between">
+            <h2>اكتب تعليقك</h2>
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={form.show_name}
+                  onChange={(e) =>
+                    setForm((prev) => ({
+                      ...prev,
+                      show_name: +e.target.checked,
+                    }))
+                  }
+                />
+              }
+              label="اظهار اسمي"
+            />
+          </div>
           <div className="my-4">
             <TextField
               className="w-full"

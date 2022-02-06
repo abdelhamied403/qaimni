@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import LoginForm from "../../src/components/auth/LoginForm";
 import Auth from "../../src/layout/Auth";
@@ -18,7 +19,13 @@ const Login = (props) => {
   return (
     <div className="my-auto">
       <div className="mx-12">
-        <img className="w-64" src="../assets/logo-demo.png" alt="" />
+        <Link href="/" passHref>
+          <img
+            className="w-64 cursor-pointer"
+            src="../assets/logo-demo.png"
+            alt=""
+          />
+        </Link>
         <h1 className="text-4xl font-black my-6">تسجيل الدخول</h1>
         <h4 className="text-lg text-gray-400 font-bold m-0">
           {vocab?.infos_desc}

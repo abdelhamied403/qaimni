@@ -64,6 +64,12 @@ const Company = (props) => {
               <p>
                 {companyData?.address} - {companyData?.phone}
               </p>
+              <p>
+                عدد الموظفين:{" "}
+                <span className="text-primary font-bold">
+                  {companyData?.employee_numbers}
+                </span>
+              </p>
             </div>
             <div className="actions flex gap-4">
               <Link href={`${id}/review`} passHref>
@@ -80,7 +86,7 @@ const Company = (props) => {
               )}
             </div>
           </div>
-          <div className="rate">
+          <div className="rate flex gap-4">
             <Rating
               name="size-large"
               value={companyData?.rate || 0}
@@ -88,6 +94,9 @@ const Company = (props) => {
               readOnly
               precision={0.1}
             />
+            <p className="text-primary font-bold">
+              {companyData?.recommended_count} تقييمات
+            </p>
           </div>
           <p className="m-0">{companyData?.description}</p>
         </div>

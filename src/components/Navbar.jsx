@@ -118,8 +118,8 @@ const Navbar = (props) => {
                   {!user.image_url && <PersonIcon color="primary" />}
                   {user.image_url && (
                     <img
-                      className="w-12 h-12 object-cover"
-                      src="assets/logo-demo.png"
+                      className="w-8 h-8 object-cover"
+                      src={user.image_url}
                       alt=""
                     />
                   )}
