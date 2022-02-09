@@ -13,8 +13,10 @@ import Link from "next/link";
 import Page from "../../src/layout/Page";
 import PlanCard from "../../src/components/PlanCard";
 import company from "../../src/services/company";
-import WithAuth from "../../src/components/HOC/withAuth";
 import withAuth from "../../src/components/HOC/withAuth";
+
+import PublicIcon from "@mui/icons-material/Public";
+import SocialIcon from "../../src/components/SocialIcon";
 
 const Company = (props) => {
   const router = useRouter();
@@ -64,12 +66,20 @@ const Company = (props) => {
               <p>
                 {companyData?.address} - {companyData?.phone}
               </p>
-              <p>
-                عدد الموظفين:{" "}
-                <span className="text-primary font-bold">
-                  {companyData?.employee_numbers}
-                </span>
-              </p>
+              <div className="flex gap-2">
+                <p>
+                  عدد الموظفين:{" "}
+                  <span className="text-primary font-bold">
+                    {companyData?.employee_numbers}
+                  </span>
+                </p>
+                <p>
+                  عدد المرشحين:{" "}
+                  <span className="text-primary font-bold">
+                    {companyData?.recommended_count}
+                  </span>
+                </p>
+              </div>
             </div>
             <div className="actions flex gap-4">
               <Link href={`${id}/review`} passHref>
@@ -86,18 +96,35 @@ const Company = (props) => {
               )}
             </div>
           </div>
-          <div className="rate flex gap-4">
-            <Rating
-              name="size-large"
-              value={companyData?.rate || 0}
-              size="large"
-              readOnly
-              precision={0.1}
-            />
-            <p className="text-primary font-bold">
-              {companyData?.recommended_count} تقييمات
-            </p>
+          <Rating
+            name="size-large"
+            value={companyData?.rate || 0}
+            size="large"
+            readOnly
+            precision={0.1}
+          />
+
+          <div className="socials flex gap-2">
+            {companyData?.social_media.map((social, idx) => (
+              <div
+                key={idx}
+                className="border border-solid border-gray-400 rounded-lg hover:border-primary hover:bg-primary transition-all"
+              >
+                <a className="px-4 flex items-center gap-2" href={social.url}>
+                  <SocialIcon name={social.name} />
+                  <p>{social.name}</p>
+                </a>
+              </div>
+            ))}
+            {companyData?.website_url && (
+              <div className="border border-solid border-gray-400 rounded-lg hover:border-primary hover:bg-primary transition-all">
+                <a className="px-4" href={companyData?.website_url}>
+                  <PublicIcon /> website
+                </a>
+              </div>
+            )}
           </div>
+
           <p className="m-0">{companyData?.description}</p>
         </div>
       </div>
