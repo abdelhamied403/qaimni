@@ -1,22 +1,18 @@
-import React, { useRef } from "react";
-import { Button, IconButton } from "@mui/material";
-import Link from "./Link";
+import React, { useState } from "react";
+import { Button, Drawer, IconButton } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import MenuIcon from "@mui/icons-material/Menu";
 import PersonIcon from "@mui/icons-material/Person";
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
 import LogoutIcon from "@mui/icons-material/Logout";
+import NavMenu from "./NavMenu";
 
 const Navbar = (props) => {
   const router = useRouter();
-  const menu = useRef();
 
   const user = useSelector((state) => state.user.user);
-
-  const toggleMenu = () => {
-    menu.current.classList.toggle("hidden");
-  };
+  const [drawerOpen, setDrawerOpen] = useState(false);
 
   const logout = () => {
     localStorage.removeItem("token");
@@ -39,45 +35,24 @@ const Navbar = (props) => {
             alt=""
             onClick={() => router.push("/")}
           />
-          <ul
-            className="
-              lg:block lg:static top-12 -left-12 text-black lg:text-inherit
-              hidden list-none absolute z-20
-            "
-            ref={menu}
-          >
-            <div className="bg-white lg:bg-transparent px-4 py-8 lg:py-2 h-screen lg:h-auto flex flex-col lg:flex-row lg:gap-4 gap-8 items-center w-72 lg:w-auto">
-              <li>
-                <span className="text-xl hover:text-primary">
-                  <Link href="/">الرئيسية</Link>
-                </span>
-              </li>
-              <li>
-                <span className="text-xl hover:text-primary">
-                  <Link className="" href="/categories">
-                    الأقسام
-                  </Link>
-                </span>
-              </li>
-              <li>
-                <span className="text-xl hover:text-primary">
-                  <Link className="" href="/blog">
-                    المدونه
-                  </Link>
-                </span>
-              </li>
-              <li>
-                <Button
-                  variant="contained"
-                  onClick={() =>
-                    window.open("https://company.qaimni.com", "_blank").focus()
-                  }
-                >
-                  <span className="text-white">تسجيل الشركات</span>
-                </Button>
-              </li>
-            </div>
+          <ul className="lg:flex text-black hidden list-none gap-4">
+            <NavMenu />
           </ul>
+          <Drawer
+            anchor="right"
+            open={drawerOpen}
+            onClose={() => setDrawerOpen(false)}
+          >
+            <ul className="lg:hidden text-black px-12 flex flex-col items-center gap-4 list-none">
+              <img
+                className="max-w-full cursor-pointer my-8"
+                src="/assets/logo-demo.png"
+                alt=""
+                onClick={() => router.push("/")}
+              />
+              <NavMenu />
+            </ul>
+          </Drawer>
         </div>
 
         <div className="actions pointer-events-auto flex items-center gap-4">
@@ -145,7 +120,7 @@ const Navbar = (props) => {
           >
             <PersonIcon />
           </div>
-          <span className="flex lg:hidden" onClick={toggleMenu}>
+          <span className="flex lg:hidden" onClick={() => setDrawerOpen(true)}>
             <MenuIcon />
           </span>
         </div>

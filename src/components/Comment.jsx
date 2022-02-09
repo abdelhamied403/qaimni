@@ -2,7 +2,7 @@ import { Rating } from "@mui/material";
 import React from "react";
 import ForumIcon from "@mui/icons-material/Forum";
 
-const Comment = ({ comment, created_at, rate, types }) => {
+const Comment = ({ comment, created_at, rate, types, user_name }) => {
   return (
     <div className="comment border border-solid border-gray-400 my-8 px-8 py-4 rounded-lg">
       <div className="flex gap-4">
@@ -12,7 +12,7 @@ const Comment = ({ comment, created_at, rate, types }) => {
         <div className="content flex-1">
           <div className="head flex flex-wrap justify-between">
             <div className="username">
-              <h3>التقييم العام</h3>
+              <h3>{user_name || "التقييم العام"}</h3>
               <p className="text-sm">{created_at}</p>
               <Rating
                 name="size-large"
