@@ -13,13 +13,7 @@ const Modal = ({ children, title, open, onClose, onSubmit, action }) => {
       <DialogTitle>{title}</DialogTitle>
       <DialogContent>{children}</DialogContent>
       <DialogActions>
-        <Button
-          onClick={() => {
-            onSubmit();
-            onClose();
-          }}
-          autoFocus
-        >
+        <Button onClick={onSubmit} autoFocus>
           {action}
         </Button>
       </DialogActions>

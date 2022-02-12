@@ -9,9 +9,9 @@ const Profile = (props) => {
   const user = useSelector((state) => state.user.user);
 
   return (
-    <div className="profile px-24 pt-8">
-      <div className="flex justify-between items-start">
-        <div className="flex items-start gap-8">
+    <div className="profile md:px-24 px-12 pt-8">
+      <div className="flex flex-wrap gap-4 justify-between items-start">
+        <div className="flex flex-wrap items-start gap-8">
           <img
             className="bg-gray-300 w-36 border border-solid border-gray-400 rounded-2xl"
             src={user?.image_url || "/assets/default_user.png"}

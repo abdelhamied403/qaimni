@@ -4,7 +4,6 @@ import {
   InputLabel,
   MenuItem,
   Input as MUIInput,
-  Select,
 } from "@mui/material";
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -16,6 +15,8 @@ import { useRouter } from "next/router";
 import withAuth from "../../src/components/HOC/withAuth";
 import { setUser } from "../../src/redux/slices/user.slice";
 import { setAlert } from "../../src/redux/slices/app.slice";
+import company from "../../src/services/company";
+import Select from "../../src/components/Select";
 
 const ProfileEdit = (props) => {
   const user = useSelector((state) => state.user.user);
@@ -31,6 +32,7 @@ const ProfileEdit = (props) => {
     job_title: "",
     country_id: "",
     state_id: "",
+    company_id: "",
     image: "",
   });
   const [errors, setErrors] = useState({
@@ -40,10 +42,12 @@ const ProfileEdit = (props) => {
     job_title: "",
     country_id: "",
     state_id: "",
+    company_id: "",
     image: "",
   });
   const [countries, setCountries] = useState([]);
   const [states, setStates] = useState([]);
+  const [companies, setCompanies] = useState([]);
 
   const getCountries = async () => {
     const countries = await vocab.getCountries();
@@ -53,19 +57,10 @@ const ProfileEdit = (props) => {
     const states = await vocab.getStates(form.country_id);
     setStates(states.data);
   };
-
-  useEffect(() => {
-    getCountries();
-    setReader(new FileReader());
-  }, []);
-
-  useEffect(() => {
-    if (form.country_id) getStates();
-  }, [form.country_id]);
-
-  useEffect(() => {
-    if (user) setForm(user);
-  }, [user]);
+  const getCompanies = async () => {
+    const companies = await company.searchCompanies();
+    setCompanies(companies.data);
+  };
 
   const onSubmit = async () => {
     const res = await userService.update(form);
@@ -103,6 +98,20 @@ const ProfileEdit = (props) => {
       }));
     };
   };
+
+  useEffect(() => {
+    getCountries();
+    setReader(new FileReader());
+    getCompanies();
+  }, []);
+
+  useEffect(() => {
+    if (form.country_id) getStates();
+  }, [form.country_id]);
+
+  useEffect(() => {
+    if (user) setForm(user);
+  }, [user]);
 
   return (
     <div className="profileEdit px-24 pt-8">
@@ -180,46 +189,41 @@ const ProfileEdit = (props) => {
               error={errors.job_title}
               setError={setErrors}
             />
+            <Select
+              label="الشركه"
+              options={companies?.data}
+              value={form?.company_id}
+              onChange={(e) =>
+                setForm((prev) => ({
+                  ...prev,
+                  company_id: e.target.value,
+                }))
+              }
+            />
             <div className="grid grid-cols-2 gap-2">
-              <FormControl>
-                <InputLabel>الدوله</InputLabel>
-                <Select
-                  value={form.country_id}
-                  label="Country"
-                  onChange={(e) =>
-                    setForm((prev) => ({
-                      ...prev,
-                      country_id: e.target.value,
-                    }))
-                  }
-                >
-                  {countries.map((country) => (
-                    <MenuItem key={country.id} value={country.id}>
-                      {country.name}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
-              <FormControl>
-                <InputLabel>المدينه</InputLabel>
-                <Select
-                  disabled={!form.country_id}
-                  value={form.state_id}
-                  label="المدينه"
-                  onChange={(e) =>
-                    setForm((prev) => ({
-                      ...prev,
-                      state_id: e.target.value,
-                    }))
-                  }
-                >
-                  {states.map((state) => (
-                    <MenuItem key={state.id} value={state.id}>
-                      {state.name}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
+              <Select
+                label="الدوله"
+                options={countries}
+                value={form.country_id}
+                onChange={(e) =>
+                  setForm((prev) => ({
+                    ...prev,
+                    country_id: e.target.value,
+                  }))
+                }
+              />
+              <Select
+                disabled={!form.country_id}
+                label="المدينه"
+                options={states}
+                value={form.state_id}
+                onChange={(e) =>
+                  setForm((prev) => ({
+                    ...prev,
+                    state_id: e.target.value,
+                  }))
+                }
+              />
             </div>
             <div className="add-logo">
               <h2>اضف الصوره الشخصيه</h2>
@@ -228,7 +232,6 @@ const ProfileEdit = (props) => {
               </div>
             </div>
           </div>
-          <div className="col"></div>
         </div>
         <div className="my-8">
           <Button

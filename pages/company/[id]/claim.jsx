@@ -14,6 +14,7 @@ const ClaimCompany = (props) => {
   const [companyData, setCompanyData] = useState();
   const user = useSelector((state) => state.user.user);
 
+  const [preview, setPreview] = useState("");
   const [reader, setReader] = useState();
   const [form, setForm] = useState({
     claimer_name: "",
@@ -44,6 +45,7 @@ const ClaimCompany = (props) => {
         ...prev,
         claimer_document: e.target.result,
       }));
+      setPreview(e.target.result);
     };
   };
 
@@ -127,7 +129,10 @@ const ClaimCompany = (props) => {
           />
           <div className="add-prove">
             <h2>ارفق صوره من البطاقة الضريبيه او السجل التجاري</h2>
-            <label htmlFor="contained-button-file" className="block my-4">
+            <label
+              htmlFor="contained-button-file"
+              className="flex items-center my-4"
+            >
               <div className="hidden">
                 <MUIInput
                   accept="image/*"
@@ -140,6 +145,8 @@ const ClaimCompany = (props) => {
               <Button variant="contained" color="accent" component="span">
                 ارفاق صوره
               </Button>
+
+              <img className="w-24" src={preview} alt="" />
             </label>
             <div className="my-8 flex justify-center">
               <Button

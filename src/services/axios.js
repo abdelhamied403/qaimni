@@ -28,27 +28,40 @@ export const addInterceptors = (dispatch) => {
       lang,
       Authorization: `Bearer ${token}`,
     };
-    dispatch(setLoading(true))
-    dispatch(setAlert(null))
-    
+    dispatch(setLoading(true));
+    dispatch(setAlert(null));
+
     return config;
   });
 
   api.interceptors.response.use(
     (response) => {
-      dispatch(setLoading(false))
-      return response
+      dispatch(setLoading(false));
+
+      if (response.data.message) {
+        dispatch(
+          setAlert({
+            message: response.data.message,
+            status: "success",
+          })
+        );
+        setTimeout(() => {
+          dispatch(setAlert(null));
+        }, 2000);
+      }
+
+      return response;
     },
     (error) => {
-      dispatch(setLoading(false))
-      if(error?.status === 404){
+      dispatch(setLoading(false));
+      if (error?.status === 404) {
         Router.push("/404");
       }
-      
-      if(error?.message){
-        dispatch(setAlert(error?.message))
+
+      if (error?.message) {
+        dispatch(setAlert(error?.message));
         setTimeout(() => {
-          dispatch(setAlert(null))
+          dispatch(setAlert(null));
         }, 2000);
       }
 

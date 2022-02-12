@@ -18,6 +18,7 @@ import company from "../src/services/company";
 import InboxIcon from "@mui/icons-material/Inbox";
 import categoryService from "../src/services/category";
 import Modal from "../src/components/Modal";
+import user from "../src/services/user";
 
 const Search = (props) => {
   const searchInput = useRef();
@@ -30,12 +31,12 @@ const Search = (props) => {
   const [form, setForm] = useState({
     name: "",
     address: "",
-    link: "",
+    website: "",
   });
   const [errors, setErrors] = useState({
     name: "",
     address: "",
-    link: "",
+    website: "",
   });
 
   const getAllCategories = async () => {
@@ -52,8 +53,9 @@ const Search = (props) => {
     setSearchResults(res.data.data);
   };
 
-  const submit = () => {
-    console.log(form);
+  const submit = async () => {
+    const res = await user.addNewCompany(form);
+    setOpen(false);
   };
 
   useEffect(() => {
@@ -162,10 +164,10 @@ const Search = (props) => {
           <Input
             required
             label="رابط للشركه"
-            name="link"
-            value={form.link}
+            name="website"
+            value={form.website}
             setValue={setForm}
-            error={errors.link}
+            error={errors.website}
             setError={setErrors}
           />
         </div>

@@ -17,6 +17,7 @@ import withAuth from "../../src/components/HOC/withAuth";
 
 import PublicIcon from "@mui/icons-material/Public";
 import SocialIcon from "../../src/components/SocialIcon";
+import Reply from "../../src/components/Reply";
 
 const Company = (props) => {
   const router = useRouter();
@@ -51,7 +52,7 @@ const Company = (props) => {
 
   return (
     <div className="mx-8 md:mx-12 lg:mx-24 my-12">
-      <div className="head flex flex-wrap gap-4 items-center my-12">
+      <div className="head flex flex-wrap gap-4 items-start my-12">
         <div className="logo border border-solid border-gray-400 rounded-xl p-4">
           <img
             className="w-44 h-44 object-contain"
@@ -73,15 +74,9 @@ const Company = (props) => {
                     {companyData?.employee_numbers}
                   </span>
                 </p>
-                <p>
-                  عدد المرشحين:{" "}
-                  <span className="text-primary font-bold">
-                    {companyData?.recommended_count}
-                  </span>
-                </p>
               </div>
             </div>
-            <div className="actions flex gap-4">
+            <div className="actions flex flex-wrap my-4 gap-4">
               <Link href={`${id}/review`} passHref>
                 <Button variant="contained" color="primary" size="large">
                   تقديم رأيك
@@ -103,8 +98,14 @@ const Company = (props) => {
             readOnly
             precision={0.1}
           />
+          <p className="mb-3">
+            <span className="text-primary font-bold">
+              {companyData?.recommended_count}
+            </span>{" "}
+            رشحوا هذه الشركه
+          </p>
 
-          <div className="socials flex gap-2">
+          <div className="socials flex flex-wrap gap-2">
             {companyData?.social_media.map((social, idx) => (
               <div
                 key={idx}
@@ -151,11 +152,22 @@ const Company = (props) => {
                 <h1>تقييمات</h1>
               </div>
               {companyReviews?.map((review) => (
-                <Comment {...review} key={review.id} />
+                <>
+                  <Comment {...review} key={review.id} />
+                  {review.reply && (
+                    <div className="reply">
+                      <Reply
+                        company={companyData?.name}
+                        {...review.reply}
+                        key={review.reply.id}
+                      />
+                    </div>
+                  )}
+                </>
               ))}
             </div>
           </TabPanel>
-          <TabPanel value={currentTab} index={1}>
+          <TabPanel value={currentTab} index={1} className="p-0">
             {/* comments */}
             <div className="comments">
               <div className="title mb-8">

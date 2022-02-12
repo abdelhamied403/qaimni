@@ -17,9 +17,10 @@ const App = (props) => {
   return (
     <CacheProvider value={cacheRtl}>
       <div
-        className={`fixed z-50 right-24 top-36 transition-opacity duration-500 ${
+        className={`fixed right-24 top-36 transition-opacity duration-500 ${
           app.alert ? "opacity-100" : "opacity-0"
         }`}
+        style={{ zIndex: 1400 }}
       >
         {app.alert && (
           <Alert

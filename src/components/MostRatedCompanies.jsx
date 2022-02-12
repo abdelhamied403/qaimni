@@ -11,25 +11,18 @@ const MostRatedCompanies = (props) => {
       </h1>
       <Slider
         className="multi"
-        slidesToShow={2}
+        slidesToShow={props.companies > 5 ? 5 : 3}
         rtl
         autoplay
-        centerMode
         responsive={[
           {
             breakpoint: 1024,
-            settings: {
-              slidesToShow: 3,
-            },
-          },
-          {
-            breakpoint: 768,
             settings: {
               slidesToShow: 2,
             },
           },
           {
-            breakpoint: 425,
+            breakpoint: 768,
             settings: {
               slidesToShow: 1,
             },

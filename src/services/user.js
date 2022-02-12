@@ -3,7 +3,7 @@ import api from "./axios";
 const user = (() => {
   const me = async () => {
     const res = await api.get("auth/me");
-    localStorage.setItem("user", JSON.stringify(res.data.data))
+    localStorage.setItem("user", JSON.stringify(res.data.data));
     return res.data;
   };
 
@@ -11,7 +11,7 @@ const user = (() => {
     const res = await api.post("auth/login", data);
     const token = res.data.data.access_token.access_token;
     localStorage.setItem("token", token);
-    localStorage.setItem("user", JSON.stringify(res.data.data))
+    localStorage.setItem("user", JSON.stringify(res.data.data));
     return res.data;
   };
 
@@ -19,16 +19,16 @@ const user = (() => {
     const res = await api.post("auth/register", data);
     const token = res.data.data.access_token.access_token;
     localStorage.setItem("token", token);
-    localStorage.setItem("user", JSON.stringify(res.data.data))
+    localStorage.setItem("user", JSON.stringify(res.data.data));
     return res.data;
   };
 
   const socialLogin = async (data) => {
-    if(data.provider_name && data.provider_id){
+    if (data.provider_name && data.provider_id) {
       const res = await api.post("auth/social", data);
       const token = res.data.data.access_token.access_token;
       localStorage.setItem("token", token);
-      localStorage.setItem("user", JSON.stringify(res.data.data))
+      localStorage.setItem("user", JSON.stringify(res.data.data));
       return res.data;
     }
     return null;
@@ -47,6 +47,11 @@ const user = (() => {
     return res.data;
   };
 
+  const addNewCompany = async (data) => {
+    const res = await api.post("companies/add-company", data);
+    return res.data;
+  };
+
   return {
     me,
     login,
@@ -54,7 +59,8 @@ const user = (() => {
     socialLogin,
     uploadCV,
     update,
-    contactUs
+    contactUs,
+    addNewCompany,
   };
 })();
 
