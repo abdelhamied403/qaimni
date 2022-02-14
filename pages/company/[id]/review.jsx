@@ -124,7 +124,7 @@ const Review = (props) => {
         </div>
       </div>
       <div className="content">
-        <div className="rate">
+        <div className="rate flex flex-col gap-4 items-center">
           <div className="flex gap-2">
             <h2>تقييم كـ</h2>
             <ToggleButtonGroup
@@ -161,58 +161,45 @@ const Review = (props) => {
               </ToggleButton>
             </ToggleButtonGroup>
           </div>
-
-          <div className="rate-types flex gap-2">
-            <div className="types text-left font-bold">
-              <div className="flex flex-col my-2">
-                <p>تقييم عام</p>
-              </div>
-              {ratingTypes.map((rateType) => (
-                <div className="flex flex-col my-2" key={rateType.id}>
-                  <p>{rateType.title}</p>
-                </div>
-              ))}
-            </div>
-            <div className="rates">
-              <div className="flex flex-col my-2">
+          <div className="flex gap-4 my-2 mx-auto">
+            <p>تقييم عام</p>
+            <Rating
+              name="size-large"
+              defaultValue={0}
+              size="large"
+              onChange={(e) => onRateChange(0, e.target.value)}
+            />
+          </div>
+          <div className="grid md:grid-cols-2 grid-cols-1 gap-x-8">
+            {ratingTypes.map((rateType) => (
+              <div className="flex gap-8 my-2" key={rateType.id}>
+                <p className="flex-1">{rateType.title}</p>
                 <Rating
                   name="size-large"
                   defaultValue={0}
                   size="large"
-                  onChange={(e) => onRateChange(0, e.target.value)}
+                  onChange={(e) => onRateChange(rateType.id, e.target.value)}
                 />
               </div>
-              {ratingTypes.map((rateType) => (
-                <div className="flex flex-col my-2" key={rateType.id}>
-                  <Rating
-                    name="size-large"
-                    defaultValue={0}
-                    onChange={(e) => onRateChange(rateType.id, e.target.value)}
-                    size="large"
-                  />
-                </div>
-              ))}
-            </div>
+            ))}
           </div>
+          <FormControlLabel
+            control={
+              <Checkbox
+                checked={form.recommended}
+                onChange={(e) =>
+                  setForm((prev) => ({
+                    ...prev,
+                    recommended: +e.target.checked,
+                  }))
+                }
+              />
+            }
+            label="هل ترشح هذه الشركه للمتقدمين؟"
+          />
         </div>
-        <div className="review">
-          <div className="flex justify-between">
-            <h2>اكتب تعليقك</h2>
-            <FormControlLabel
-              control={
-                <Checkbox
-                  checked={form.show_name}
-                  onChange={(e) =>
-                    setForm((prev) => ({
-                      ...prev,
-                      show_name: +e.target.checked,
-                    }))
-                  }
-                />
-              }
-              label="اظهار اسمي"
-            />
-          </div>
+        <div className="review my-8">
+          <h2 className="text-center">اكتب تعليقك</h2>
           <div className="my-4">
             <TextField
               className="w-full"
@@ -264,24 +251,22 @@ const Review = (props) => {
             </label>
           </div>
         </div> */}
-        <div className="checks my-8">
+
+        <div className="flex gap-4">
           <FormControlLabel
             control={
               <Checkbox
-                checked={form.recommended}
+                checked={form.show_name}
                 onChange={(e) =>
                   setForm((prev) => ({
                     ...prev,
-                    recommended: +e.target.checked,
+                    show_name: +e.target.checked,
                   }))
                 }
               />
             }
-            label="هل ترشح هذه الشركه للمتقدمين؟"
+            label="اظهار اسمي"
           />
-        </div>
-
-        <div className="flex gap-4">
           <Button
             variant="contained"
             color="primary"

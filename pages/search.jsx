@@ -65,26 +65,31 @@ const Search = (props) => {
 
   return (
     <div className="mx-8 md:mx-12 lg:mx-24 my-12">
-      <div className="search-box my-8 font-bold flex gap-4" ref={searchInput}>
-        <TextField
-          variant="outlined"
-          size="large"
-          label="ابحث عن شركه"
-          placeholder="ابحث عن شركه"
-          className="w-full font-bold"
-          value={query}
-          onChange={(e) => {
-            setQuery(e.target.value);
-            searchCompanies(e.target.value, category);
-          }}
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">
-                <SearchOutlined />
-              </InputAdornment>
-            ),
-          }}
-        />
+      <div
+        className="search-box my-8 font-bold flex flex-wrap gap-4"
+        ref={searchInput}
+      >
+        <div className="min-w-48 flex flex-1 lg:min-w-0">
+          <TextField
+            variant="outlined"
+            size="large"
+            label="ابحث عن شركه"
+            placeholder="ابحث عن شركه"
+            className="flex-1 font-bold"
+            value={query}
+            onChange={(e) => {
+              setQuery(e.target.value);
+              searchCompanies(e.target.value, category);
+            }}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <SearchOutlined />
+                </InputAdornment>
+              ),
+            }}
+          />
+        </div>
         <FormControl className="w-56">
           <InputLabel>الاقسام</InputLabel>
           <Select

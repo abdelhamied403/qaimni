@@ -18,7 +18,7 @@ const Categories = (props) => {
 
   return (
     <>
-      <div className="px-12 mt-12 md:px-24">
+      <div className="px-12 my-12 md:px-24">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-6 gap-8">
           {categories?.map((category) => (
             <CategoryCard {...category} key={category.id} />

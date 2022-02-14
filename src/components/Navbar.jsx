@@ -4,12 +4,14 @@ import SearchIcon from "@mui/icons-material/Search";
 import MenuIcon from "@mui/icons-material/Menu";
 import PersonIcon from "@mui/icons-material/Person";
 import { useRouter } from "next/router";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import LogoutIcon from "@mui/icons-material/Logout";
 import NavMenu from "./NavMenu";
+import { setUser } from "../redux/slices/user.slice";
 
 const Navbar = (props) => {
   const router = useRouter();
+  const dispatch = useDispatch();
 
   const user = useSelector((state) => state.user.user);
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -18,6 +20,7 @@ const Navbar = (props) => {
     localStorage.removeItem("token");
     localStorage.removeItem("provider");
     localStorage.removeItem("user");
+    dispatch(setUser(null));
     router.replace("/auth/login");
   };
 
@@ -93,7 +96,7 @@ const Navbar = (props) => {
                   {!user.image_url && <PersonIcon color="primary" />}
                   {user.image_url && (
                     <img
-                      className="w-8 h-8 object-cover"
+                      className="w-6 h-6 object-cover"
                       src={user.image_url}
                       alt=""
                     />
