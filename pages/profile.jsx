@@ -53,7 +53,7 @@ const Profile = (props) => {
               {user?.country} - {user?.state}
             </p>
             <div className="text-primary">
-              <Link href={user.cv_url}>السيره الذاتيه</Link>
+              <Link href={user.cv_url || ''}>السيره الذاتيه</Link>
             </div>
           </div>
         </div>
