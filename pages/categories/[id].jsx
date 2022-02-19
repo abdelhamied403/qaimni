@@ -1,3 +1,4 @@
+import { Pagination } from "@mui/material";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import CompanyCard from "../../src/components/CompanyCard";
@@ -9,17 +10,20 @@ const Category = (props) => {
   const { id } = router.query;
   const [category, setCategory] = useState();
   const [companies, setCompanies] = useState([]);
+  const [pagination, setPagination] = useState();
+  const [page, setPage] = useState(1);
 
   const getCategory = async (id) => {
     const category = await categoryService.getCategory(id);
-    const companies = await categoryService.getCategoryCompanies(id);
+    const companies = await categoryService.getCategoryCompanies(id, page);
     setCategory(category.data);
     setCompanies(companies.data.data);
+    setPagination(companies.data.pagination);
   };
 
   useEffect(() => {
     if (id) getCategory(id);
-  }, [id]);
+  }, [id, page]);
 
   return (
     <div className="category">
@@ -29,6 +33,16 @@ const Category = (props) => {
           {companies.map((company) => (
             <CompanyCard {...company} key={company.id} />
           ))}
+        </div>
+
+        <div className="flex justify-center my-12">
+          <Pagination
+            page={page}
+            onChange={(_, num) => setPage(num)}
+            count={pagination?.total_pages || 0}
+            variant="outlined"
+            color="primary"
+          />
         </div>
       </div>
     </div>

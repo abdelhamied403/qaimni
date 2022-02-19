@@ -9,8 +9,8 @@ const section = (() => {
     const res = await api.get(`categories/${id}`);
     return res.data;
   };
-  const getCategoryCompanies = async (id) => {
-    const res = await api.get(`categories/${id}/companies`);
+  const getCategoryCompanies = async (id, page) => {
+    const res = await api.get(`categories/${id}/companies?page=${page}`);
     return res.data;
   };
 
