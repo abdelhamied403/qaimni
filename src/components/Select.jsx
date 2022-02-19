@@ -1,5 +1,6 @@
 import {
   FormControl,
+  FormHelperText,
   InputLabel,
   MenuItem,
   Select as MUISelect,
@@ -13,10 +14,11 @@ const Select = ({
   options,
   track_key = "id",
   track_value = "name",
+  error,
   ...rest
 }) => {
   return (
-    <FormControl>
+    <FormControl error={error}>
       <InputLabel>{label}</InputLabel>
       <MUISelect label={label} value={value} onChange={onChange} {...rest}>
         {options?.map((option) => (
@@ -25,6 +27,7 @@ const Select = ({
           </MenuItem>
         ))}
       </MUISelect>
+      <FormHelperText>{error}</FormHelperText>
     </FormControl>
   );
 };

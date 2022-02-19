@@ -1,4 +1,9 @@
-import { Button, Input as MUIInput } from "@mui/material";
+import {
+  Button,
+  FormControl,
+  FormHelperText,
+  Input as MUIInput,
+} from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Input from "../../src/components/Input";
@@ -55,10 +60,14 @@ const ProfileEdit = (props) => {
   };
 
   const onSubmit = async () => {
-    const res = await userService.update(form);
-    dispatch(setUser(res.data));
-    localStorage.setItem("user", JSON.stringify(res.data));
-    router.push("/profile");
+    try {
+      const res = await userService.update(form);
+      dispatch(setUser(res.data));
+      localStorage.setItem("user", JSON.stringify(res.data));
+      router.push("/profile");
+    } catch (error) {
+      setErrors(error.errors);
+    }
   };
 
   const onFileUpload = (e) => {
@@ -140,7 +149,9 @@ const ProfileEdit = (props) => {
                   company_id: e.target.value,
                 }))
               }
+              error={errors.company_id}
             />
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
               <Select
                 label="الدوله"
