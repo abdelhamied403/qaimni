@@ -153,16 +153,12 @@ const Company = (props) => {
               </div>
               {companyReviews?.map((review) => (
                 <>
-                  <Comment {...review} key={review.id} />
-                  {review.reply && (
-                    <div className="reply">
-                      <Reply
-                        company={companyData?.name}
-                        {...review.reply}
-                        key={review.reply.id}
-                      />
-                    </div>
-                  )}
+                  <Comment
+                    {...review}
+                    key={review.id}
+                    reply={review.reply}
+                    company={companyData?.name}
+                  />
                 </>
               ))}
             </div>
@@ -174,7 +170,12 @@ const Company = (props) => {
                 <h1>تقييمات</h1>
               </div>
               {clientsReviews?.map((review) => (
-                <Comment {...review} key={review.id} />
+                <Comment
+                  {...review}
+                  key={review.id}
+                  reply={review.reply}
+                  company={companyData?.name}
+                />
               ))}
             </div>
           </TabPanel>

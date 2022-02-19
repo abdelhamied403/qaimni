@@ -1,8 +1,17 @@
 import { Rating } from "@mui/material";
 import React from "react";
 import ForumIcon from "@mui/icons-material/Forum";
+import Reply from "./Reply";
 
-const Comment = ({ comment, created_at, rate, types, user_name }) => {
+const Comment = ({
+  comment,
+  created_at,
+  rate,
+  types,
+  user_name,
+  reply,
+  company,
+}) => {
   return (
     <div className="comment border border-solid border-gray-400 my-8 px-8 py-4 rounded-lg">
       <div className="flex gap-4">
@@ -41,6 +50,11 @@ const Comment = ({ comment, created_at, rate, types, user_name }) => {
             </div>
           </div>
           <p>{comment}</p>
+          {reply && (
+            <div className="reply">
+              <Reply company={company} {...reply} key={reply.id} />
+            </div>
+          )}
         </div>
       </div>
     </div>
