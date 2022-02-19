@@ -30,6 +30,11 @@ const Review = (props) => {
     show_name: 0,
     types: {},
   });
+  const [errors, setErrors] = useState({
+    rate: "",
+    comment: "",
+    types: "",
+  });
 
   // FUTURE: File upload
   // const [files, setFiles] = useState([]);
@@ -88,8 +93,12 @@ const Review = (props) => {
       rating_type_id: Object.keys(form.types)[idx],
       rate,
     }));
-    await company.submitReview(id, { ...form, types });
-    router.push(`/company/${id}`);
+    try {
+      await company.submitReview(id, { ...form, types });
+      router.push(`/company/${id}`);
+    } catch (error) {
+      setErrors(error.errors);
+    }
   };
 
   return (
@@ -170,6 +179,7 @@ const Review = (props) => {
               onChange={(e) => onRateChange(0, e.target.value)}
             />
           </div>
+          {errors.types && <span className="text-red-400">{errors.rate}</span>}
           <div className="grid md:grid-cols-2 grid-cols-1 gap-x-8">
             {ratingTypes.map((rateType) => (
               <div className="flex gap-8 my-2" key={rateType.id}>
@@ -183,6 +193,7 @@ const Review = (props) => {
               </div>
             ))}
           </div>
+          {errors.types && <span className="text-red-400">{errors.types}</span>}
           <FormControlLabel
             control={
               <Checkbox
@@ -206,6 +217,8 @@ const Review = (props) => {
               label="تعليقك"
               multiline
               rows={4}
+              error={errors.comment}
+              helperText={errors.comment}
               onChange={(e) =>
                 setForm((prev) => ({
                   ...prev,

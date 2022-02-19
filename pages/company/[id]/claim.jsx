@@ -50,8 +50,14 @@ const ClaimCompany = (props) => {
   };
 
   const submit = async () => {
-    const res = await company.claim(form);
-    console.log(res.data);
+    try {
+      const res = await company.claim(form);
+    } catch (error) {
+      setErrors((prev) => ({
+        ...prev,
+        ...error.errors,
+      }));
+    }
   };
 
   useEffect(() => {
@@ -145,6 +151,9 @@ const ClaimCompany = (props) => {
               <Button variant="contained" color="accent" component="span">
                 ارفاق صوره
               </Button>
+              {errors.claimer_document && (
+                <span className="text-red-400">{errors.claimer_document}</span>
+              )}
 
               <img className="w-24" src={preview} alt="" />
             </label>
