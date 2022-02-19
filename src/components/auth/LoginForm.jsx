@@ -26,9 +26,13 @@ const LoginForm = (props) => {
   });
 
   const onSubmit = async () => {
-    const res = await user.login(form);
-    dispatch(setUser(res?.data?.user));
-    router.push("/");
+    try {
+      const res = await user.login(form);
+      dispatch(setUser(res?.data?.user));
+      router.push("/");
+    } catch (error) {
+      setErrors((prev) => ({ ...prev, ...error.errors }));
+    }
   };
 
   const socialLogin = async () => {

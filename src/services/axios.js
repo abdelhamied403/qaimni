@@ -74,7 +74,7 @@ export const addInterceptors = (dispatch) => {
       if (error?.response?.data) {
         return Promise.reject(error.response.data);
       }
-      return Promise.reject(error?.message);
+      return Promise.reject(error);
     }
   );
 };

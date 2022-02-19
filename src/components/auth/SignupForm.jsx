@@ -63,9 +63,13 @@ const SignupForm = (props) => {
   }, [form.country_id]);
 
   const onSubmit = async () => {
-    const res = await user.register(form);
-    dispatch(setUser(res.data.user));
-    router.push("/");
+    try {
+      const res = await user.register(form);
+      dispatch(setUser(res.data.user));
+      router.push("/");
+    } catch (error) {
+      setErrors((prev) => ({ ...prev, ...error.errors }));
+    }
   };
 
   const socialLogin = async () => {
@@ -163,7 +167,7 @@ const SignupForm = (props) => {
       />
 
       <div className="grid grid-cols-2 gap-2">
-        <FormControl>
+        <FormControl error={errors.country_id}>
           <InputLabel>الدوله</InputLabel>
           <Select
             value={form.country_id}
@@ -181,8 +185,9 @@ const SignupForm = (props) => {
               </MenuItem>
             ))}
           </Select>
+          <FormHelperText>{errors.country_id}</FormHelperText>
         </FormControl>
-        <FormControl>
+        <FormControl error={errors.state_id}>
           <InputLabel>المدينه</InputLabel>
           <Select
             disabled={!form.country_id}
@@ -201,6 +206,7 @@ const SignupForm = (props) => {
               </MenuItem>
             ))}
           </Select>
+          <FormHelperText>{errors.state_id}</FormHelperText>
         </FormControl>
       </div>
 
