@@ -14,10 +14,15 @@ import { useDispatch } from "react-redux";
 import { setUser } from "../../redux/slices/user.slice";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import FacebookIcon from "@mui/icons-material/Facebook";
+import { useSession, signIn, getProviders } from "next-auth/react";
 
 const SignupForm = (props) => {
   const dispatch = useDispatch();
   const router = useRouter();
+  const [providers, setProviders] = useState([]);
+  const session = useSession();
+
   const [form, setForm] = useState({
     name: "",
     phone: "",
@@ -63,8 +68,62 @@ const SignupForm = (props) => {
     router.push("/");
   };
 
+  const socialLogin = async () => {
+    const data = {
+      name: session.data?.name,
+      email: session.data?.email,
+      picture: session.data?.picture,
+      provider_name: localStorage.getItem("provider"),
+      provider_id: session.data?.sub,
+    };
+    const res = await user.socialLogin(data);
+    dispatch(setUser(res?.data?.user));
+    router.push("/");
+  };
+
+  useEffect(() => {
+    if (session && localStorage.getItem("provider")) socialLogin();
+  }, [session]);
+
+  useEffect(() => {
+    getProviders().then((providers) => {
+      setProviders(providers);
+    });
+  }, []);
+
   return (
     <div className={`form ${props.className}`}>
+      <h3>سجل دخول بواسطه</h3>
+      <div className="social-login flex gap-2">
+        <Button
+          variant="contained"
+          color="inherit"
+          style={{ backgroundColor: "#4267B2", color: "white" }}
+          className="flex gap-2"
+          size="large"
+          onClick={() => {
+            signIn(providers.facebook.id);
+            localStorage.setItem("provider", providers.facebook.id);
+          }}
+        >
+          <FacebookIcon />
+          <span>فيسبوك</span>
+        </Button>
+        <Button
+          variant="outlined"
+          color="inherit"
+          style={{ backgroundColor: "#fff", color: "black" }}
+          className="flex gap-2"
+          size="large"
+          onClick={() => {
+            signIn(providers.google.id);
+            localStorage.setItem("provider", providers.google.id);
+          }}
+        >
+          <img className="w-6" src="/assets/google_logo.png" alt="" />
+          <span>جوجل</span>
+        </Button>
+      </div>
       <Input
         required
         label="الاسم بالكامل"
