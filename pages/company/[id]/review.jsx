@@ -179,9 +179,7 @@ const Review = (props) => {
               onChange={(e) => onRateChange(0, e.target.value)}
             />
           </div>
-          {errors.types && (
-            <span className="text-red-400">{errors.rate[0]}</span>
-          )}
+          {errors.types && <span className="text-red-400">{errors.rate}</span>}
           <div className="grid md:grid-cols-2 grid-cols-1 gap-x-8">
             {ratingTypes.map((rateType) => (
               <div className="flex gap-8 my-2" key={rateType.id}>
@@ -195,9 +193,7 @@ const Review = (props) => {
               </div>
             ))}
           </div>
-          {errors.types && (
-            <span className="text-red-400">{errors.types[0]}</span>
-          )}
+          {errors.types && <span className="text-red-400">{errors.types}</span>}
           <FormControlLabel
             control={
               <Checkbox
