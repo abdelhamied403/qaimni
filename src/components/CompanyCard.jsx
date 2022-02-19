@@ -9,10 +9,16 @@ const CompanyCard = ({ id, logo_url, name, rate, description }) => {
       <Link href={`/company/${id}`}>
         <div className="flex flex-col gap-8 cursor-pointer group">
           <div className="logo border border-solid border-gray-400 rounded-xl">
-            <img className="w-48 h-48 object-contain mx-auto" src={logo_url} alt="" />
+            <img
+              className="w-48 h-48 object-contain mx-auto"
+              src={logo_url}
+              alt=""
+            />
           </div>
           <div className="info ">
-              <h1 className="title m-0 group-hover:text-primary">{name}</h1>
+            <h1 className="title truncate m-0 group-hover:text-primary">
+              {name}
+            </h1>
             {/* <Link href={`/company/${id}`} className="hover:text-primary">
             </Link> */}
             <Rating
