@@ -10,6 +10,7 @@ import { SessionProvider } from "next-auth/react";
 import { addInterceptors } from "../src/services/axios";
 import { initUser } from "../src/redux/slices/user.slice";
 import * as ga from '../src/lib/ga';
+import * as fbq from '../src/lib/fpixel'
 
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }) {
@@ -23,8 +24,11 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
       }
     });
 
+    fbq.pageview()
+
     const handleRouteChange = (url) => {
-      ga.pageview(url)
+      ga.pageview(url);
+      fbq.pageview()
     }
 
     //When the component is mounted, subscribe to router changes
