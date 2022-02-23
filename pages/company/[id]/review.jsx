@@ -11,6 +11,7 @@ import {
 } from "@mui/material";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
+import Swal from "sweetalert2";
 import withAuth from "../../../src/components/HOC/withAuth";
 import Page from "../../../src/layout/Page";
 import company from "../../../src/services/company";
@@ -35,6 +36,17 @@ const Review = (props) => {
     comment: "",
     types: "",
   });
+
+  const ratingAs = {
+    employee: {
+      name: "employee",
+      value: "موظف",
+    },
+    client: {
+      name: "client",
+      value: "عميل",
+    },
+  };
 
   // FUTURE: File upload
   // const [files, setFiles] = useState([]);
@@ -94,10 +106,23 @@ const Review = (props) => {
       rate,
     }));
     try {
-      await company.submitReview(id, { ...form, types });
-      router.push(`/company/${id}`);
+      Swal.fire({
+        title: `هل انت متأكد من التقييم ك${ratingAs[form.type].value}`,
+        text: "وموافق علي الشروط والاحكام",
+        icon: "question",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "موافق",
+        cancelButtonText: "رجوع",
+      }).then(async (result) => {
+        if (result.isConfirmed) {
+          await company.submitReview(id, { ...form, types });
+          router.push(`/company/${id}`);
+        }
+      });
     } catch (error) {
-      setErrors(error.errors);
+      setErrors((prev) => ({ ...prev, ...error.errors }));
     }
   };
 
@@ -154,20 +179,16 @@ const Review = (props) => {
                 }));
               }}
             >
-              <ToggleButton
-                value="employee"
-                disabled={rateAs === "employee"}
-                style={{ padding: "0 30px" }}
-              >
-                موظف
-              </ToggleButton>
-              <ToggleButton
-                value="client"
-                disabled={rateAs === "client"}
-                style={{ padding: "0 30px" }}
-              >
-                عميل
-              </ToggleButton>
+              {Object.values(ratingAs).map((type) => (
+                <ToggleButton
+                  key={type.name}
+                  value={type.name}
+                  disabled={rateAs === type.name}
+                  style={{ padding: "0 30px" }}
+                >
+                  {type.value}
+                </ToggleButton>
+              ))}
             </ToggleButtonGroup>
           </div>
           <div className="flex gap-4 my-2 mx-auto">
