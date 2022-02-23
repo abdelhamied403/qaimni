@@ -17,6 +17,7 @@ const publicRoutes = [
   "/blog",
   "/search",
   "/categories",
+  "/company/[id]",
 ];
 
 export const addInterceptors = (dispatch) => {
@@ -66,7 +67,7 @@ export const addInterceptors = (dispatch) => {
       }
 
       if (error?.status === 401) {
-        if (!publicRoutes.includes(Router.pathname)) {
+        if (!publicRoutes.includes(Router.route)) {
           Router.push("/auth/login");
         }
       }
