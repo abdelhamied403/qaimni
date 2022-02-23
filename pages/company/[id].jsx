@@ -18,6 +18,7 @@ import withAuth from "../../src/components/HOC/withAuth";
 import PublicIcon from "@mui/icons-material/Public";
 import SocialIcon from "../../src/components/SocialIcon";
 import Reply from "../../src/components/Reply";
+import Head from "next/head";
 
 const Company = (props) => {
   const router = useRouter();
@@ -50,183 +51,194 @@ const Company = (props) => {
     }
   }, [id]);
 
+  const slugResolve = () => id.split("-").join(" ");
+
   return (
-    <div className="mx-8 md:mx-12 lg:mx-24 my-12">
-      <div className="head flex flex-wrap gap-4 items-start my-12">
-        <div className="logo border border-solid border-gray-400 rounded-xl p-4">
-          <img
-            className="w-44 h-44 object-contain"
-            src={companyData?.logo_url}
-            alt=""
-          />
-        </div>
-        <div className="info flex-1">
-          <div className="flex flex-wrap justify-between items-start">
-            <div className="info">
-              <h1 className="m-0 text-primary">{companyData?.name}</h1>
-              <p>
-                {companyData?.address} - {companyData?.phone}
-              </p>
-              <div className="flex gap-2">
+    <>
+      <Head>
+        <title>قيمني | {slugResolve()}</title>
+      </Head>
+      <div className="mx-8 md:mx-12 lg:mx-24 my-12">
+        <div className="head flex flex-wrap gap-4 items-start my-12">
+          <div className="logo border border-solid border-gray-400 rounded-xl p-4">
+            <img
+              className="w-44 h-44 object-contain"
+              src={companyData?.logo_url}
+              alt=""
+            />
+          </div>
+          <div className="info flex-1">
+            <div className="flex flex-wrap justify-between items-start">
+              <div className="info">
+                <h1 className="m-0 text-primary">{companyData?.name}</h1>
                 <p>
-                  عدد الموظفين:{" "}
-                  <span className="text-primary font-bold">
-                    {companyData?.employee_numbers}
-                  </span>
+                  {companyData?.address} - {companyData?.phone}
                 </p>
+                <div className="flex gap-2">
+                  <p>
+                    عدد الموظفين:{" "}
+                    <span className="text-primary font-bold">
+                      {companyData?.employee_numbers}
+                    </span>
+                  </p>
+                </div>
               </div>
-            </div>
-            <div className="actions flex flex-wrap my-4 gap-4">
-              <Link href={`${id}/review`} passHref>
-                <Button variant="contained" color="primary" size="large">
-                  تقديم رأيك
-                </Button>
-              </Link>
-              {!companyData?.verified && (
-                <Link href={`${id}/claim`} passHref>
-                  <Button variant="contained" color="accent" size="large">
-                    المطالبه بالشركه
+              <div className="actions flex flex-wrap my-4 gap-4">
+                <Link href={`${id}/review`} passHref>
+                  <Button variant="contained" color="primary" size="large">
+                    تقديم رأيك
                   </Button>
                 </Link>
+                {!companyData?.verified && (
+                  <Link href={`${id}/claim`} passHref>
+                    <Button variant="contained" color="accent" size="large">
+                      المطالبه بالشركه
+                    </Button>
+                  </Link>
+                )}
+              </div>
+            </div>
+            <Rating
+              name="size-large"
+              value={companyData?.rate || 0}
+              size="large"
+              readOnly
+              precision={0.1}
+            />
+            <p className="mb-3">
+              <span className="text-primary font-bold">
+                {companyData?.recommended_count}
+              </span>{" "}
+              رشحوا هذه الشركه
+            </p>
+
+            <div className="socials flex flex-wrap gap-2">
+              {companyData?.social_media.map((social, idx) => (
+                <div
+                  key={idx}
+                  className="border border-solid border-gray-400 rounded-lg hover:border-primary hover:bg-primary transition-all"
+                >
+                  <a className="px-4 flex items-center gap-2" href={social.url}>
+                    <SocialIcon name={social.name} />
+                    <p>{social.name}</p>
+                  </a>
+                </div>
+              ))}
+              {companyData?.website_url && (
+                <div className="border border-solid border-gray-400 rounded-lg hover:border-primary hover:bg-primary transition-all">
+                  <a className="px-4" href={companyData?.website_url}>
+                    <PublicIcon /> website
+                  </a>
+                </div>
               )}
             </div>
-          </div>
-          <Rating
-            name="size-large"
-            value={companyData?.rate || 0}
-            size="large"
-            readOnly
-            precision={0.1}
-          />
-          <p className="mb-3">
-            <span className="text-primary font-bold">
-              {companyData?.recommended_count}
-            </span>{" "}
-            رشحوا هذه الشركه
-          </p>
 
-          <div className="socials flex flex-wrap gap-2">
-            {companyData?.social_media.map((social, idx) => (
-              <div
-                key={idx}
-                className="border border-solid border-gray-400 rounded-lg hover:border-primary hover:bg-primary transition-all"
-              >
-                <a className="px-4 flex items-center gap-2" href={social.url}>
-                  <SocialIcon name={social.name} />
-                  <p>{social.name}</p>
-                </a>
-              </div>
-            ))}
-            {companyData?.website_url && (
-              <div className="border border-solid border-gray-400 rounded-lg hover:border-primary hover:bg-primary transition-all">
-                <a className="px-4" href={companyData?.website_url}>
-                  <PublicIcon /> website
-                </a>
-              </div>
-            )}
+            <p className="m-0">{companyData?.description}</p>
           </div>
-
-          <p className="m-0">{companyData?.description}</p>
         </div>
-      </div>
 
-      {/* <div className="flex gap-4 justify-center">
+        {/* <div className="flex gap-4 justify-center">
         <PlanCard></PlanCard>
         <PlanCard></PlanCard>
       </div> */}
 
-      <div className="tabs">
-        <div className="tabs flex justify-center">
-          <Tabs value={currentTab} onChange={(_, val) => setCurrentTab(val)}>
-            <Tab icon={<CommentIcon />} label="تقييمات الموظفين" index={0} />
-            <Tab icon={<CommentIcon />} label="تقييمات العملاء" index={1} />
-            {/* <Tab icon={<PaidIcon />} label="المرتبات" index={3} />
+        <div className="tabs">
+          <div className="tabs flex justify-center">
+            <Tabs value={currentTab} onChange={(_, val) => setCurrentTab(val)}>
+              <Tab icon={<CommentIcon />} label="تقييمات الموظفين" index={0} />
+              <Tab icon={<CommentIcon />} label="تقييمات العملاء" index={1} />
+              {/* <Tab icon={<PaidIcon />} label="المرتبات" index={3} />
             <Tab icon={<WorkIcon />} label="الوظائف" index={4} /> */}
-          </Tabs>
-        </div>
-        <div className="tabContent">
-          <TabPanel value={currentTab} index={0}>
-            {/* comments */}
-            <div className="comments">
-              <div className="title mb-8">
-                <h1>تقييمات</h1>
+            </Tabs>
+          </div>
+          <div className="tabContent">
+            <TabPanel value={currentTab} index={0}>
+              {/* comments */}
+              <div className="comments">
+                <div className="title mb-8">
+                  <h1>تقييمات</h1>
+                </div>
+                {companyReviews?.map((review) => (
+                  <>
+                    <Comment
+                      {...review}
+                      key={review.id}
+                      reply={review.reply}
+                      company={companyData?.name}
+                    />
+                  </>
+                ))}
               </div>
-              {companyReviews?.map((review) => (
-                <>
+            </TabPanel>
+            <TabPanel value={currentTab} index={1} className="p-0">
+              {/* comments */}
+              <div className="comments">
+                <div className="title mb-8">
+                  <h1>تقييمات</h1>
+                </div>
+                {clientsReviews?.map((review) => (
                   <Comment
                     {...review}
                     key={review.id}
                     reply={review.reply}
                     company={companyData?.name}
                   />
-                </>
-              ))}
-            </div>
-          </TabPanel>
-          <TabPanel value={currentTab} index={1} className="p-0">
-            {/* comments */}
-            <div className="comments">
-              <div className="title mb-8">
-                <h1>تقييمات</h1>
+                ))}
               </div>
-              {clientsReviews?.map((review) => (
-                <Comment
-                  {...review}
-                  key={review.id}
-                  reply={review.reply}
-                  company={companyData?.name}
-                />
-              ))}
-            </div>
-          </TabPanel>
-          <TabPanel value={currentTab} index={2}>
-            <h1>المرتبات</h1>
-            <SaleryCard />
-            <SaleryCard />
-            <SaleryCard />
-            <SaleryCard />
-          </TabPanel>
-          <TabPanel value={currentTab} index={3}>
-            <div className="jobCard">
-              <div className="head flex justify-between">
-                <h1>Production Engineer</h1>
-                <div className="actions">
-                  <Button variant="outlined" color="primary" size="large">
-                    تقدم للوظيفه
-                  </Button>
-                </div>
-              </div>
-              <div className="content">
-                <div className="company flex gap-4">
-                  <div className="logo">
-                    <img
-                      className="w-24 h-24 object-cover"
-                      src="https://images.pexels.com/photos/9404648/pexels-photo-9404648.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
-                      alt=""
-                    />
+            </TabPanel>
+            <TabPanel value={currentTab} index={2}>
+              <h1>المرتبات</h1>
+              <SaleryCard />
+              <SaleryCard />
+              <SaleryCard />
+              <SaleryCard />
+            </TabPanel>
+            <TabPanel value={currentTab} index={3}>
+              <div className="jobCard">
+                <div className="head flex justify-between">
+                  <h1>Production Engineer</h1>
+                  <div className="actions">
+                    <Button variant="outlined" color="primary" size="large">
+                      تقدم للوظيفه
+                    </Button>
                   </div>
-                  <div className="info">
-                    <div className="name flex items-center gap-3">
-                      <h2>جوجل</h2>
-                      <div className="rate">
-                        <Rating
-                          name="size-large"
-                          defaultValue={2}
-                          size="large"
-                        />
-                      </div>
+                </div>
+                <div className="content">
+                  <div className="company flex gap-4">
+                    <div className="logo">
+                      <img
+                        className="w-24 h-24 object-cover"
+                        src="https://images.pexels.com/photos/9404648/pexels-photo-9404648.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+                        alt=""
+                      />
                     </div>
-                    <p>المعادي, مصر الجديده</p>
-                    <p>54k$ - 87k$</p>
+                    <div className="info">
+                      <div className="name flex items-center gap-3">
+                        <h2>جوجل</h2>
+                        <div className="rate">
+                          <Rating
+                            name="size-large"
+                            defaultValue={2}
+                            size="large"
+                          />
+                        </div>
+                      </div>
+                      <p>المعادي, مصر الجديده</p>
+                      <p>54k$ - 87k$</p>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </TabPanel>
+            </TabPanel>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
+};
+
+Company.getInitialProps = (ctx) => {
+  return {};
 };
 
 Company.Layout = Page;

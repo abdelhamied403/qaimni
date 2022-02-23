@@ -12,7 +12,10 @@ const Page = ({ title, children }) => {
     <>
       <Head>
         <title>قيمني | {title}</title>
-        <meta name="description" content="قيّمني اول منصة عربية تهدف إلى تجميع الآراء والتقييمات حول الشركات" />
+        <meta
+          name="description"
+          content="قيّمني اول منصة عربية تهدف إلى تجميع الآراء والتقييمات حول الشركات"
+        />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="page min-h-screen flex flex-col">

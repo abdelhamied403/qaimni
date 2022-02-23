@@ -4,9 +4,11 @@ import { Rating } from "@mui/material";
 import Link from "next/link";
 
 const CompanyCard = ({ id, logo_url, name, rate, description }) => {
+  const companySlugger = () => name.split(" ").join("-");
+
   return (
     <div className="company-card">
-      <Link href={`/company/${id}`}>
+      <Link href={`/company/${id}-${companySlugger()}`} passHref>
         <div className="flex flex-col gap-8 cursor-pointer group">
           <div className="logo border border-solid border-gray-400 rounded-xl">
             <img
