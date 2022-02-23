@@ -54,6 +54,9 @@ const Navbar = (props) => {
                 onClick={() => router.push("/")}
               />
               <NavMenu />
+              <Button variant="contained" color="error" onClick={logout}>
+                <span className="text-white">تسجيل الخروج</span>
+              </Button>
             </ul>
           </Drawer>
         </div>
