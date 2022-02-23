@@ -20,7 +20,7 @@ const NavMenu = (props) => {
       <li>
         <span className="text-xl hover:text-primary">
           <Link className="" href="/blog">
-            المدونه
+            المدونة
           </Link>
         </span>
       </li>

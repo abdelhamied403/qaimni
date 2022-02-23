@@ -37,11 +37,14 @@ const Footer = (props) => {
             <a className="hover:text-primary">تواصل معنا</a>
           </Link>
           <Link className="text-lg" href="/privacy-policy">
-            <a className="hover:text-primary">سياسة الخصوصيه</a>
+            <a className="hover:text-primary">سياسة الخصوصية</a>
           </Link>
           <Link className="text-lg" href="/terms-of-condition">
-            <a className="hover:text-primary">شروط الاستخدام</a>
+            <a className="hover:text-primary">شروط الإستخدام</a>
           </Link>
+          <div className="text-lg">
+            <a target="_blank" rel="noreferrer" href="https://company.qaimni.com" className="hover:text-primary">منصة الشركات</a>
+          </div>
         </div>
         <div className="logo">
           <img src="/assets/logo-demo.png" alt="" />
