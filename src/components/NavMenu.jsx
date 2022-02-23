@@ -28,7 +28,7 @@ const NavMenu = (props) => {
         <Button
           variant="contained"
           onClick={() =>
-            window.open("https://company.qaimni.com", "_blank").focus()
+            window.open("https://company.qaimni.com/auth/signup", "_blank").focus()
           }
         >
           <span className="text-white">تسجيل الشركات</span>
