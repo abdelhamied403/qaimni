@@ -1,17 +1,17 @@
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useState } from "react";
 import Slider from "react-slick";
 
-const MostRatedCompanies = (props) => {
+const CompaniesSlider = ({ title, companies }) => {
   const router = useRouter();
+  const [dragging, setDragging] = useState(false);
   return (
     <section className="top-rated py-24 px-12 md:px-24">
-      <h1 className="font-bold text-3xl md:text-3xl mb-6">
-        الشركات الاعلي تقييماً
-      </h1>
+      <h1 className="font-bold text-3xl md:text-3xl mb-6">{title}</h1>
       <Slider
         className="multi"
-        slidesToShow={props.companies > 5 ? 5 : 3}
+        slidesToShow={companies?.length > 5 ? 5 : 2}
+        slidesToScroll={3}
         rtl
         autoplay
         responsive={[
@@ -28,15 +28,22 @@ const MostRatedCompanies = (props) => {
             },
           },
         ]}
+        beforeChange={() => setDragging(true)}
       >
-        {props.companies?.map((company) => (
+        {companies?.map((company) => (
           <div className="slide text-center" key={company.id}>
             <div
-              className="cursor-pointer"
-              onMouseUpCapture={() => router.push(`/company/${company.id}`)}
+              className="cursor-pointer w-72 h-72 p-8 mx-auto"
+              onClick={(e) => {
+                if (!dragging) {
+                  e.preventDefault();
+                  router.push(`https://qaimni.com/company/${company.id}`);
+                }
+                setDragging(false);
+              }}
             >
               <img
-                className="w-72 h-72 object-contain object-center p-8 mx-auto"
+                className="w-full h-full object-contain object-center"
                 src={company.logo_url}
                 alt=""
               />
@@ -49,4 +56,4 @@ const MostRatedCompanies = (props) => {
   );
 };
 
-export default MostRatedCompanies;
+export default CompaniesSlider;

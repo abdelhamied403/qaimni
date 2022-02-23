@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import Spinner from "../src/components/Spinner";
 import HomeSection from "../src/components/HomeSection";
 import MostRatedCompanies from "../src/components/MostRatedCompanies";
+import CompaniesSlider from "../src/components/CompaniesSlider";
 
 var settings = {
   infinite: true,
@@ -53,7 +54,14 @@ const Home = () => {
         </div>
       </div>
 
-      <MostRatedCompanies companies={homeData?.companies} />
+      <CompaniesSlider
+        title="الشركات الاعلي تقييماً"
+        companies={homeData?.companies}
+      />
+      <CompaniesSlider
+        title="الشركات المضافة حديثاً"
+        companies={homeData?.latest_companies}
+      />
     </>
   );
 };
