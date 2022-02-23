@@ -9,6 +9,7 @@ import {
   ToggleButton,
   ToggleButtonGroup,
 } from "@mui/material";
+import Head from "next/head";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import Swal from "sweetalert2";
@@ -126,132 +127,146 @@ const Review = (props) => {
     }
   };
 
+  const slugResolve = () => {
+    const s = id?.split("-");
+    s?.shift();
+    return s?.join(" ");
+  };
+
   return (
-    <div className="mx-8 md:mx-12 lg:mx-24 my-12">
-      <div className="head flex flex-wrap gap-4 items-center my-12">
-        <div className="logo border border-solid border-gray-400 rounded-xl p-4">
-          <img
-            className="w-44 h-44 object-contain"
-            src={companyData?.logo_url}
-            alt=""
-          />
-        </div>
-        <div className="info flex-1">
-          <div className="flex flex-wrap justify-between items-start">
-            <div className="info">
-              <h1 className="m-0">{companyData?.name}</h1>
-              <p>
-                {companyData?.address} - {companyData?.phone}
-              </p>
-            </div>
-          </div>
-          <div className="rate">
-            <Rating
-              name="size-large"
-              value={companyData?.rate || 0}
-              size="large"
-              readOnly
-              precision={0.1}
+    <>
+      <Head>
+        <title>قيمني | تقييم {slugResolve()}</title>
+      </Head>
+      <div className="mx-8 md:mx-12 lg:mx-24 my-12">
+        <div className="head flex flex-wrap gap-4 items-center my-12">
+          <div className="logo border border-solid border-gray-400 rounded-xl p-4">
+            <img
+              className="w-44 h-44 object-contain"
+              src={companyData?.logo_url}
+              alt=""
             />
           </div>
-          <p className="m-0">{companyData?.description}</p>
-        </div>
-      </div>
-      <div className="content">
-        <div className="rate flex flex-col gap-4 items-center">
-          <div className="flex gap-2">
-            <h2>تقييم كـ</h2>
-            <ToggleButtonGroup
-              value={rateAs}
-              exclusive
-              color="primary"
-              variant="contained"
-              onChange={(e) => {
-                setRateAs(e.target.value);
-                setForm((prev) => ({
-                  ...prev,
-                  type: e.target.value,
-                }));
-                setRatingTypes([]);
-                setForm((prev) => ({
-                  ...prev,
-                  types: [],
-                }));
-              }}
-            >
-              {Object.values(ratingAs).map((type) => (
-                <ToggleButton
-                  key={type.name}
-                  value={type.name}
-                  disabled={rateAs === type.name}
-                  style={{ padding: "0 30px" }}
-                >
-                  {type.value}
-                </ToggleButton>
-              ))}
-            </ToggleButtonGroup>
-          </div>
-          <div className="flex gap-4 my-2 mx-auto">
-            <p>تقييم عام</p>
-            <Rating
-              name="size-large"
-              defaultValue={0}
-              size="large"
-              onChange={(e) => onRateChange(0, e.target.value)}
-            />
-          </div>
-          {errors.types && <span className="text-red-400">{errors.rate}</span>}
-          <div className="grid md:grid-cols-2 grid-cols-1 gap-x-8">
-            {ratingTypes.map((rateType) => (
-              <div className="flex gap-8 my-2" key={rateType.id}>
-                <p className="flex-1">{rateType.title}</p>
-                <Rating
-                  name="size-large"
-                  defaultValue={0}
-                  size="large"
-                  onChange={(e) => onRateChange(rateType.id, e.target.value)}
-                />
+          <div className="info flex-1">
+            <div className="flex flex-wrap justify-between items-start">
+              <div className="info">
+                <h1 className="m-0">{companyData?.name}</h1>
+                <p>
+                  {companyData?.address} - {companyData?.phone}
+                </p>
               </div>
-            ))}
+            </div>
+            <div className="rate">
+              <Rating
+                name="size-large"
+                value={companyData?.rate || 0}
+                size="large"
+                readOnly
+                precision={0.1}
+              />
+            </div>
+            <p className="m-0">{companyData?.description}</p>
           </div>
-          {errors.types && <span className="text-red-400">{errors.types}</span>}
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={form.recommended}
+        </div>
+        <div className="content">
+          <div className="rate flex flex-col gap-4 items-center">
+            <div className="flex gap-2">
+              <h2>تقييم كـ</h2>
+              <ToggleButtonGroup
+                value={rateAs}
+                exclusive
+                color="primary"
+                variant="contained"
+                onChange={(e) => {
+                  setRateAs(e.target.value);
+                  setForm((prev) => ({
+                    ...prev,
+                    type: e.target.value,
+                  }));
+                  setRatingTypes([]);
+                  setForm((prev) => ({
+                    ...prev,
+                    types: [],
+                  }));
+                }}
+              >
+                {Object.values(ratingAs).map((type) => (
+                  <ToggleButton
+                    key={type.name}
+                    value={type.name}
+                    disabled={rateAs === type.name}
+                    style={{ padding: "0 30px" }}
+                  >
+                    {type.value}
+                  </ToggleButton>
+                ))}
+              </ToggleButtonGroup>
+            </div>
+            <div className="flex gap-4 my-2 mx-auto">
+              <p>تقييم عام</p>
+              <Rating
+                name="size-large"
+                defaultValue={0}
+                size="large"
+                onChange={(e) => onRateChange(0, e.target.value)}
+              />
+            </div>
+            {errors.types && (
+              <span className="text-red-400">{errors.rate}</span>
+            )}
+            <div className="grid md:grid-cols-2 grid-cols-1 gap-x-8">
+              {ratingTypes.map((rateType) => (
+                <div className="flex gap-8 my-2" key={rateType.id}>
+                  <p className="flex-1">{rateType.title}</p>
+                  <Rating
+                    name="size-large"
+                    defaultValue={0}
+                    size="large"
+                    onChange={(e) => onRateChange(rateType.id, e.target.value)}
+                  />
+                </div>
+              ))}
+            </div>
+            {errors.types && (
+              <span className="text-red-400">{errors.types}</span>
+            )}
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={form.recommended}
+                  onChange={(e) =>
+                    setForm((prev) => ({
+                      ...prev,
+                      recommended: +e.target.checked,
+                    }))
+                  }
+                />
+              }
+              label="هل ترشح هذه الشركه للمتقدمين؟"
+            />
+          </div>
+          <div className="review my-8">
+            <h2 className="text-center">اكتب تعليقك</h2>
+            <div className="my-4">
+              <TextField
+                className="w-full"
+                label="تعليقك"
+                multiline
+                rows={4}
+                error={errors.comment}
+                helperText={errors.comment}
                 onChange={(e) =>
                   setForm((prev) => ({
                     ...prev,
-                    recommended: +e.target.checked,
+                    comment: e.target.value,
                   }))
                 }
               />
-            }
-            label="هل ترشح هذه الشركه للمتقدمين؟"
-          />
-        </div>
-        <div className="review my-8">
-          <h2 className="text-center">اكتب تعليقك</h2>
-          <div className="my-4">
-            <TextField
-              className="w-full"
-              label="تعليقك"
-              multiline
-              rows={4}
-              error={errors.comment}
-              helperText={errors.comment}
-              onChange={(e) =>
-                setForm((prev) => ({
-                  ...prev,
-                  comment: e.target.value,
-                }))
-              }
-            />
+            </div>
           </div>
-        </div>
 
-        {/* FUTURE: File upload */}
-        {/* <div className="add-prove">
+          {/* FUTURE: File upload */}
+          {/* <div className="add-prove">
           <h2>اضف دليلك</h2>
           <div className="flex flex-wrap gap-4 my-2">
             <div className="images flex">
@@ -286,40 +301,41 @@ const Review = (props) => {
           </div>
         </div> */}
 
-        <div className="flex gap-4">
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={form.show_name}
-                onChange={(e) =>
-                  setForm((prev) => ({
-                    ...prev,
-                    show_name: +e.target.checked,
-                  }))
-                }
-              />
-            }
-            label="اظهار اسمي"
-          />
-          <Button
-            variant="contained"
-            color="primary"
-            size="large"
-            onClick={submit}
-          >
-            تقديم رأيك
-          </Button>
-          <Button
-            variant="outlined"
-            color="primary"
-            size="large"
-            onClick={() => router.push(`/company/${id}`)}
-          >
-            الغاء
-          </Button>
+          <div className="flex gap-4">
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={form.show_name}
+                  onChange={(e) =>
+                    setForm((prev) => ({
+                      ...prev,
+                      show_name: +e.target.checked,
+                    }))
+                  }
+                />
+              }
+              label="اظهار اسمي"
+            />
+            <Button
+              variant="contained"
+              color="primary"
+              size="large"
+              onClick={submit}
+            >
+              تقديم رأيك
+            </Button>
+            <Button
+              variant="outlined"
+              color="primary"
+              size="large"
+              onClick={() => router.push(`/company/${id}`)}
+            >
+              الغاء
+            </Button>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

@@ -1,4 +1,5 @@
 import { Pagination } from "@mui/material";
+import Head from "next/head";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import CompanyCard from "../../src/components/CompanyCard";
@@ -25,27 +26,38 @@ const Category = (props) => {
     if (id) getCategory(id);
   }, [id, page]);
 
-  return (
-    <div className="category">
-      <div className="my-8 mx-24">
-        <h1 className="mb-6">{category?.title}</h1>
-        <div className="companies grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4 max-w-7xl mx-auto">
-          {companies.map((company) => (
-            <CompanyCard {...company} key={company.id} />
-          ))}
-        </div>
+  const slugResolve = () => {
+    const s = id?.split("-");
+    s?.shift();
+    return s?.join(" ");
+  };
 
-        <div className="flex justify-center my-12">
-          <Pagination
-            page={page}
-            onChange={(_, num) => setPage(num)}
-            count={pagination?.total_pages || 0}
-            variant="outlined"
-            color="primary"
-          />
+  return (
+    <>
+      <Head>
+        <title>قيمني | {slugResolve()}</title>
+      </Head>
+      <div className="category">
+        <div className="my-8 mx-24">
+          <h1 className="mb-6">{category?.title}</h1>
+          <div className="companies grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4 max-w-7xl mx-auto">
+            {companies.map((company) => (
+              <CompanyCard {...company} key={company.id} />
+            ))}
+          </div>
+
+          <div className="flex justify-center my-12">
+            <Pagination
+              page={page}
+              onChange={(_, num) => setPage(num)}
+              count={pagination?.total_pages || 0}
+              variant="outlined"
+              color="primary"
+            />
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

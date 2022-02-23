@@ -7,6 +7,7 @@ import company from "../../../src/services/company";
 import Input from "../../../src/components/Input";
 import { useSelector } from "react-redux";
 import withAuth from "../../../src/components/HOC/withAuth";
+import Head from "next/head";
 
 const ClaimCompany = (props) => {
   const router = useRouter();
@@ -74,103 +75,116 @@ const ClaimCompany = (props) => {
     }));
   }, [user, id]);
 
+  const slugResolve = () => {
+    const s = id?.split("-");
+    s?.shift();
+    return s?.join(" ");
+  };
+
   return (
-    <div className="mx-8 md:mx-12 lg:mx-24 my-12">
-      <div className="head flex flex-wrap gap-4 items-center my-12">
-        <div className="logo border border-solid border-gray-400 rounded-xl p-4">
-          <img
-            className="w-44 h-44 object-contain"
-            src={companyData?.logo_url}
-            alt=""
-          />
-        </div>
-        <div className="info flex-1">
-          <div className="flex flex-wrap justify-between items-start">
-            <div className="info">
-              <h1 className="m-0">{companyData?.name}</h1>
-              <p>
-                {companyData?.address} - {companyData?.phone}
-              </p>
-            </div>
-            <div className="actions flex gap-4">
-              <Link href={`/company/${id}/review`} passHref>
-                <Button variant="contained" color="primary" size="large">
-                  تقديم رأيك
-                </Button>
-              </Link>
-            </div>
-          </div>
-          <div className="rate">
-            <Rating
-              name="size-large"
-              value={companyData?.rate || 0}
-              size="large"
-              readOnly
-              precision={0.1}
+    <>
+      <Head>
+        <title>قيمني | استرداد {slugResolve()}</title>
+      </Head>
+      <div className="mx-8 md:mx-12 lg:mx-24 my-12">
+        <div className="head flex flex-wrap gap-4 items-center my-12">
+          <div className="logo border border-solid border-gray-400 rounded-xl p-4">
+            <img
+              className="w-44 h-44 object-contain"
+              src={companyData?.logo_url}
+              alt=""
             />
           </div>
-          <p className="m-0">{companyData?.description}</p>
-        </div>
-      </div>
-
-      <div className="body">
-        <div className="flex flex-col gap-4 max-w-xl mx-auto">
-          <Input
-            required
-            label="الاسم بالكامل"
-            name="claimer_name"
-            value={form.claimer_name}
-            setValue={setForm}
-            error={errors.claimer_name}
-            setError={setErrors}
-          />
-          <Input
-            required
-            label="الهاتف"
-            name="claimer_phone"
-            value={form.claimer_phone}
-            setValue={setForm}
-            error={errors.claimer_phone}
-            setError={setErrors}
-          />
-          <div className="add-prove">
-            <h2>ارفق صوره من البطاقة الضريبيه او السجل التجاري</h2>
-            <label
-              htmlFor="contained-button-file"
-              className="flex items-center my-4"
-            >
-              <div className="hidden">
-                <MUIInput
-                  accept="image/*"
-                  id="contained-button-file"
-                  multiple
-                  type="file"
-                  onInput={onFileUpload}
-                />
+          <div className="info flex-1">
+            <div className="flex flex-wrap justify-between items-start">
+              <div className="info">
+                <h1 className="m-0">{companyData?.name}</h1>
+                <p>
+                  {companyData?.address} - {companyData?.phone}
+                </p>
               </div>
-              <Button variant="contained" color="accent" component="span">
-                ارفاق صوره
-              </Button>
-              {errors.claimer_document && (
-                <span className="text-red-400">{errors.claimer_document}</span>
-              )}
-
-              <img className="w-24" src={preview} alt="" />
-            </label>
-            <div className="my-8 flex justify-center">
-              <Button
-                variant="contained"
-                color="primary"
+              <div className="actions flex gap-4">
+                <Link href={`/company/${id}/review`} passHref>
+                  <Button variant="contained" color="primary" size="large">
+                    تقديم رأيك
+                  </Button>
+                </Link>
+              </div>
+            </div>
+            <div className="rate">
+              <Rating
+                name="size-large"
+                value={companyData?.rate || 0}
                 size="large"
-                onClick={submit}
+                readOnly
+                precision={0.1}
+              />
+            </div>
+            <p className="m-0">{companyData?.description}</p>
+          </div>
+        </div>
+
+        <div className="body">
+          <div className="flex flex-col gap-4 max-w-xl mx-auto">
+            <Input
+              required
+              label="الاسم بالكامل"
+              name="claimer_name"
+              value={form.claimer_name}
+              setValue={setForm}
+              error={errors.claimer_name}
+              setError={setErrors}
+            />
+            <Input
+              required
+              label="الهاتف"
+              name="claimer_phone"
+              value={form.claimer_phone}
+              setValue={setForm}
+              error={errors.claimer_phone}
+              setError={setErrors}
+            />
+            <div className="add-prove">
+              <h2>ارفق صوره من البطاقة الضريبيه او السجل التجاري</h2>
+              <label
+                htmlFor="contained-button-file"
+                className="flex items-center my-4"
               >
-                المطالبه بالشركه
-              </Button>
+                <div className="hidden">
+                  <MUIInput
+                    accept="image/*"
+                    id="contained-button-file"
+                    multiple
+                    type="file"
+                    onInput={onFileUpload}
+                  />
+                </div>
+                <Button variant="contained" color="accent" component="span">
+                  ارفاق صوره
+                </Button>
+                {errors.claimer_document && (
+                  <span className="text-red-400">
+                    {errors.claimer_document}
+                  </span>
+                )}
+
+                <img className="w-24" src={preview} alt="" />
+              </label>
+              <div className="my-8 flex justify-center">
+                <Button
+                  variant="contained"
+                  color="primary"
+                  size="large"
+                  onClick={submit}
+                >
+                  المطالبه بالشركه
+                </Button>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

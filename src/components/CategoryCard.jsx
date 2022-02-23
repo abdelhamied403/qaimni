@@ -3,8 +3,10 @@ import Link from "next/link";
 import React from "react";
 
 const CategoryCard = (props) => {
+  const slugger = () => props.title.split(" ").join("-");
+
   return (
-    <Link href={`/categories/${props.id}`} passHref>
+    <Link href={`/categories/${props.id}-${slugger()}`} passHref>
       <div className="category-card border border-solid rounded-xl border-black group px-4">
         <div className="text-center">
           <Button fullWidth variant="default">

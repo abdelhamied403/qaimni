@@ -51,7 +51,11 @@ const Company = (props) => {
     }
   }, [id]);
 
-  const slugResolve = () => id.split("-").join(" ");
+  const slugResolve = () => {
+    const s = id.split("-");
+    s.shift();
+    return s.join(" ");
+  };
 
   return (
     <>
