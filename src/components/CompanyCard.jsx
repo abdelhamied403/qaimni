@@ -16,7 +16,7 @@ const CompanyCard = ({ id, logo_url, name, rate, description }) => {
             />
           </div>
           <div className="info ">
-            <h1 className="title truncate m-0 group-hover:text-primary text-3xl mb-2">
+            <h1 className="title truncate m-0 group-hover:text-primary text-xl mb-2">
               {name}
             </h1>
             {/* <Link href={`/company/${id}`} className="hover:text-primary">
