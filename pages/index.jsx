@@ -7,7 +7,6 @@ import home from "../src/services/home";
 import { useEffect, useState } from "react";
 import Spinner from "../src/components/Spinner";
 import HomeSection from "../src/components/HomeSection";
-import MostRatedCompanies from "../src/components/MostRatedCompanies";
 import CompaniesSlider from "../src/components/CompaniesSlider";
 
 var settings = {
