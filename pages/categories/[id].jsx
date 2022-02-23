@@ -29,7 +29,7 @@ const Category = (props) => {
     <div className="category">
       <div className="my-8 mx-24">
         <h1>{category?.title}</h1>
-        <div className="companies grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 max-w-7xl mx-auto">
+        <div className="companies grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4 max-w-7xl mx-auto">
           {companies.map((company) => (
             <CompanyCard {...company} key={company.id} />
           ))}
