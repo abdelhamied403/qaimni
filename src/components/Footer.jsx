@@ -29,7 +29,7 @@ const Footer = (props) => {
   return (
     <footer className="bg-gray-900 py-4 px-12 md:px-24 text-white">
       <div className="flex flex-wrap justify-center md:justify-between gap-4 items-center">
-        <div className="menu flex gap-4">
+        <div className="menu flex flex-wrap gap-4">
           <Link className="text-lg" href="/about">
             <a className="hover:text-primary">عن قيمني</a>
           </Link>
@@ -43,7 +43,14 @@ const Footer = (props) => {
             <a className="hover:text-primary">شروط الإستخدام</a>
           </Link>
           <div className="text-lg">
-            <a target="_blank" rel="noreferrer" href="https://company.qaimni.com" className="hover:text-primary">منصة الشركات</a>
+            <a
+              target="_blank"
+              rel="noreferrer"
+              href="https://company.qaimni.com"
+              className="hover:text-primary"
+            >
+              منصة الشركات
+            </a>
           </div>
         </div>
         <div className="logo">
