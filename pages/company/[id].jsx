@@ -52,9 +52,9 @@ const Company = (props) => {
   }, [id]);
 
   const slugResolve = () => {
-    const s = id.split("-");
-    s.shift();
-    return s.join(" ");
+    const s = id?.split("-");
+    s?.shift();
+    return s?.join(" ");
   };
 
   return (
