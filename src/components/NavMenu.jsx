@@ -1,8 +1,23 @@
 import { Button } from "@mui/material";
 import Link from "./Link";
 import React from "react";
+import { useRouter } from "next/router";
+import { useDispatch, useSelector } from "react-redux";
+import { setUser } from "../redux/slices/user.slice";
 
 const NavMenu = (props) => {
+
+  const router = useRouter();
+  const dispatch = useDispatch();
+
+  const logout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("provider");
+    localStorage.removeItem("user");
+    dispatch(setUser(null));
+    router.replace("/auth/login");
+  };
+
   return (
     <>
       <li>
@@ -32,6 +47,14 @@ const NavMenu = (props) => {
           }
         >
           <span className="text-white">تسجيل الشركات</span>
+        </Button>
+      </li>
+      <li>
+        <Button
+          variant="contained"
+          onClick={logout}
+        >
+          <span className="text-white">خروج</span>
         </Button>
       </li>
     </>
