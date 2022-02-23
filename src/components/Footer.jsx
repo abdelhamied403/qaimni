@@ -43,7 +43,7 @@ const Footer = (props) => {
             <a className="hover:text-primary">شروط الاستخدام</a>
           </Link>
           <div className="text-lg">
-            <a href="https://company.qaimni.com" className="hover:text-primary">موقع الشركات</a>
+            <a target="_blank" href="https://company.qaimni.com" className="hover:text-primary">موقع الشركات</a>
           </div>
         </div>
         <div className="logo">
