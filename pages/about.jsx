@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import Head from "next/head";
 import Page from "../src/layout/Page";
 import vocabService from "../src/services/vocab";
 
@@ -16,6 +17,10 @@ const About = (props) => {
 
   return (
     <div className="about mx-24 mt-8 flex flex-col items-center">
+      <Head>
+        <title>ABout Qaimni</title>
+        <meta name="description" content="Abiut Us Description" />
+      </Head>
       <img src="/assets/about.png" alt="" />
       <h1>{vocab?.infos_title}</h1>
       <p className="text-center my-4 mb-24">
