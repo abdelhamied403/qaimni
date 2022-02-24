@@ -48,10 +48,13 @@ const App = (props) => {
             t.src=v;s=b.getElementsByTagName(e)[0];
             s.parentNode.insertBefore(t,s)}(window, document,'script',
             'https://connect.facebook.net/en_US/fbevents.js');
-            fbq('init', ${fbq.FB_PIXEL_ID});
+            fbq('init', '704092874333142');
           `,
           }}
         />
+        <noscript><img height="1" width="1" style="display:none"
+        src="https://www.facebook.com/tr?id=704092874333142&ev=PageView&noscript=1"
+        /></noscript>
         <noscript>
           <img
             height="1"
