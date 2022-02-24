@@ -37,7 +37,7 @@ const CompaniesSlider = ({ title, companies }) => {
               onClick={(e) => {
                 if (!dragging) {
                   e.preventDefault();
-                  router.push(`https://qaimni.com/company/${company.id}`);
+                  router.push(`https://qaimni.com/company/${company.id}-${company.name.split(" ").join("-")}`);
                 }
                 setDragging(false);
               }}
