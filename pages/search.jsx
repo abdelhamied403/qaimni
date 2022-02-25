@@ -54,8 +54,15 @@ const Search = (props) => {
   };
 
   const submit = async () => {
-    const res = await user.addNewCompany(form);
-    setOpen(false);
+    try {
+      const res = await user.addNewCompany({
+        ...form,
+        website: "http://www." + form.website,
+      });
+      setOpen(false);
+    } catch (error) {
+      setErrors(error.errors);
+    }
   };
 
   useEffect(() => {
@@ -167,6 +174,7 @@ const Search = (props) => {
             setError={setErrors}
           />
           <Input
+            dir="ltr"
             required
             label="رابط للشركه"
             name="website"
@@ -174,6 +182,11 @@ const Search = (props) => {
             setValue={setForm}
             error={errors.website}
             setError={setErrors}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">https://www.</InputAdornment>
+              ),
+            }}
           />
         </div>
       </Modal>

@@ -21,6 +21,8 @@ const Input = ({
   setValue,
   error,
   setError,
+  InputProps,
+  ...rest
 }) => {
   const validate = (value) => {
     if (required && (!value || value?.trim() === "")) {
@@ -84,6 +86,7 @@ const Input = ({
 
   return (
     <TextField
+      {...rest}
       maxRows={maxRows}
       multiline={multiline}
       type={type || "text"}
@@ -92,6 +95,7 @@ const Input = ({
       label={label}
       helperText={error}
       onInput={onChange}
+      InputProps={InputProps}
     />
   );
 };
