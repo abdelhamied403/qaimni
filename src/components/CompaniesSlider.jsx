@@ -10,10 +10,11 @@ const CompaniesSlider = ({ title, companies }) => {
       <h1 className="font-bold text-3xl md:text-3xl mb-6">{title}</h1>
       <Slider
         className="multi"
-        slidesToShow={companies?.length > 5 ? 5 : 2}
+        slidesToShow={companies?.length > 7 ? 7 : 2}
         slidesToScroll={3}
         rtl
         autoplay
+        infinite
         responsive={[
           {
             breakpoint: 1024,
@@ -33,11 +34,15 @@ const CompaniesSlider = ({ title, companies }) => {
         {companies?.map((company) => (
           <div className="slide text-center" key={company.id}>
             <div
-              className="cursor-pointer w-72 h-72 p-8 mx-auto"
+              className="cursor-pointer w-56 h-56 p-8"
               onClick={(e) => {
                 if (!dragging) {
                   e.preventDefault();
-                  router.push(`https://qaimni.com/company/${company.id}-${company.name.split(" ").join("-")}`);
+                  router.push(
+                    `https://qaimni.com/company/${company.id}-${company.name
+                      .split(" ")
+                      .join("-")}`
+                  );
                 }
                 setDragging(false);
               }}
