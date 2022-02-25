@@ -2,7 +2,9 @@ import React, { useEffect, useState } from "react";
 import Input from "../../components/Input";
 import {
   Button,
+  Checkbox,
   FormControl,
+  FormControlLabel,
   FormHelperText,
   InputLabel,
   MenuItem,
@@ -13,9 +15,9 @@ import user from "../../services/user";
 import { useDispatch } from "react-redux";
 import { setUser } from "../../redux/slices/user.slice";
 import { useRouter } from "next/router";
-import Link from "next/link";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import { useSession, signIn, getProviders } from "next-auth/react";
+import Link from "../Link";
 
 const SignupForm = (props) => {
   const dispatch = useDispatch();
@@ -31,6 +33,7 @@ const SignupForm = (props) => {
     country_id: "",
     state_id: "",
     password: "",
+    agreed: false,
   });
   const [errors, setErrors] = useState({
     name: "",
@@ -40,6 +43,7 @@ const SignupForm = (props) => {
     country_id: "",
     state_id: "",
     password: "",
+    agreed: "",
   });
 
   const [countries, setCountries] = useState([]);
@@ -64,9 +68,18 @@ const SignupForm = (props) => {
 
   const onSubmit = async () => {
     try {
-      const res = await user.register(form);
-      dispatch(setUser(res.data.user));
-      router.push("/");
+      if (form.agreed) {
+        setErrors({});
+        const res = await user.register(form);
+        dispatch(setUser(res.data.user));
+        router.push("/");
+      } else {
+        throw {
+          errors: {
+            agreed: "يجب عليك الموافقه اولاً علي الشروط والاحكام",
+          },
+        };
+      }
     } catch (error) {
       setErrors((prev) => ({ ...prev, ...error.errors }));
     }
@@ -220,6 +233,27 @@ const SignupForm = (props) => {
         error={errors.password}
         setError={setErrors}
       />
+
+      <div className="checks">
+        <div className="flex">
+          <Checkbox
+            checked={form.agreed}
+            onChange={(e) =>
+              setForm((prev) => ({
+                ...prev,
+                agreed: +e.target.checked,
+              }))
+            }
+          />
+          <p>
+            أوافق علي{" "}
+            <Link className="underline font-bold" href="/terms-of-condition">
+              الشروط والاحكام
+            </Link>
+          </p>
+        </div>
+        {errors.agreed && <span className="text-red-500">{errors.agreed}</span>}
+      </div>
 
       <div className="actions flex items-center justify-between gap-2">
         <Button
