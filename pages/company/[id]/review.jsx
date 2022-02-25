@@ -109,7 +109,7 @@ const Review = (props) => {
     try {
       Swal.fire({
         title: `هل انت متأكد من التقييم ك${ratingAs[form.type].value}`,
-        text: "وموافق علي الشروط والاحكام",
+        html: "<span>وموافق علي <a class='text-underline text-primary' href='/terms-of-condition'>الشروط والاحكام</a></span>",
         icon: "question",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
