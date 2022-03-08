@@ -68,7 +68,7 @@ export const addInterceptors = (dispatch) => {
 
       if (error?.status === 401) {
         if (!publicRoutes.includes(Router.route)) {
-          Router.push("/auth/login");
+          Router.push(`/auth/login?redirect=${location.href}`);
         }
       }
 

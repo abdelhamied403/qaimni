@@ -7,19 +7,18 @@ const withAuth = (WrappedComponent, Layout, name) => {
     const [verified, setVerified] = useState(false);
 
     useEffect(() => {
-      if(localStorage.getItem("token") && localStorage.getItem("user")){
+      if (localStorage.getItem("token") && localStorage.getItem("user")) {
         setVerified(true);
-      }else{
-        router.push("/auth/login")
+      } else {
+        router.push(`/auth/login?redirect=${location.href}`);
       }
     }, []);
-    
-    return verified ? <WrappedComponent {...props} /> : <></>
-    
-  }
+
+    return verified ? <WrappedComponent {...props} /> : <></>;
+  };
   Component.Layout = Layout;
   Component.DisplayName = name;
   return Component;
 };
- 
+
 export default withAuth;

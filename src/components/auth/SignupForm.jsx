@@ -72,7 +72,7 @@ const SignupForm = (props) => {
         setErrors({});
         const res = await user.register(form);
         dispatch(setUser(res.data.user));
-        router.push("/");
+        router.push(router.query?.redirect || "/");
       } else {
         throw {
           errors: {
@@ -95,7 +95,7 @@ const SignupForm = (props) => {
     };
     const res = await user.socialLogin(data);
     dispatch(setUser(res?.data?.user));
-    router.push("/");
+    router.push(router.query?.redirect || "/");
   };
 
   useEffect(() => {
