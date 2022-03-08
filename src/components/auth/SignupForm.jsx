@@ -247,9 +247,13 @@ const SignupForm = (props) => {
           />
           <p>
             أوافق علي{" "}
-            <Link className="underline font-bold" href="/terms-of-condition">
+            <a
+              className="underline font-bold"
+              href="/terms-of-condition"
+              target="_blank"
+            >
               الشروط والاحكام
-            </Link>
+            </a>
           </p>
         </div>
         {errors.agreed && <span className="text-red-500">{errors.agreed}</span>}
