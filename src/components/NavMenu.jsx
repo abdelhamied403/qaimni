@@ -25,10 +25,19 @@ const NavMenu = (props) => {
         </span>
       </li>
       <li>
+        <span className="text-xl hover:text-primary">
+          <Link className="" href="/jobs">
+            الوظائف
+          </Link>
+        </span>
+      </li>
+      <li>
         <Button
           variant="contained"
           onClick={() =>
-            window.open("https://company.qaimni.com/auth/signup", "_blank").focus()
+            window
+              .open("https://company.qaimni.com/auth/signup", "_blank")
+              .focus()
           }
         >
           <span className="text-white">تسجيل الشركات</span>
