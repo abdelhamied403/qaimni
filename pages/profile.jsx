@@ -1,4 +1,4 @@
-import { Button } from "@mui/material";
+import { Button, Chip } from "@mui/material";
 import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -99,16 +99,26 @@ const Profile = (props) => {
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 mt-6">
           {applications.map((application) => (
             <div className="job" key={application.id}>
-              <Link href={`jobs/${application.job_id}`} passHref>
+              <Link
+                href={`jobs/${application.job_id}-${application.job_title}`}
+                passHref
+              >
                 <div className="card cursor-pointer px-8 py-4 rounded-xl border border-solid border-gray-300 hover:shadow ">
-                  <div className="flex flex-wrap items-center gap-8">
-                    <div className="logo">
-                      <img className="w-12" src={application.logo_url} alt="" />
+                  <div className="flex flex-wrap justify-between items-center gap-8">
+                    <div className="flex flex-wrap items-center gap-8">
+                      <div className="logo">
+                        <img
+                          className="w-12"
+                          src={application.logo_url}
+                          alt=""
+                        />
+                      </div>
+                      <div className="details">
+                        <h3>{application.job_title}</h3>
+                        <p>{application.created_at}</p>
+                      </div>
                     </div>
-                    <div className="details">
-                      <h3>{application.job_title}</h3>
-                      <p>{application.created_at}</p>
-                    </div>
+                    <Chip label={application.status} color="primary" />
                   </div>
                 </div>
               </Link>
