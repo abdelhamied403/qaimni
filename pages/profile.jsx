@@ -1,16 +1,19 @@
-import { Button } from "@mui/material";
+import { Button, Chip } from "@mui/material";
 import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import withAuth from "../src/components/HOC/withAuth";
 import Page from "../src/layout/Page";
 import { setAlert } from "../src/redux/slices/app.slice";
+import jobService from "../src/services/job";
 import userService from "../src/services/user";
 
 const Profile = (props) => {
   const user = useSelector((state) => state.user.user);
   const cvFile = useRef(null);
   const [reader, setReader] = useState();
+  const [applications, setApplications] = useState([]);
+
   const dispatch = useDispatch();
 
   const onCVUpload = (e) => {
@@ -31,8 +34,14 @@ const Profile = (props) => {
     };
   };
 
+  const getApplications = async () => {
+    const res = await jobService.getApplications();
+    setApplications(res.data.data);
+  };
+
   useEffect(() => {
     setReader(new FileReader());
+    getApplications();
   }, []);
 
   return (
@@ -53,7 +62,7 @@ const Profile = (props) => {
               {user?.country} - {user?.state}
             </p>
             <div className="text-primary">
-              <Link href={user.cv_url || ''}>السيره الذاتيه</Link>
+              <Link href={user.cv_url || ""}>السيره الذاتيه</Link>
             </div>
           </div>
         </div>
@@ -83,6 +92,38 @@ const Profile = (props) => {
           {/* <Button variant="contained" color="accent" size="large">
             اشتراك premium
           </Button> */}
+        </div>
+      </div>
+      <div className="jobs-applications my-8">
+        <h1 className="text-4xl">الوظائف التي قدمت عليها</h1>
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 mt-6">
+          {applications.map((application) => (
+            <div className="job" key={application.id}>
+              <Link
+                href={`jobs/${application.job_id}-${application.job_title}`}
+                passHref
+              >
+                <div className="card cursor-pointer px-8 py-4 rounded-xl border border-solid border-gray-300 hover:shadow ">
+                  <div className="flex flex-wrap justify-between items-center gap-8">
+                    <div className="flex flex-wrap items-center gap-8">
+                      <div className="logo">
+                        <img
+                          className="w-12"
+                          src={application.logo_url}
+                          alt=""
+                        />
+                      </div>
+                      <div className="details">
+                        <h3>{application.job_title}</h3>
+                        <p>{application.created_at}</p>
+                      </div>
+                    </div>
+                    <Chip label={application.status} color="primary" />
+                  </div>
+                </div>
+              </Link>
+            </div>
+          ))}
         </div>
       </div>
     </div>

@@ -29,7 +29,7 @@ const LoginForm = (props) => {
     try {
       const res = await user.login(form);
       dispatch(setUser(res?.data?.user));
-      router.push("/");
+      router.push(router.query?.redirect || "/");
     } catch (error) {
       setErrors((prev) => ({ ...prev, ...error.errors }));
     }
@@ -45,7 +45,7 @@ const LoginForm = (props) => {
     };
     const res = await user.socialLogin(data);
     dispatch(setUser(res?.data?.user));
-    router.push("/");
+    router.push(router.query?.redirect || "/");
   };
 
   useEffect(() => {

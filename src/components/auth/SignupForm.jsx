@@ -72,7 +72,7 @@ const SignupForm = (props) => {
         setErrors({});
         const res = await user.register(form);
         dispatch(setUser(res.data.user));
-        router.push("/");
+        router.push(router.query?.redirect || "/");
       } else {
         throw {
           errors: {
@@ -95,7 +95,7 @@ const SignupForm = (props) => {
     };
     const res = await user.socialLogin(data);
     dispatch(setUser(res?.data?.user));
-    router.push("/");
+    router.push(router.query?.redirect || "/");
   };
 
   useEffect(() => {
@@ -247,9 +247,13 @@ const SignupForm = (props) => {
           />
           <p>
             أوافق علي{" "}
-            <Link className="underline font-bold" href="/terms-of-condition">
+            <a
+              className="underline font-bold"
+              href="/terms-of-condition"
+              target="_blank"
+            >
               الشروط والاحكام
-            </Link>
+            </a>
           </p>
         </div>
         {errors.agreed && <span className="text-red-500">{errors.agreed}</span>}
