@@ -7,6 +7,7 @@ import Input from "../../src/components/Input";
 import userService from "../../src/services/user";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/router";
+import withAuth from "../../src/components/HOC/withAuth";
 
 const Job = (props) => {
   const router = useRouter();
@@ -191,5 +192,4 @@ const Job = (props) => {
   );
 };
 
-Job.Layout = JobLayout;
-export default Job;
+export default withAuth(Job, JobLayout, "الوظائف");
