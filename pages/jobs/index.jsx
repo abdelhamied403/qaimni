@@ -1,21 +1,19 @@
-import React, { useEffect } from "react";
+import React from "react";
 import withAuth from "../../src/components/HOC/withAuth";
-import Page from "../../src/layout/Page";
-import jobService from "../../src/services/job";
-import { useRouter } from "next/router";
+import JobLayout from "../../src/layout/Job";
+import WorkIcon from "@mui/icons-material/Work";
 
 const Jobs = (props) => {
-  const router = useRouter();
-  const init = async () => {
-    const res = await jobService.getAllJobs(1);
-    const job = res.data.data[0];
-    router.push(`/jobs/${job.id}-${job.title}`);
-  };
-  useEffect(() => {
-    init();
-  }, []);
-
-  return <div className="jobs mx-4 lg:mx-24 my-8"></div>;
+  return (
+    <div className="jobs mx-4 lg:mx-24 my-8 flex-1 flex">
+      <div className="m-auto flex flex-col items-center text-gray-400">
+        <WorkIcon sx={{ fontSize: 72 }}></WorkIcon>
+        <h1>اختر وظيفة لعرضها</h1>
+      </div>
+    </div>
+  );
 };
 
-export default withAuth(Jobs, Page, "الوظائف");
+Jobs.Layout = JobLayout;
+Jobs.DisplayName = "الوظائف";
+export default Jobs;
