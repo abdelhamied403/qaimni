@@ -1,5 +1,4 @@
 import React from "react";
-import withAuth from "../../src/components/HOC/withAuth";
 import JobLayout from "../../src/layout/Job";
 import WorkIcon from "@mui/icons-material/Work";
 
