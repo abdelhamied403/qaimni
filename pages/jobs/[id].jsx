@@ -1,13 +1,24 @@
 import React, { useEffect, useRef, useState } from "react";
 import JobLayout from "../../src/layout/Job";
 import jobService from "../../src/services/job";
-import { Button, Chip } from "@mui/material";
+import { Button, Chip, Rating } from "@mui/material";
 import Modal from "../../src/components/Modal";
 import Input from "../../src/components/Input";
 import userService from "../../src/services/user";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/router";
-import withAuth from "../../src/components/HOC/withAuth";
+import clsx from "clsx";
+import {
+  FacebookShareButton,
+  LinkedinShareButton,
+  TwitterShareButton,
+  WhatsappShareButton,
+  FacebookIcon,
+  TwitterIcon,
+  LinkedinIcon,
+  WhatsappIcon,
+} from "react-share";
+import Link from "../../src/components/Link";
 
 const Job = (props) => {
   const router = useRouter();
@@ -49,83 +60,119 @@ const Job = (props) => {
     };
   };
 
+  const openApplyModal = () => {
+    if (user) {
+      setApplyModalOpen(true);
+    } else {
+      router.push("/auth/login");
+    }
+  };
+
   useEffect(() => {
-    getJobs(id);
+    id && getJobs(id);
   }, [id]);
 
   return (
     <>
-      <div className="flex justify-between">
+      <div className="flex items-center justify-between">
         <div className="flex items-center gap-4">
           <h1>{job?.title}</h1>
           <Chip label={job?.type} color="primary" />
         </div>
+        <div className="share-buttons flex gap-4">
+          <FacebookShareButton url={`https://qaimni.com/jobs/${id}`}>
+            <FacebookIcon width={36} height={36} />
+          </FacebookShareButton>
+          <TwitterShareButton url={`https://qaimni.com/jobs/${id}`}>
+            <TwitterIcon width={36} height={36} />
+          </TwitterShareButton>
+          <LinkedinShareButton url={`https://qaimni.com/jobs/${id}`}>
+            <LinkedinIcon width={36} height={36} />
+          </LinkedinShareButton>
+          <WhatsappShareButton url={`https://qaimni.com/jobs/${id}`}>
+            <WhatsappIcon width={36} height={36} />
+          </WhatsappShareButton>
+        </div>
+
         <Button
           variant="contained"
           color="primary"
           size="large"
-          onClick={() => {
-            setApplyModalOpen(true);
-          }}
+          onClick={openApplyModal}
         >
           <span className="text-white">تقدم للوظيفة</span>
         </Button>
       </div>
 
-      <p>
-        {job?.country}, {job?.state}
-      </p>
-      <div className="flex flex-col">
-        <div className="flex flex-wrap gap-2">
-          <img className="w-8" src={job?.company_logo} alt="" />
-          <p>{job?.company_name}</p>
+      <p className="text-gray-400 text-sm">{job?.created_at}</p>
+      <Link href={`/company/${job?.company_id}-${job?.company_name}`}>
+        {job?.company_name}
+      </Link>
+      <Rating
+        name="size-large"
+        value={job?.company_rate || 0}
+        size="large"
+        readOnly
+        precision={0.1}
+      />
+
+      <div className={clsx({ disabled: job?.status !== "open" })}>
+        <p>
+          {job?.country}, {job?.state}
+        </p>
+
+        <div className="flex flex-wrap gap-4 items-center">
+          <h2 className="text-primary font-extrabold">التفاصيل</h2>
+          <span className="flex-1 border border-solid border-gray-200" />
         </div>
-        <p className="text-gray-400 text-sm">{job?.created_at}</p>
-      </div>
 
-      {!job?.hide_salary && (
-        <div className="flex flex-col flex-wrap gap-2">
-          <div className="flex flex-wrap gap-4 items-center">
-            <h2 className="text-primary font-extrabold">تفاصيل المرتب</h2>
-            <span className="flex-1 border border-solid border-gray-200" />
-          </div>
+        <div className="flex flex-col gap-2 my-4">
+          <p className="flex items-center">
+            <span className="text-sm w-32">المستوي الدراسي: </span>
+            <span className="text-primary font-bold">
+              {job?.education_level}
+            </span>
+          </p>
+          <p className="flex items-center">
+            <span className="text-sm w-32">المستوي الوظيفي: </span>
+            <span className="text-primary font-bold">{job?.career_level}</span>
+          </p>
 
-          <h4>
-            من {job?.salary_range_from} الي {job?.salary_range_to}
-          </h4>
-
-          <p className="text-gray-400 text-sm">
-            {job?.additional_salary_details}
+          <p className="flex items-center">
+            <span className="text-sm w-32">تفاصيل المرتب: </span>
+            {job?.hide_salary === 0 ? (
+              <span className="text-primary font-bold">
+                من {job?.salary_range_from} الي {job?.salary_range_to}
+                {job?.additional_salary_details && (
+                  <span className="mx-2">
+                    ({job?.additional_salary_details})
+                  </span>
+                )}
+              </span>
+            ) : (
+              <span className="text-primary font-bold">خاص</span>
+            )}
+          </p>
+          <p className="flex items-center">
+            <span className="text-sm w-32">سنوات الخبره: </span>
+            <span className="text-primary font-bold">
+              من {job?.experience_years_from} الي {job?.experience_years_to}
+            </span>
           </p>
         </div>
-      )}
 
-      <div className="flex flex-wrap gap-4 items-center">
-        <h2 className="text-primary font-extrabold">تفاصيل الوظيفة</h2>
-        <span className="flex-1 border border-solid border-gray-200" />
-      </div>
-      <div dangerouslySetInnerHTML={{ __html: job?.job_description }} />
-      <div className="flex flex-wrap gap-4 items-center">
-        <h2 className="text-primary font-extrabold">المتطلبات</h2>
-        <span className="flex-1 border border-solid border-gray-200" />
-      </div>
-      <div dangerouslySetInnerHTML={{ __html: job?.job_requirements }} />
-
-      <div className="flex flex-wrap gap-4 items-center">
-        <h2 className="text-primary font-extrabold">المتسوي</h2>
-        <span className="flex-1 border border-solid border-gray-200" />
+        <div className="flex flex-wrap gap-4 items-center">
+          <h2 className="text-primary font-extrabold">الوصف</h2>
+          <span className="flex-1 border border-solid border-gray-200" />
+        </div>
+        <div dangerouslySetInnerHTML={{ __html: job?.job_description }} />
+        <div className="flex flex-wrap gap-4 items-center">
+          <h2 className="text-primary font-extrabold">المتطلبات</h2>
+          <span className="flex-1 border border-solid border-gray-200" />
+        </div>
+        <div dangerouslySetInnerHTML={{ __html: job?.job_requirements }} />
       </div>
 
-      <p>
-        <span className="font-extrabold">المتسوي الدراسي: </span>
-        {job?.education_level}
-      </p>
-      <p>
-        <span className="font-extrabold">المتسوي الوظيفي: </span>
-        {job?.career_level}
-      </p>
-
-      {/* <pre>{JSON.stringify(Object.keys(job || {}), null, 2)}</pre> */}
       <Modal
         title={`تقدم لوظيفة ${job?.title}`}
         open={applyModalOpen}
@@ -192,4 +239,5 @@ const Job = (props) => {
   );
 };
 
-export default withAuth(Job, JobLayout, "الوظائف");
+Job.Layout = JobLayout;
+export default Job;

@@ -5,9 +5,8 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import home from "../src/services/home";
 import { useEffect, useState } from "react";
-import Spinner from "../src/components/Spinner";
 import HomeSection from "../src/components/HomeSection";
-import CompaniesSlider from "../src/components/CompaniesSlider";
+import CompanyCard from "../src/components/CompanyCard";
 
 var settings = {
   infinite: true,
@@ -53,14 +52,26 @@ const Home = () => {
         </div>
       </div>
 
-      <CompaniesSlider
-        title="الشركات الاعلي تقييماً"
-        companies={homeData?.companies}
-      />
-      <CompaniesSlider
-        title="الشركات المضافة حديثاً"
-        companies={homeData?.latest_companies}
-      />
+      <div className="top-rate py-24 px-12 md:px-24">
+        <h1 className="font-bold text-3xl md:text-3xl mb-6">
+          الشركات الاعلي تقييماً
+        </h1>
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4 max-w-7xl mx-auto">
+          {homeData?.companies.map((company) => (
+            <CompanyCard key={company.id} {...company} />
+          ))}
+        </div>
+      </div>
+      <div className="latest py-24 px-12 md:px-24">
+        <h1 className="font-bold text-3xl md:text-3xl mb-6">
+          الشركات المضافة حديثاً
+        </h1>
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4 max-w-7xl mx-auto">
+          {homeData?.latest_companies.map((company) => (
+            <CompanyCard key={company.id} {...company} />
+          ))}
+        </div>
+      </div>
     </>
   );
 };
