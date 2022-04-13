@@ -22,12 +22,12 @@ const JobLayout = (props) => {
   const slugResolve = () => {
     const s = id?.split("-");
     s?.shift();
-    return s?.join(" ");
+    return s ? `وظيفة ${s?.join(" ")}` : "الوظائف";
   };
 
   return (
     <>
-      <Page title={`وظيفة ${slugResolve()}`}>
+      <Page title={slugResolve()}>
         <div className="jobs mx-4 lg:mx-24 my-8">
           <div className="grid grid-cols-5 gap-8">
             <div className="col-span-5 xl:col-span-1 flex flex-col gap-4">
