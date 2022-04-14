@@ -74,7 +74,7 @@ const Job = (props) => {
 
   return (
     <>
-      <div className="flex items-center justify-between">
+      <div className="flex items-center flex-wrap justify-between">
         <div className="flex items-center gap-4">
           <h1>{job?.title}</h1>
           <Chip label={job?.type} color="primary" />
@@ -94,14 +94,16 @@ const Job = (props) => {
           </WhatsappShareButton>
         </div>
 
-        <Button
-          variant="contained"
-          color="primary"
-          size="large"
-          onClick={openApplyModal}
-        >
-          <span className="text-white">تقدم للوظيفة</span>
-        </Button>
+        {job?.application_status || (
+          <Button
+            variant="contained"
+            color="primary"
+            size="large"
+            onClick={openApplyModal}
+          >
+            <span className="text-white">تقدم للوظيفة</span>
+          </Button>
+        )}
       </div>
 
       <p className="text-gray-400 text-sm">{job?.created_at}</p>
@@ -165,12 +167,18 @@ const Job = (props) => {
           <h2 className="text-primary font-extrabold">الوصف</h2>
           <span className="flex-1 border border-solid border-gray-200" />
         </div>
-        <div dangerouslySetInnerHTML={{ __html: job?.job_description }} />
+        <div
+          className="break-all"
+          dangerouslySetInnerHTML={{ __html: job?.job_description }}
+        />
         <div className="flex flex-wrap gap-4 items-center">
           <h2 className="text-primary font-extrabold">المتطلبات</h2>
           <span className="flex-1 border border-solid border-gray-200" />
         </div>
-        <div dangerouslySetInnerHTML={{ __html: job?.job_requirements }} />
+        <div
+          className="break-all"
+          dangerouslySetInnerHTML={{ __html: job?.job_requirements }}
+        />
       </div>
 
       <Modal
