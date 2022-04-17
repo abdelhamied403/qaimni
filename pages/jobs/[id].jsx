@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from "react";
-import JobLayout from "../../src/layout/Job";
 import jobService from "../../src/services/job";
 import { Button, Chip, Rating } from "@mui/material";
 import Modal from "../../src/components/Modal";
@@ -19,6 +18,7 @@ import {
   WhatsappIcon,
 } from "react-share";
 import Link from "../../src/components/Link";
+import Page from "../../src/layout/Page";
 
 const Job = (props) => {
   const router = useRouter();
@@ -247,5 +247,5 @@ const Job = (props) => {
   );
 };
 
-Job.Layout = JobLayout;
+Job.Layout = Page;
 export default Job;

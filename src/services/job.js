@@ -1,6 +1,6 @@
 import api from "./axios";
 
-const jobs = (() => {
+const job = (() => {
   const getAllJobs = async (page) => {
     const res = await api.get(`jobs?page=${page}`);
     return res.data;
@@ -26,4 +26,4 @@ const jobs = (() => {
   };
 })();
 
-export default jobs;
+export default job;
