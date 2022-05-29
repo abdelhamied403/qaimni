@@ -77,14 +77,14 @@ const Job = (props) => {
     <>
       <Head>
         <title> قيمني | وظيفة {job.title}</title>
-        <meta itemProp="name" content={job.title} />
+        <meta property="og:title" content={job.title} />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "http://schema.org",
               "@type": "article",
-              name: job.title,
+              name: "job.title",
               about: "description",
               url: "url",
             }),
