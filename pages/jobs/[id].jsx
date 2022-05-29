@@ -78,6 +78,18 @@ const Job = (props) => {
       <Head>
         <title> قيمني | وظيفة {job.title}</title>
         <meta itemProp="name" content={job.title} />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "http://schema.org",
+              "@type": schemaType,
+              name: job.title,
+              about: "description",
+              url: "url",
+            }),
+          }}
+        />
       </Head>
       <div className="py-12 mx-4 lg:mx-24">
         <div className="flex items-center flex-wrap justify-between">
