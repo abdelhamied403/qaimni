@@ -33,8 +33,8 @@ const Navbar = (props) => {
       >
         <div className="menu flex items-center pointer-events-auto">
           <img
-            className="max-w-full cursor-pointer"
-            src="/assets/logo-demo.png"
+            className="w-36 cursor-pointer"
+            src="/assets/logo.svg"
             alt=""
             onClick={() => router.push("/")}
           />
@@ -49,7 +49,7 @@ const Navbar = (props) => {
             <ul className="lg:hidden text-black px-12 flex flex-col items-center gap-4 list-none">
               <img
                 className="max-w-full cursor-pointer my-8"
-                src="/assets/logo-demo.png"
+                src="/assets/logo.svg"
                 alt=""
                 onClick={() => router.push("/")}
               />

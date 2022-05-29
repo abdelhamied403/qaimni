@@ -28,7 +28,7 @@ const Page = ({ title, children }) => {
           </div>
         )}
 
-        <main className="flex-1">{children}</main>
+        <main className="flex-1 flex flex-col">{children}</main>
         <Footer />
       </div>
     </>

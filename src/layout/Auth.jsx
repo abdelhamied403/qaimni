@@ -1,8 +1,6 @@
 import React from "react";
 import Head from "next/head";
 import Spinner from "../components/Spinner";
-import { Alert } from "@mui/material";
-import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
 import { useSelector } from "react-redux";
 
 const Auth = ({ title, children }) => {
@@ -31,7 +29,7 @@ const Auth = ({ title, children }) => {
             <div className="banner hidden lg:block col-span-0 lg:col-span-1">
               <img
                 className="w-full h-screen object-cover"
-                src="../assets/authBanner.png"
+                src="../assets/authBanner.jpg"
                 alt=""
               />
             </div>

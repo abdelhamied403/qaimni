@@ -1,12 +1,15 @@
 import rtlPlugin from "stylis-plugin-rtl";
 import { CacheProvider } from "@emotion/react";
 import createCache from "@emotion/cache";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import { Alert } from "@mui/material";
 import Head from "next/head";
 import * as fbq from "../lib/fpixel";
+import vocab from "../services/vocab";
+import { setVocab } from "../redux/slices/vocab.slice";
+import { useEffect } from "react";
 
 // Create rtl cache
 const cacheRtl = createCache({
@@ -16,6 +19,20 @@ const cacheRtl = createCache({
 
 const App = (props) => {
   const app = useSelector((state) => state.app);
+  const dispatch = useDispatch();
+
+  const initVocab = async () => {
+    const [countries, states] = await Promise.all([
+      vocab.getCountries(),
+      vocab.getStates(),
+    ]);
+
+    dispatch(setVocab([countries.data, states.data]));
+  };
+
+  useEffect(() => {
+    initVocab();
+  }, []);
 
   return (
     <>

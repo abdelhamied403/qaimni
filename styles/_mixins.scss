@@ -1,0 +1,13 @@
+$truncates: 4;
+
+@mixin truncates {
+  @for $i from 1 through $truncates {
+    .truncate-#{$i} {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: $i;
+      -webkit-box-orient: vertical;
+    }
+  }
+}

@@ -1,8 +1,13 @@
 import api from "./axios";
 
-const jobs = (() => {
-  const getAllJobs = async (page) => {
-    const res = await api.get(`jobs?page=${page}`);
+const job = (() => {
+  const getAllJobs = async (
+    page,
+    { countriesFilter, statesFilter, careerLevel, query }
+  ) => {
+    const res = await api.get(
+      `jobs?page=${page}&query=${query}&country_id=${countriesFilter}&state_id=${statesFilter}&career_level=${careerLevel}`
+    );
     return res.data;
   };
   const apply = async (id, data) => {
@@ -26,4 +31,4 @@ const jobs = (() => {
   };
 })();
 
-export default jobs;
+export default job;

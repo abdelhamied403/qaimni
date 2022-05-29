@@ -62,28 +62,6 @@ const Input = ({
     validate(value);
   };
 
-  if (type === "select") {
-    return (
-      <FormControl error={error.length > 0}>
-        <InputLabel>{label}</InputLabel>
-        <Select
-          labelId="demo-simple-select-disabled-label"
-          id="demo-simple-select-disabled"
-          value={value}
-          label="Age"
-          onChange={onChange}
-        >
-          {options.map((option) => (
-            <MenuItem value={option.value} key={option.value}>
-              {option.text}
-            </MenuItem>
-          ))}
-        </Select>
-        <FormHelperText>{error}</FormHelperText>
-      </FormControl>
-    );
-  }
-
   return (
     <TextField
       {...rest}
