@@ -10,8 +10,10 @@ import CardMembershipIcon from "@mui/icons-material/CardMembership";
 import CategoryIcon from "@mui/icons-material/Category";
 import { Badge, Chip, Pagination, TextField } from "@mui/material";
 import job from "../../src/services/job";
-import Link from "../../src/components/Link";
+import clsx from "clsx";
 import JobCard from "../../src/components/JobCard";
+import vocab from "../../src/services/vocab";
+import { careerLevels } from "../../src/utils/data";
 
 const Jobs = (props) => {
   const [query, setQuery] = useState("");
@@ -20,84 +22,82 @@ const Jobs = (props) => {
   const [page, setPage] = useState(1);
 
   const countries = useSelector((state) => state.vocab.countries);
-  const [countriesFilters, setCountriesFilters] = useState([]);
-  const states = useSelector((state) => state.vocab.states);
-  const [statesFilters, setStatesFilters] = useState([]);
+  const [states, setStates] = useState([]);
+  const [countriesFilter, setCountriesFilter] = useState("");
+  const [statesFilter, setStatesFilter] = useState("");
+  const [careerLevel, setCareerLevel] = useState("");
 
-  const getJobs = async () => {
-    const res = await job.getAllJobs(page);
-    setPagination(res.data.pagination);
-    setJobs(res.data.data);
-  };
+  let timer = null;
 
   useEffect(() => {
-    setCountriesFilters(
-      countries.map((country) => ({
-        ...country,
-        checked: true,
-      }))
-    );
-    setStatesFilters(
-      states.map((state) => ({
-        ...state,
-        checked: true,
-      }))
-    );
-  }, [countries, states]);
+    (async () => {
+      const states = await vocab.getStates(countriesFilter);
+      setStates(states.data);
+    })();
+  }, [countriesFilter]);
 
   useEffect(() => {
-    getJobs();
-  }, [page]);
+    (async () => {
+      const res = await job.getAllJobs(page, {
+        countriesFilter,
+        statesFilter,
+        careerLevel,
+        query,
+      });
+      setPagination(res.data.pagination);
+      setJobs(res.data.data);
+    })();
+  }, [page, countriesFilter, statesFilter, careerLevel, query]);
 
   return (
     <div className="jobs bg-gray-100 flex-1 flex flex-col">
       <div className="mx-4 lg:mx-24 flex-1 py-8">
         <div className="grid grid-cols-4 gap-8">
-          <div className="filters col-span-1 flex flex-col gap-2">
-            <div className="flex">
-              <TextField
-                className="flex-1 bg-white rounded-xl"
-                type="search"
-                label="البحث"
-                placeholder="البحث..."
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-              />
-            </div>
-            <div className="card px-6 py-2">
-              <Collapse name="الدوله" icon={<PublicIcon color="primary" />}>
-                <FilterChecks
-                  name="الدوله"
-                  filters={countriesFilters}
-                  setFilters={setCountriesFilters}
+          <div className="filters col-span-1">
+            <div className="flex flex-col gap-2">
+              <div className="flex">
+                <TextField
+                  className="flex-1 bg-white rounded-xl"
+                  type="search"
+                  label="البحث"
+                  placeholder="البحث..."
+                  value={query}
+                  onChange={(e) => setQuery(e.target.value)}
                 />
-              </Collapse>
-            </div>
-            <div className="card px-6 py-2">
-              <Collapse name="المدينة" icon={<FmdGoodIcon color="primary" />}>
-                <FilterChecks
-                  name="المدينة"
-                  filters={statesFilters}
-                  setFilters={setStatesFilters}
-                />
-              </Collapse>
-            </div>
-            <div className="card px-6 py-2">
-              <Collapse name="المستوي" icon={<FactCheckIcon color="primary" />}>
-                level
-              </Collapse>
-            </div>
-            <div className="card px-6 py-2">
-              <Collapse
-                name="عدد سنوات الخبرة"
-                icon={<CardMembershipIcon color="primary" />}
-              ></Collapse>
-            </div>
-            <div className="card px-6 py-2">
-              <Collapse
-                name="نوع الوظيفة"
-                icon={<CategoryIcon color="primary" />}
-              ></Collapse>
+              </div>
+              <div className="card px-6 py-2">
+                <Collapse name="الدوله" icon={<PublicIcon color="primary" />}>
+                  <FilterChecks
+                    name="الدوله"
+                    filters={countries}
+                    setFilter={setCountriesFilter}
+                    active={countriesFilter}
+                  />
+                </Collapse>
+              </div>
+              <div className="card px-6 py-2">
+                <Collapse name="المدينة" icon={<FmdGoodIcon color="primary" />}>
+                  <FilterChecks
+                    name="المدينة"
+                    filters={states}
+                    setFilter={setStatesFilter}
+                    active={statesFilter}
+                  />
+                </Collapse>
+              </div>
+              <div className="card px-6 py-2">
+                <Collapse
+                  name="المستوي"
+                  icon={<FactCheckIcon color="primary" />}
+                >
+                  <FilterChecks
+                    name="المستوي"
+                    filters={careerLevels}
+                    setFilter={setCareerLevel}
+                    active={careerLevel}
+                  />
+                </Collapse>
+              </div>
             </div>
           </div>
           <div className="list col-span-3 flex flex-col gap-4">

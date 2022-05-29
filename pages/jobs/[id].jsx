@@ -73,7 +73,7 @@ const Job = (props) => {
   }, [id]);
 
   return (
-    <>
+    <div className="py-12 mx-4 lg:mx-24">
       <div className="flex items-center flex-wrap justify-between">
         <div className="flex items-center gap-4">
           <h1>{job?.title}</h1>
@@ -243,7 +243,7 @@ const Job = (props) => {
           </div>
         </div>
       </Modal>
-    </>
+    </div>
   );
 };
 

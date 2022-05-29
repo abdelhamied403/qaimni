@@ -53,9 +53,7 @@ const Footer = (props) => {
             </a>
           </div>
         </div>
-        <div className="logo">
-          <img src="/assets/logo-demo.png" alt="" />
-        </div>
+        <img className="w-36" src="/assets/logo.svg" alt="" />
         <div className="socials flex gap-4">
           {socials.map((social) => (
             <a

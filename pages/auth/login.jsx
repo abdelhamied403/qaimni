@@ -22,7 +22,7 @@ const Login = (props) => {
         <Link href="/" passHref>
           <img
             className="w-64 cursor-pointer"
-            src="../assets/logo-demo.png"
+            src="../assets/logo.svg"
             alt=""
           />
         </Link>

@@ -8,25 +8,12 @@ import {
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 
-const FilterChecks = ({ name, filters, setFilters }) => {
+const FilterChecks = ({ name, filters, setFilter, active }) => {
   const [query, setQuery] = useState("");
   const [filteredChecks, setFilteredChecks] = useState(filters);
 
-  const onFilterCheck = (event, id) => {
-    const { checked } = event.target;
-
-    let newFilters = filters.map((filter) => {
-      if (filter.id === id) {
-        return { ...filter, checked };
-      }
-      return filter;
-    });
-
-    setFilters(newFilters);
-  };
-  const onAllFilterCheck = (event) => {
-    const { checked } = event.target;
-    setFilters(filters.map((f) => ({ ...f, checked })));
+  const handleCheck = (id) => {
+    setFilter(id === active ? "" : id);
   };
 
   useEffect(() => {
@@ -48,30 +35,14 @@ const FilterChecks = ({ name, filters, setFilters }) => {
           <FormControl sx={{ m: 3 }} component="fieldset" variant="standard">
             <FormLabel component="legend">اختر {name}</FormLabel>
             <FormGroup>
-              {!query && (
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      checked={filters.every((f) => f.checked)}
-                      onChange={onAllFilterCheck}
-                      indeterminate={
-                        !filters.every((f) => f.checked) &&
-                        filters.some((f) => f.checked)
-                      }
-                      name="all"
-                    />
-                  }
-                  label="الكل"
-                />
-              )}
-              <div className="pr-6">
-                {filteredChecks.map((filter) => (
+              <div className="pr-6 flex flex-col gap-2">
+                {filters.map((filter) => (
                   <FormControlLabel
                     key={filter.id}
                     control={
                       <Checkbox
-                        checked={filter.checked}
-                        onChange={(e) => onFilterCheck(e, filter.id)}
+                        checked={filter.id === active}
+                        onChange={() => handleCheck(filter.id)}
                         name={filter.id}
                       />
                     }
