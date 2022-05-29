@@ -83,7 +83,7 @@ const Job = (props) => {
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "http://schema.org",
-              "@type": schemaType,
+              "@type": "article",
               name: job.title,
               about: "description",
               url: "url",
