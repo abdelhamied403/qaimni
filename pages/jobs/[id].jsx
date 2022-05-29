@@ -76,7 +76,7 @@ const Job = (props) => {
   return (
     <>
       <Head>
-        <title> قيمني | وظيفة {job.title}</title>
+        <title> قيمني | وظ vيفة {job.title}</title>
       </Head>
       <div className="py-12 mx-4 lg:mx-24">
         <div className="flex items-center flex-wrap justify-between">
